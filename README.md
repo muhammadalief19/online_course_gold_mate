@@ -59,13 +59,9 @@ Run the following Tinker commands to create the users:
 
 ```bash
 php artisan tinker --execute="\App\Models\User::create(['name' => 'Admin User', 'username' => 'example@admin', 'email' => 'admin@example.com', 'email_verified_at' => now(), 'password' => bcrypt('password'), 'photo' => 'path/to/photo.jpg', 'phone' => '123456789', 'address' => 'Admin Address', 'role' => 'admin', 'status' => '1', 'last_seen' => now(), 'remember_token' => \Illuminate\Support\Str::random(10)]);"
-```
 
-```bash
 php artisan tinker --execute="\App\Models\User::create(['name' => 'Instructor User', 'username' => 'example@instructor', 'email' => 'instructor@example.com', 'email_verified_at' => now(), 'password' => bcrypt('password'), 'photo' => 'path/to/photo.jpg', 'phone' => '123456789', 'address' => 'Instructor Address', 'role' => 'instructor', 'status' => '1', 'last_seen' => now(), 'remember_token' => \Illuminate\Support\Str::random(10)]);"
-```
 
-```bash
 php artisan tinker --execute="\App\Models\User::create(['name' => 'Regular User', 'username' => 'example@user', 'email' => 'user@example.com', 'email_verified_at' => now(), 'password' => bcrypt('password'), 'photo' => 'path/to/photo.jpg', 'phone' => '123456789', 'address' => 'User Address', 'role' => 'user', 'status' => '1', 'last_seen' => now(), 'remember_token' => \Illuminate\Support\Str::random(10)]);"
 ```
 
