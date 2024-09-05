@@ -10,7 +10,7 @@ use App\Exports\PermissionExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PermissionImport;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
