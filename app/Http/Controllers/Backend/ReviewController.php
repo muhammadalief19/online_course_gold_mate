@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class ReviewController extends Controller
@@ -33,16 +33,16 @@ class ReviewController extends Controller
             'message' => 'Review Will Approve By Admin',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);  
+        return redirect()->back()->with($notification);
 
-    }// End Method 
+    }// End Method
 
     public function AdminPendingReview(){
 
         $review = Review::where('status',0)->orderBy('id','DESC')->get();
         return view('admin.backend.review.pending_review',compact('review'));
 
-    }// End Method 
+    }// End Method
 
     public function UpdateReviewStatus(Request $request){
 
@@ -57,14 +57,14 @@ class ReviewController extends Controller
 
         return response()->json(['message' => 'Review Status Updated Successfully']);
 
-    }// End Method 
+    }// End Method
 
     public function AdminActiveReview(){
 
         $review = Review::where('status',1)->orderBy('id','DESC')->get();
         return view('admin.backend.review.active_review',compact('review'));
 
-    }// End Method 
+    }// End Method
 
     public function InstructorAllReview(){
         $id = Auth::user()->id;
@@ -72,8 +72,7 @@ class ReviewController extends Controller
         return view('instructor.review.active_review',compact('review'));
 
 
-    }// End Method 
+    }// End Method
 
 
 }
- 
