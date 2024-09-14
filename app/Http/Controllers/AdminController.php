@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Course;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
- 
+
 class AdminController extends Controller
 {
     public function AdminDashboard(){
 
         return view('admin.index');
 
-    } // End Method 
+    } // End Method
 
     public function AdminLogout(Request $request) {
         Auth::guard('web')->logout();
@@ -29,13 +29,13 @@ class AdminController extends Controller
             'message' => 'Logout Successfully',
             'alert-type' => 'info'
         );
- 
+
         return redirect('/admin/login')->with($notification);
-    } // End Method 
+    } // End Method
 
     public function AdminLogin(){
         return view('admin.admin_login');
-    } // End Method 
+    } // End Method
 
 
     public function AdminProfile(){
@@ -61,7 +61,7 @@ class AdminController extends Controller
            @unlink(public_path('upload/admin_images/'.$data->photo));
            $filename = date('YmdHi').$file->getClientOriginalName();
            $file->move(public_path('upload/admin_images'),$filename);
-           $data['photo'] = $filename; 
+           $data['photo'] = $filename;
         }
 
         $data->save();
@@ -71,7 +71,7 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
-        
+
     }// End Method
 
     public function AdminChangePassword(){
@@ -82,25 +82,25 @@ class AdminController extends Controller
 
     }// End Method
 
- 
+
     public function AdminPasswordUpdate(Request $request){
 
-        /// Validation 
+        /// Validation
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed'
         ]);
 
         if (!Hash::check($request->old_password, auth::user()->password)) {
-            
+
             $notification = array(
                 'message' => 'Old Password Does not Match!',
                 'alert-type' => 'error'
             );
             return back()->with($notification);
-        } 
+        }
 
-        /// Update The new Password 
+        /// Update The new Password
         User::whereId(auth::user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
@@ -109,7 +109,7 @@ class AdminController extends Controller
             'message' => 'Password Change Successfully',
             'alert-type' => 'success'
         );
-        return back()->with($notification); 
+        return back()->with($notification);
 
     }// End Method
 
@@ -142,7 +142,7 @@ class AdminController extends Controller
             'message' => 'Instructor Registed Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('instructor.login')->with($notification); 
+        return redirect()->route('instructor.login')->with($notification);
 
     }// End Method
 
@@ -152,7 +152,7 @@ class AdminController extends Controller
         $allinstructor = User::where('role','instructor')->latest()->get();
         return view('admin.backend.instructor.all_instructor',compact('allinstructor'));
     }// End Method
- 
+
     public function UpdateUserStatus(Request $request){
 
         $userId = $request->input('user_id');
@@ -218,6 +218,22 @@ class AdminController extends Controller
     public function StoreAdmin(Request $request){
 
         $user = new User();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+        ]);
+
+        if (User::where('email', $request->email)->exists()) {
+            $notification = [
+                'message' => 'The email address is already in use by another account.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+        
         $user->username = $request->username;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -236,7 +252,7 @@ class AdminController extends Controller
             'message' => 'New Admin Inserted Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('all.admin')->with($notification); 
+        return redirect()->route('all.admin')->with($notification);
 
     }// End Method
 
@@ -250,13 +266,28 @@ class AdminController extends Controller
     }// End Method
 
     public function UpdateAdmin(Request $request,$id){
-
         $user = User::find($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:15',
+            'address' => 'required|string|max:255',
+        ]);
+
+        if (User::where('email', $request->email)->where('id', '!=', $id)->exists()) {
+            $notification = [
+                'message' => 'The email address is already in use by another account.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+
         $user->username = $request->username;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
-        $user->address = $request->address; 
+        $user->address = $request->address;
         $user->role = 'admin';
         $user->status = '1';
         $user->save();
@@ -270,7 +301,7 @@ class AdminController extends Controller
             'message' => 'Admin Updated Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('all.admin')->with($notification); 
+        return redirect()->route('all.admin')->with($notification);
 
     }// End Method
 
@@ -285,11 +316,10 @@ class AdminController extends Controller
             'message' => 'Admin Deleted Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification); 
+        return redirect()->back()->with($notification);
 
     }// End Method
-    
+
 
 
 }
- 
