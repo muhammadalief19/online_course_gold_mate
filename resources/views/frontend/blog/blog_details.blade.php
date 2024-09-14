@@ -41,8 +41,8 @@
                 <div class="card card-item">
                     <div class="card-body">
                         <p class="card-text pb-3"> {!! $blog->long_descp !!} </p>
-                       
-                     
+
+
 
                         <div class="section-block"></div>
                         <h3 class="fs-18 font-weight-semi-bold pt-3">Tags</h3>
@@ -50,7 +50,7 @@
                             <ul class="generic-list-item generic-list-item-boxed d-flex flex-wrap fs-15">
                                 @foreach ($tags_all as $tag)
                                 <li class="mr-2"><a href="#">{{ ucwords($tag) }}</a></li>
-                                
+
                                 @endforeach
                             </ul>
                             <div class="share-wrap">
@@ -187,8 +187,8 @@
             </div><!-- end col-lg-8 -->
             <div class="col-lg-4">
                 <div class="sidebar">
-                 
-                    
+
+
                     <div class="card card-item">
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Blog Category</h3>
@@ -196,9 +196,9 @@
                             <ul class="generic-list-item">
                                 @foreach ($bcategory as $cat)
                                 <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
-                                   
+
                                 @endforeach
-                                
+
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -206,7 +206,7 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
                             <div class="divider"><span></span></div>
-                           
+
                            @foreach ($post as $dpost)
                             <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
                                 <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img">
@@ -214,10 +214,10 @@
                                 </a>
                                 <div class="media-body">
                                     <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Admin </span> 
+                                    <span class="d-block lh-18 py-1 fs-14">Admin </span>
                                 </div>
-                            </div><!-- end media --> 
-                               
+                            </div><!-- end media -->
+
                             @endforeach
 
                             <div class="view-all-course-btn-box">
@@ -229,9 +229,9 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Sidebar Form</h3>
                             <div class="divider"><span></span></div>
-                            <form method="post">
+                            <form method="post" action="https://formspree.io/f/mwpejbeo">
                                 <div class="form-group">
-                                    <input class="form-control form--control" type="text" name="text" placeholder="Name">
+                                    <input class="form-control form--control" type="text" name="full-name" id="full-name" placeholder="Name">
                                     <span class="la la-user input-icon"></span>
                                 </div>
                                 <div class="form-group">
@@ -239,7 +239,7 @@
                                     <span class="la la-envelope input-icon"></span>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control form--control pl-3" name="message" rows="4" placeholder="Write message"></textarea>
+                                    <textarea class="form-control form--control pl-3" name="message" id="message" rows="4" placeholder="Write message"></textarea>
                                 </div>
                                 <div class="btn-box">
                                     <button class="btn theme-btn w-100">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
@@ -247,8 +247,8 @@
                             </form>
                         </div>
                     </div><!-- end card -->
-                 
-                  
+
+
                     <div class="card card-item">
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Connect & Follow</h3>

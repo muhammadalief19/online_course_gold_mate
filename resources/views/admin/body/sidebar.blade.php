@@ -42,7 +42,7 @@
         @endif
 
 
-        @if (Auth::user()->can('instructor.menu'))
+        @if(Auth::user()->can('instructor.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
@@ -55,7 +55,6 @@
             </ul>
         </li>
         @endif
-
 
         <li>
             <a class="has-arrow" href="javascript:;">
@@ -298,7 +297,9 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('all.user') }}">All User</a></li>
-                    <li><a href="{{ route('all.instructor') }}">All Instructor</a></li>
+                    @if(Auth::user()->can('instructor.menu'))
+                        <li><a href="{{ route('all.instructor') }}">All Instructor</a></li>
+                    @endif
                 </ul>
             </li>
             <li>

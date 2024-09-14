@@ -31,8 +31,8 @@
         <div class="row">
             <div class="col-lg-8 mb-5">
                 <div class="row">
-                  
-                  
+
+
    @foreach ($blog as $item)
     <div class="col-lg-6">
         <div class="card card-item">
@@ -52,7 +52,7 @@
                     <li class="d-flex align-items-center"><a href="#">130 Likes</a></li>
                 </ul>
                 <div class="d-flex justify-content-between align-items-center pt-3">
-                    <a href="blog-single.html" class="btn theme-btn theme-btn-sm theme-btn-white">Read More <i class="la la-arrow-right icon ml-1"></i></a>
+                    <a href="{{ url('blog/details/'.$item->post_slug) }}" class="btn theme-btn theme-btn-sm theme-btn-white">Read More <i class="la la-arrow-right icon ml-1"></i></a>
                     <div class="share-wrap">
                         <ul class="social-icons social-icons-styled">
                             <li class="mr-0"><a href="#" class="facebook-bg"><i class="la la-facebook"></i></a></li>
@@ -64,11 +64,11 @@
                 </div>
             </div><!-- end card-body -->
         </div><!-- end card -->
-    </div><!-- end col-lg-6 --> 
-    @endforeach       
+    </div><!-- end col-lg-6 -->
+    @endforeach
 
 
-                     
+
                 </div><!-- end row -->
                 <div class="text-center pt-3">
                     <nav aria-label="Page navigation example" class="pagination-box">
@@ -95,7 +95,7 @@
             </div><!-- end col-lg-8 -->
             <div class="col-lg-4">
                 <div class="sidebar">
-                     
+
                     <div class="card card-item">
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Blog Category</h3>
@@ -103,9 +103,8 @@
                             <ul class="generic-list-item">
                                 @foreach ($bcategory as $cat)
                                 <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
-                                   
                                 @endforeach
-                                
+
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -113,7 +112,7 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
                             <div class="divider"><span></span></div>
-                           
+
                            @foreach ($post as $dpost)
                             <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
                                 <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img">
@@ -121,10 +120,10 @@
                                 </a>
                                 <div class="media-body">
                                     <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Admin </span> 
+                                    <span class="d-block lh-18 py-1 fs-14">Admin </span>
                                 </div>
-                            </div><!-- end media --> 
-                               
+                            </div><!-- end media -->
+
                             @endforeach
 
                             <div class="view-all-course-btn-box">
@@ -132,15 +131,15 @@
                             </div>
                         </div>
                     </div><!-- end card -->
-                   
-                  
+
+
                     <div class="card card-item">
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Sidebar Form</h3>
                             <div class="divider"><span></span></div>
-                            <form method="post">
+                            <form method="post" action="https://formspree.io/f/mwpejbeo">
                                 <div class="form-group">
-                                    <input class="form-control form--control" type="text" name="text" placeholder="Name">
+                                    <input class="form-control form--control" type="text" name="full-name" id="full-name" placeholder="Name">
                                     <span class="la la-user input-icon"></span>
                                 </div>
                                 <div class="form-group">
@@ -148,7 +147,7 @@
                                     <span class="la la-envelope input-icon"></span>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control form--control pl-3" name="message" rows="4" placeholder="Write message"></textarea>
+                                    <textarea class="form-control form--control pl-3" name="message" id="message" rows="4" placeholder="Write message"></textarea>
                                 </div>
                                 <div class="btn-box">
                                     <button class="btn theme-btn w-100">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>

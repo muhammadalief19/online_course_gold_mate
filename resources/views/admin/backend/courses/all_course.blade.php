@@ -59,10 +59,10 @@
 
 
                             <td>
-    <div class="form-check-danger form-check form-switch">
-        <input class="form-check-input status-toggle large-checkbox" type="checkbox" id="flexSwitchCheckCheckedDanger" data-course-id="{{ $item->id }}" {{ $item->status ? 'checked' : ''}}  >
-        <label class="form-check-label" for="flexSwitchCheckCheckedDanger"> </label>
-    </div>
+                                <div class="form-check-danger form-check form-switch">
+                                    <input class="form-check-input status-toggle large-checkbox" type="checkbox" id="flexSwitchCheckCheckedDanger" data-course-id="{{ $item->id }}" {{ $item->status ? 'checked' : ''}}  >
+                                    <label class="form-check-label" for="flexSwitchCheckCheckedDanger"> </label>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
