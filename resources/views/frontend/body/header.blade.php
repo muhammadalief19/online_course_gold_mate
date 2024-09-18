@@ -280,14 +280,14 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tg-header__top-info list-wrap">
-                            <li><img src="assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
-                            <li><img src="assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}></a></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}></a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
                         <div class="tg-header__top-right">
                             <div class="tg-header__phone">
-                                <img src="assets/img/icons/phone.svg" alt="Icon">Call us: <a href="tel:00123456789"> {{ $setting->phone }}</a>
+                                <img src="{{ asset('') }}assets/img/icons/phone.svg" alt="Icon">Call us: <a href="tel:00123456789"> {{ $setting->phone }}</a>
                             </div>
                             <ul class="tg-header__top-social list-wrap">
                                 <li>Follow Us On :</li>
@@ -358,13 +358,13 @@
                                     <ul class="list-wrap">
                                         <li class="wishlist-icon">
                                             <a href="cart.html" class="cart-count">
-                                                <img src="assets/img/icons/heart.svg" class="injectable" alt="img">
+                                                <img src="{{ asset('') }}assets/img/icons/heart.svg" class="injectable" alt="img">
                                                 <span class="wishlist-count">0</span>
                                             </a>
                                         </li>
                                         <li class="mini-cart-icon">
                                             <a href="cart.html" class="cart-count">
-                                                <img src="assets/img/icons/cart.svg" class="injectable" alt="img">
+                                                <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
                                                 <span class="mini-cart-count">0</span>
                                             </a>
                                         </li>
@@ -374,7 +374,7 @@
                                     </ul>
                                 </div>
                                 <div class="mobile-login-btn">
-                                    <a href="login.html"><img src="assets/img/icons/user.svg" alt="" class="injectable"></a>
+                                    <a href="login.html"><img src="{{ asset('') }}assets/img/icons/user.svg" alt="" class="injectable"></a>
                                 </div>
                                 <div class="mobile-nav-toggler"><i class="tg-flaticon-menu-1"></i></div>
                             </nav>
@@ -384,7 +384,7 @@
                             <nav class="tgmobile__menu-box">
                                 <div class="close-btn"><i class="tg-flaticon-close-1"></i></div>
                                 <div class="nav-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo.svg" alt="Logo"></a>
+                                    <a href="index.html"><img src="{{ asset('') }}assets/img/logo/logo.svg" alt="Logo"></a>
                                 </div>
                                 <div class="tgmobile__search">
                                     <form action="#">

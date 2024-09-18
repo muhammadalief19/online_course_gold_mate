@@ -161,7 +161,7 @@
                 <div class="loader-container">
                 </div>
             </div>
-        </div>
+        </div>x
         <!--Preloader-end -->
 
         @include('frontend.body.header')

@@ -16,7 +16,7 @@ class BlogController extends Controller
     $category = BlogCategory::latest()->get();
     return view('admin.backend.blogcategory.blog_category',compact('category'));
 
-   }// End Method 
+   }// End Method
 
    public function StoreBlogCategory(Request $request){
 
@@ -32,7 +32,7 @@ class BlogController extends Controller
     return redirect()->back()->with($notification);
 
 
-   }// End Method 
+   }// End Method
 
 
    public function EditBlogCategory($id){
@@ -40,7 +40,7 @@ class BlogController extends Controller
     $categories = BlogCategory::find($id);
     return response()->json($categories);
 
-   }// End Method 
+   }// End Method
 
 
    public function UpdateBlogCategory(Request $request){
@@ -58,10 +58,10 @@ class BlogController extends Controller
     return redirect()->back()->with($notification);
 
 
-   }// End Method 
+   }// End Method
 
    public function DeleteBlogCategory($id){
-   
+
     BlogCategory::find($id)->delete();
 
     $notification = array(
@@ -71,14 +71,14 @@ class BlogController extends Controller
     return redirect()->back()->with($notification);
 
 
-   }// End Method 
+   }// End Method
 
    //////////// All Blog Post Method .//
 
    public function BlogPost(){
     $post = BlogPost::latest()->get();
     return view('admin.backend.post.all_post',compact('post'));
-   }// End Method 
+   }// End Method
 
 
    public function AddBlogPost(){
@@ -86,11 +86,11 @@ class BlogController extends Controller
     $blogcat = BlogCategory::latest()->get();
     return view('admin.backend.post.add_post',compact('blogcat'));
 
-   }// End Method 
+   }// End Method
 
    public function StoreBlogPost(Request $request){
 
-    $image = $request->file('post_image');  
+    $image = $request->file('post_image');
     $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
     Image::make($image)->resize(370,247)->save('upload/post/'.$name_gen);
     $save_url = 'upload/post/'.$name_gen;
@@ -101,8 +101,8 @@ class BlogController extends Controller
         'post_slug' => strtolower(str_replace(' ','-',$request->post_title)),
         'long_descp' => $request->long_descp,
         'post_tags' => $request->post_tags,
-        'post_image' => $save_url,  
-        'created_at' => Carbon::now(),      
+        'post_image' => $save_url,
+        'created_at' => Carbon::now(),
 
     ]);
 
@@ -110,9 +110,9 @@ class BlogController extends Controller
         'message' => 'Blog Post Inserted Successfully',
         'alert-type' => 'success'
     );
-    return redirect()->route('blog.post')->with($notification);  
+    return redirect()->route('blog.post')->with($notification);
 
-   }// End Method 
+   }// End Method
 
    public function EditBlogPost($id){
 
@@ -120,37 +120,37 @@ class BlogController extends Controller
     $post = BlogPost::find($id);
     return view('admin.backend.post.edit_post',compact('post','blogcat'));
 
-   }// End Method 
+   }// End Method
 
 
    public function UpdateBlogPost(Request $request){
-        
+
     $post_id = $request->id;
 
     if ($request->file('post_image')) {
 
-        $image = $request->file('post_image');  
+        $image = $request->file('post_image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
         Image::make($image)->resize(370,247)->save('upload/post/'.$name_gen);
         $save_url = 'upload/post/'.$name_gen;
-    
+
         BlogPost::find($post_id)->update([
             'blogcat_id' => $request->blogcat_id,
             'post_title' => $request->post_title,
             'post_slug' => strtolower(str_replace(' ','-',$request->post_title)),
             'long_descp' => $request->long_descp,
             'post_tags' => $request->post_tags,
-            'post_image' => $save_url,  
-            'created_at' => Carbon::now(),      
-    
+            'post_image' => $save_url,
+            'created_at' => Carbon::now(),
+
         ]);
-    
+
         $notification = array(
             'message' => 'Blog Post Updated Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('blog.post')->with($notification);  
-    
+        return redirect()->route('blog.post')->with($notification);
+
     } else {
 
         BlogPost::find($post_id)->update([
@@ -158,20 +158,20 @@ class BlogController extends Controller
             'post_title' => $request->post_title,
             'post_slug' => strtolower(str_replace(' ','-',$request->post_title)),
             'long_descp' => $request->long_descp,
-            'post_tags' => $request->post_tags, 
-            'created_at' => Carbon::now(),      
-    
+            'post_tags' => $request->post_tags,
+            'created_at' => Carbon::now(),
+
         ]);
-    
+
         $notification = array(
             'message' => 'Blog Post Updated Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('blog.post')->with($notification);  
+        return redirect()->route('blog.post')->with($notification);
 
-    } // end else 
+    } // end else
 
-}// End Method 
+}// End Method
 
 
 public function DeleteBlogPost($id){
@@ -188,7 +188,7 @@ public function DeleteBlogPost($id){
         );
         return redirect()->back()->with($notification);
 
-}// End Method 
+}// End Method
 
 public function BlogDetails($slug){
 
@@ -199,7 +199,7 @@ public function BlogDetails($slug){
     $post = BlogPost::latest()->limit(3)->get();
     return view('frontend.blog.blog_details',compact('blog','tags_all','bcategory','post'));
 
-}// End Method 
+}// End Method
 
 public function BlogCatList($id){
 
@@ -209,17 +209,17 @@ public function BlogCatList($id){
     $post = BlogPost::latest()->limit(3)->get();
     return view('frontend.blog.blog_cat_list',compact('blog','breadcat','bcategory','post'));
 
-}// End Method 
+}// End Method
 
 public function BlogList(){
+    $blog = BlogPost::with('blog')->latest()->paginate(3);
 
-    $blog = BlogPost::latest()->paginate(2);
     $bcategory = BlogCategory::latest()->get();
-    $post = BlogPost::latest()->limit(3)->get();
+    $post = BlogPost::latest()->limit(4)->get();
     return view('frontend.blog.blog_list',compact('blog','bcategory','post'));
 
 
-}// End Method 
+}// End Method
 
 
-} 
+}
