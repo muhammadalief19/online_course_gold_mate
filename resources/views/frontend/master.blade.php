@@ -161,7 +161,7 @@
                 <div class="loader-container">
                 </div>
             </div>
-        </div>x
+        </div>
         <!--Preloader-end -->
 
         @include('frontend.body.header')
@@ -217,5 +217,5 @@
     @endif
    </script>
 
-</body>]
+</body>
 </html>
