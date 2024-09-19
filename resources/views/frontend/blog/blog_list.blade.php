@@ -1,5 +1,4 @@
 @extends('frontend.master')
-
 @section('home')
 
 {{-- <!-- ================================
@@ -165,127 +164,115 @@
     </section>
     <!-- breadcrumb-area-end -->
 
-    <!-- blog-area -->
-    <section class="blog-area section-py-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-9 col-lg-8">
-                    <div class="row gutter-20">
-                        @foreach ($blog as $item)
-                        <div class="col-xl-4 col-md-6">
-                            <div class="blog__post-item shine__animate-item">
-                                <div class="blog__post-thumb">
+   <!-- blog-area -->
+<section class="blog-area section-py-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8">
+                <div class="row gutter-20">
+
+                    <!-- Loop through blog items, limit to 9 items and 3 per row -->
+                    @foreach ($blog->take(9) as $item)
+                    <div class="col-xl-4 col-md-6"> <!-- 3 per row -->
+                        <div class="blog__post-item shine__animate-item">
+                            <div class="blog__post-thumb">
+                                <a href="{{ url('blog/details/'.$item->post_slug) }}">
+                                    <img class="card-img-top lazy" src="{{ asset($item->post_image) }}" alt="{{ $item->post_title }}">
+                                </a>
+                                <a href="/blog" class="post-tag">{{ $item->blog->category_name }}</a> <!-- Menampilkan category_name -->
+                            </div>
+                            <div class="blog__post-content">
+                                <div class="blog__post-meta">
+                                    <ul class="list-wrap">
+                                        <li><i class="flaticon-calendar"></i>{{ $item->created_at->format('d F, Y') }}</li>
+                                        <li><i class="flaticon-user-1"></i>by <a href="/blog_detail">Admin</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="title">
                                     <a href="{{ url('blog/details/'.$item->post_slug) }}">
-                                        <img class="card-img-top lazy" src="{{ asset($item->post_image)  }}" data-src="images/img8.jpg" alt="Card image cap">
+                                        {{ $item->post_title }}
                                     </a>
-                                    <a href="/blog" class="post-tag">{{ $item->blog->category_name }}</a> <!-- Menampilkan category_name -->
-                                </div>
-                                <div class="blog__post-content">
-                                    <div class="blog__post-meta">
-                                        <ul class="list-wrap">
-                                            <li><i class="flaticon-calendar"></i>{{ $item->created_at->format('d F, Y') }}</li>
-                                            <li><i class="flaticon-user-1"></i>by <a href="/blog_detail">Admin</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="{{ url('blog/details/'.$item->post_slug) }}">{{ $item->post_title }}</a></h4>
-                                </div>
+                                </h4>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                    <nav class="pagination__wrap mt-25">
-                        <ul class="list-wrap">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="/blog">2</a></li>
-                            <li><a href="/blog">3</a></li>
-                            <li><a href="/blog">4</a></li>
-                        </ul>
+                    @endforeach
+
+                    </div><!-- end row -->
+                <div class="text-center pt-3">
+                    <nav aria-label="Page navigation example" class="pagination-box">
+                       
+                  {{-- {{ $blog->links() }} --}}
+
+                  {{ $blog->links('vendor.pagination.custom') }}
+
                     </nav>
+                    
                 </div>
-                <div class="col-xl-3 col-lg-4">
-                    <aside class="blog-sidebar">
-                        <div class="blog-widget widget_search">
-                            <div class="sidebar-search-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Search here">
-                                    <button><i class="flaticon-search"></i></button>
-                                </form>
+            </div><!-- end col-lg-8 -->
+
+            <!-- Sidebar Area -->
+            <div class="col-xl-3 col-lg-4">
+                <aside class="blog-sidebar">
+                    <div class="blog-widget widget_search">
+                        <div class="sidebar-search-form">
+                            <form action="#">
+                                <input type="text" placeholder="Search here">
+                                <button><i class="flaticon-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="blog-widget">
+                        <h4 class="widget-title">Categories</h4>
+                        <div class="shop-cat-list">
+                            <ul class="list-wrap">
+                                @foreach ($bcategory as $cat)
+                                    <li><a href="{{ url('blog/cat/list/'.$cat->id) }}"><i class="flaticon-angle-right"></i>{{ $cat->category_name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card card-item">
+                        <div class="card-body">
+                            <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
+                            <div class="divider"><span></span></div>
+                           
+                           @foreach ($post as $dpost)
+                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
+                                <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img">
+                                    <img class="mr-3" src="{{ asset($dpost->post_image) }}" alt="Related course image">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
+                                    <span class="d-block lh-18 py-1 fs-14">Admin </span> 
+                                </div>
+                            </div><!-- end media --> 
+                               
+                            @endforeach
+
+                            <div class="view-all-course-btn-box">
+                                <a href="blog-no-sidebar.html" class="btn theme-btn w-100">View All Posts <i class="la la-arrow-right icon ml-1"></i></a>
                             </div>
                         </div>
-                        <div class="blog-widget">
-                            <h4 class="widget-title">Categories</h4>
-                            <div class="shop-cat-list">
-                                <ul class="list-wrap">
-                                    @foreach ($bcategory as $cat)
-                                        <li><a href="{{ url('blog/cat/list/'.$cat->id) }}"><i class="flaticon-angle-right"></i>{{ $cat->category_name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    </div><!-- end card -->
+                    <div class="blog-widget">
+                        <h4 class="widget-title">Tags</h4>
+                        <div class="tagcloud">
+                            <a href="#">Education</a>
+                            <a href="#">Training</a>
+                            <a href="#">Online</a>
+                            <a href="#">Learn</a>
+                            <a href="#">Course</a>
+                            <a href="#">LMS</a>
                         </div>
-                        <div class="blog-widget">
-                            <h4 class="widget-title">Latest Post</h4>
-                            <div class="rc-post-item">
-                                <div class="rc-post-thumb">
-                                    <a href="/blog_detail">
-                                        <img src="assets/img/blog/latest_post01.jpg" alt="img">
-                                    </a>
-                                </div>
-                                <div class="rc-post-content">
-                                    <span class="date"><i class="flaticon-calendar"></i> April 13, 2024</span>
-                                    <h4 class="title"><a href="/blog_detail">the Right Learning Path for your</a></h4>
-                                </div>
-                            </div>
-                            <div class="rc-post-item">
-                                <div class="rc-post-thumb">
-                                    <a href="/blog_detail">
-                                        <img src="assets/img/blog/latest_post02.jpg" alt="img">
-                                    </a>
-                                </div>
-                                <div class="rc-post-content">
-                                    <span class="date"><i class="flaticon-calendar"></i> April 13, 2024</span>
-                                    <h4 class="title"><a href="/blog_detail">The Growing Need Management</a></h4>
-                                </div>
-                            </div>
-                            <div class="rc-post-item">
-                                <div class="rc-post-thumb">
-                                    <a href="/blog_detail">
-                                        <img src="assets/img/blog/latest_post03.jpg" alt="img">
-                                    </a>
-                                </div>
-                                <div class="rc-post-content">
-                                    <span class="date"><i class="flaticon-calendar"></i> April 13, 2024</span>
-                                    <h4 class="title"><a href="/blog_detail">the Right Learning Path for your</a></h4>
-                                </div>
-                            </div>
-                            <div class="rc-post-item">
-                                <div class="rc-post-thumb">
-                                    <a href="/blog_detail">
-                                        <img src="assets/img/blog/latest_post04.jpg" alt="img">
-                                    </a>
-                                </div>
-                                <div class="rc-post-content">
-                                    <span class="date"><i class="flaticon-calendar"></i> April 13, 2024</span>
-                                    <h4 class="title"><a href="/blog_detail">The Growing Need Management</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-widget">
-                            <h4 class="widget-title">Tags</h4>
-                            <div class="tagcloud">
-                                <a href="#">Education</a>
-                                <a href="#">Training</a>
-                                <a href="#">Online</a>
-                                <a href="#">Learn</a>
-                                <a href="#">Course</a>
-                                <a href="#">LMS</a>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+                    </div>
+                </aside>
             </div>
         </div>
-    </section>
-    <!-- blog-area-end -->
+    </div>
+</section>
+<!-- blog-area-end -->
+
 
     </main>
     <!-- main-area-end -->
@@ -302,6 +289,7 @@
                     <img class="card-img-top lazy" src="{{ asset($item->post_image)  }}" data-src="images/img8.jpg" alt="Card image cap">
                 </a>
                 <div class="course-badge-labels">
+                    
                 </div>
             </div><!-- end card-image -->
             <div class="card-body">
