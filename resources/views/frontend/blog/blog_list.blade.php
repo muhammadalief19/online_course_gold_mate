@@ -233,39 +233,72 @@
                         </div>
                     </div>
                     <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
-                            <div class="divider"><span></span></div>
-                           
-                           @foreach ($post as $dpost)
-                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img">
-                                    <img class="mr-3" src="{{ asset($dpost->post_image) }}" alt="Related course image">
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Admin </span> 
-                                </div>
-                            </div><!-- end media --> 
-                               
-                            @endforeach
+    <div class="card-body">
+        <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
+        <div class="divider"><span></span></div>
 
-                            <div class="view-all-course-btn-box">
-                                <a href="blog-no-sidebar.html" class="btn theme-btn w-100">View All Posts <i class="la la-arrow-right icon ml-1"></i></a>
-                            </div>
-                        </div>
-                    </div><!-- end card -->
-                    <div class="blog-widget">
-                        <h4 class="widget-title">Tags</h4>
-                        <div class="tagcloud">
-                            <a href="#">Education</a>
-                            <a href="#">Training</a>
-                            <a href="#">Online</a>
-                            <a href="#">Learn</a>
-                            <a href="#">Course</a>
-                            <a href="#">LMS</a>
-                        </div>
-                    </div>
+        @foreach ($post as $dpost)
+        <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4 recent-post-card">
+            <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img post-thumbnail">
+                <img class="mr-3 rounded img-fluid" src="{{ asset($dpost->post_image) }}" alt="Related post image">
+            </a>
+            <div class="media-body">
+                <h5 class="fs-15 post-title">
+                    <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
+                </h5>
+                <span class="d-block lh-18 py-1 fs-14 text-muted">By Admin</span>
+            </div>
+        </div><!-- end media -->
+        @endforeach
+
+    </div>
+</div>
+
+<style>
+    .recent-post-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding-bottom: 20px;
+    }
+
+    .recent-post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-thumbnail img {
+        border-radius: 10px;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .post-title a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .post-title a:hover {
+        color: #007bff;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .divider span {
+        display: inline-block;
+        width: 50px;
+        height: 3px;
+        background-color: #007bff;
+    }
+</style>
+
+                    
                 </aside>
             </div>
         </div>
