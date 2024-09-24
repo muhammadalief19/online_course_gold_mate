@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $setting = App\Models\SiteSetting::find(1);
 @endphp
 
@@ -255,129 +255,6 @@
             </li>
         </ul>
     </div><!-- end off-canvas-menu -->
-    <div class="off-canvas-menu custom-scrollbar-styled category-off-canvas-menu">
-        <div class="off-canvas-menu-close cat-menu-close icon-element icon-element-sm shadow-sm" data-toggle="tooltip" data-placement="left" title="Close menu">
-            <i class="la la-times"></i>
-        </div><!-- end off-canvas-menu-close -->
-        <ul class="generic-list-item off-canvas-menu-list pt-90px">
-            <li>
-                <a href="course-grid.html">Development</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Development</a></li>
-                    <li><a href="#">Web Development</a></li>
-                    <li><a href="#">Mobile Apps</a></li>
-                    <li><a href="#">Game Development</a></li>
-                    <li><a href="#">Databases</a></li>
-                    <li><a href="#">Programming Languages</a></li>
-                    <li><a href="#">Software Testing</a></li>
-                    <li><a href="#">Software Engineering</a></li>
-                    <li><a href="#">E-Commerce</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">business</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Business</a></li>
-                    <li><a href="#">Finance</a></li>
-                    <li><a href="#">Entrepreneurship</a></li>
-                    <li><a href="#">Strategy</a></li>
-                    <li><a href="#">Real Estate</a></li>
-                    <li><a href="#">Home Business</a></li>
-                    <li><a href="#">Communications</a></li>
-                    <li><a href="#">Industry</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">IT & Software</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All IT & Software</a></li>
-                    <li><a href="#">IT Certification</a></li>
-                    <li><a href="#">Hardware</a></li>
-                    <li><a href="#">Network & Security</a></li>
-                    <li><a href="#">Operating Systems</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">Finance & Accounting</a>
-                <ul class="sub-menu">
-                    <li><a href="#"> All Finance & Accounting</a></li>
-                    <li><a href="#">Accounting & Bookkeeping</a></li>
-                    <li><a href="#">Cryptocurrency & Blockchain</a></li>
-                    <li><a href="#">Economics</a></li>
-                    <li><a href="#">Investing & Trading</a></li>
-                    <li><a href="#">Other Finance & Economics</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">design</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Design</a></li>
-                    <li><a href="#">Graphic Design</a></li>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Design Tools</a></li>
-                    <li><a href="#">3D & Animation</a></li>
-                    <li><a href="#">User Experience</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">Personal Development</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Personal Development</a></li>
-                    <li><a href="#">Personal Transformation</a></li>
-                    <li><a href="#">Productivity</a></li>
-                    <li><a href="#">Leadership</a></li>
-                    <li><a href="#">Personal Finance</a></li>
-                    <li><a href="#">Career Development</a></li>
-                    <li><a href="#">Parenting & Relationships</a></li>
-                    <li><a href="#">Happiness</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">Marketing</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Marketing</a></li>
-                    <li><a href="#">Digital Marketing</a></li>
-                    <li><a href="#">Search Engine Optimization</a></li>
-                    <li><a href="#">Social Media Marketing</a></li>
-                    <li><a href="#">Branding</a></li>
-                    <li><a href="#">Video & Mobile Marketing</a></li>
-                    <li><a href="#">Affiliate Marketing</a></li>
-                    <li><a href="#">Growth Hacking</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">Health & Fitness</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Health & Fitness</a></li>
-                    <li><a href="#">Fitness</a></li>
-                    <li><a href="#">Sports</a></li>
-                    <li><a href="#">Dieting</a></li>
-                    <li><a href="#">Self Defense</a></li>
-                    <li><a href="#">Meditation</a></li>
-                    <li><a href="#">Mental Health</a></li>
-                    <li><a href="#">Yoga</a></li>
-                    <li><a href="#">Dance</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="course-grid.html">Photography</a>
-                <ul class="sub-menu">
-                    <li><a href="#">All Photography</a></li>
-                    <li><a href="#">Digital Photography</a></li>
-                    <li><a href="#">Photography Fundamentals</a></li>
-                    <li><a href="#">Commercial Photography</a></li>
-                    <li><a href="#">Video Design</a></li>
-                    <li><a href="#">Photography Tools</a></li>
-                    <li><a href="#">Other</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div><!-- end off-canvas-menu -->
     <div class="mobile-search-form">
         <div class="d-flex align-items-center">
             <form method="post" class="flex-grow-1 mr-3">
@@ -392,4 +269,148 @@
         </div>
     </div><!-- end mobile-search-form -->
     <div class="body-overlay"></div>
-</header><!-- end header-menu-area -->
+</header><!-- end header-menu-area --> --}}
+@php
+    $setting = App\Models\SiteSetting::find(1);
+@endphp
+    <!-- header-area -->
+    <header>
+        <div class="tg-header__top">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="tg-header__top-info list-wrap">
+                            <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="tg-header__top-right">
+                            <div class="tg-header__phone">
+                                <img src="{{ asset('') }}assets/img/icons/phone.svg" alt="Icon">Call us: <a href="tel:00123456789"> {{ $setting->phone }}</a>
+                            </div>
+                            <ul class="tg-header__top-social list-wrap">
+                                <li>Follow Us On :</li>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="header-fixed-height"></div>
+        <div id="sticky-header" class="tg-header__area">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tgmenu__wrap">
+                            <nav class="tgmenu__nav">
+                                <div class="logo">
+                                    <a href="{{ url('/') }}" class="logo"><img src="{{ asset($setting->logo)}}"alt="Logo"></a>
+                                </div>
+                                <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
+                                    <ul class="navigation">
+                                        <li class=""><a href="{{ url('/') }}">Home</a></li>
+                                        <li class="menu-item-has-children"><a href="#">Courses</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="courses.html">Course grid</a></li>
+                                                <li><a href="course-details.html">Course List</a></li>
+                                            </ul>
+                                        </li>
+                                        @php
+                                    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
+                                        @endphp
+
+                                        <li class="menu-item-has-children"><a href="#">Categories</a>
+                                            <ul class="sub-menu">
+                                                @foreach ($categories as $cat)
+                                                @php
+                                                $subcategories = App\Models\SubCategory::where('category_id',$cat->id)->get();
+                                                @endphp
+                                                <li class="menu-item-has-children">
+                                                    <a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a>
+                                                    <ul class="sub-menu">
+                                                        @foreach ($subcategories as $subcat)
+                                                        <li><a href="{{ url('subcategory/'.$subcat->id.'/'.$subcat->subcategory_slug) }}">{{ $subcat->subcategory_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                        <li class=""><a href="{{ route('blog') }}">Blog</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tgmenu__search d-none d-md-block">
+                                    <form action="#" class="tgmenu__search-form">
+                                        <div class="input-grp">
+                                            <input type="text" placeholder="Search For Course . . .">
+                                            <button type="submit"><i class="flaticon-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tgmenu__action">
+                                    <ul class="list-wrap">
+                                        <li class="wishlist-icon">
+                                            <a href="cart.html" class="cart-count">
+                                                <img src="{{ asset('') }}assets/img/icons/heart.svg" class="injectable" alt="img">
+                                                <span class="wishlist-count">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="mini-cart-icon">
+                                            <a href="cart.html" class="cart-count">
+                                                <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
+                                                <span class="mini-cart-count">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="header-btn login-btn">
+                                            <a href="login.html">Log in</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mobile-login-btn">
+                                    <a href="login.html"><img src="{{ asset('') }}assets/img/icons/user.svg" alt="" class="injectable"></a>
+                                </div>
+                                <div class="mobile-nav-toggler"><i class="tg-flaticon-menu-1"></i></div>
+                            </nav>
+                        </div>
+                        <!-- Mobile Menu  -->
+                        <div class="tgmobile__menu">
+                            <nav class="tgmobile__menu-box">
+                                <div class="close-btn"><i class="tg-flaticon-close-1"></i></div>
+                                <div class="nav-logo">
+                                    <a href="index.html"><img src="{{ asset('') }}assets/img/logo/logo.svg" alt="Logo"></a>
+                                </div>
+                                <div class="tgmobile__search">
+                                    <form action="#">
+                                        <input type="text" placeholder="Search here...">
+                                        <button><i class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="tgmobile__menu-outer">
+                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                </div>
+                                <div class="social-links">
+                                    <ul class="list-wrap">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="tgmobile__menu-backdrop"></div>
+                        <!-- End Mobile Menu -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-area-end -->

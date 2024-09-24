@@ -1,12 +1,443 @@
 @extends('frontend.master')
-@section('home')
-
 @section('title')
 {{ $course->course_name }} | Easy Learning
 @endsection
+@section('home')
 
+<main class="main-area fix">
 
-<!-- ================================
+    <!-- breadcrumb-area -->
+    {{-- <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="assets/img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb__content">
+                        <nav class="breadcrumb">
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="index.html">Home</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="index.html">Courses</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span property="itemListElement" typeof="ListItem">{{ $course->course_title }}</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb__shape-wrap">
+            <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+        </div>
+    </div>
+    <!-- breadcrumb-area-end --> --}}
+
+    <!-- courses-details-area -->
+    <section class="courses__details-area section-py-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-8">
+                    <div class="courses__details-thumb">
+                        <img src="{{asset('') }}{{$course->course_image}}" alt="img">
+                    </div>
+                    <div class="courses__details-content">
+                        <ul class="courses__item-meta list-wrap">
+                            <li class="courses__item-tag">
+                                <a href="/">{{ $course['category']['category_name'] }}</a>
+                            </li>
+                            <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
+                        </ul>
+                        <h2 class="title">{{ $course->course_title }}</h2>
+                        <div class="courses__details-meta">
+                            <ul class="list-wrap">
+                                <li class="author-two">
+                                    <img src="{{asset('')}}assets/img/courses/course_author001.png" alt="img">
+                                    By
+                                    <a href="#">David Millar</a>
+                                </li>
+                                <li class="date"><i class="flaticon-calendar"></i>{{ $course->created_at->format('d F, Y') }}</li>
+                                <li><i class="flaticon-mortarboard"></i>2,250 Students</li>
+                            </ul>
+                        </div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum-tab-pane" type="button" role="tab" aria-controls="curriculum-tab-pane" aria-selected="false">Curriculum</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Instructors</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                                <div class="courses__overview-wrap">
+                                    <h3 class="title">Course Description</h3>
+                                    {!! $course->description !!}
+                                    <h3 class="title">What you'll learn in this course?</h3>
+                                    <p>{!! $course->prerequisites !!}</p>
+                                    @foreach ($goals as $goal)
+                                    <ul class="about__info-list list-wrap">
+                                        <li class="about__info-list-item">
+                                            <i class="flaticon-angle-right"></i>
+                                            <p class="content">{{ $goal->goal_name }}</p>
+                                        </li>
+                                    </ul>
+                                    @endforeach
+                                    {{-- <p class="last-info">Morem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn.</p> --}}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="curriculum-tab-pane" role="tabpanel" aria-labelledby="curriculum-tab" tabindex="0">
+                                <div class="courses__curriculum-wrap">
+                                    <h3 class="title">Course Curriculum</h3>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne">
+                                                    Introduction
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <ul class="list-wrap">
+                                                        <li class="course-item open-item">
+                                                            <a href="https://www.youtube.com/watch?v=b2Az7_lLh3g" class="course-item-link popup-video">
+                                                                <span class="item-name">Course Installation</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">03:03</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">Create a Simple React App</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">07:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">React for the Rest of us</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">10:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Capacitance and Inductance
+                                                </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <ul class="list-wrap">
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">Course Installation</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">07:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">Create a Simple React App</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">07:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">React for the Rest of us</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">10:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Final Audit
+                                                </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                                data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <ul class="list-wrap">
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">Course Installation</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">07:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">Create a Simple React App</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">07:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="course-item">
+                                                            <a href="#" class="course-item-link">
+                                                                <span class="item-name">React for the Rest of us</span>
+                                                                <div class="course-item-meta">
+                                                                    <span class="item-meta duration">10:48</span>
+                                                                    <span class="item-meta course-item-status">
+                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                    </span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
+                                <div class="courses__instructors-wrap">
+                                    <div class="courses__instructors-thumb">
+                                        <img src="assets/img/courses/course_instructors.png" alt="img">
+                                    </div>
+                                    <div class="courses__instructors-content">
+                                        <h2 class="title">Mark Jukarberg</h2>
+                                        <span class="designation">UX Design Lead</span>
+                                        <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
+                                        <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                        <div class="instructor__social">
+                                            <ul class="list-wrap justify-content-start">
+                                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                                <div class="courses__rating-wrap">
+                                    <h2 class="title">Reviews</h2>
+                                    <div class="course-rate">
+                                        <div class="course-rate__summary">
+                                            <div class="course-rate__summary-value">4.8</div>
+                                            <div class="course-rate__summary-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="course-rate__summary-text">
+                                                12 Ratings
+                                            </div>
+                                        </div>
+                                        <div class="course-rate__details">
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    5
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:80%;" title="80%"></div>
+                                                    <span class="rating-count">2</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    4
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:50%;" title="50%"></div>
+                                                    <span class="rating-count">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    3
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    2
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    1
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course-review-head">
+                                        <div class="review-author-thumb">
+                                            <img src="assets/img/courses/review-author.png" alt="img">
+                                        </div>
+                                        <div class="review-author-content">
+                                            <div class="author-name">
+                                                <h5 class="name">Jura Hujaor <span>2 Days ago</span></h5>
+                                                <div class="author-rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <h4 class="title">The best LMS Design System</h4>
+                                            <p>Maximus ligula eleifend id nisl quis interdum. Sed malesuada tortor non turpis semper bibendum nisi porta, malesuada risus nonerviverra dolor. Vestibulum ante ipsum primis in faucibus.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="courses__details-sidebar">
+                        <div class="courses__details-video">
+                            <img src="assets/img/courses/course_thumb02.jpg" alt="img">
+                            <a href="https://www.youtube.com/watch?v=YwrHGratByU" class="popup-video"><i class="fas fa-play"></i></a>
+                        </div>
+                        <div class="courses__cost-wrap">
+                            <span>This Course Fee:</span>
+                            <h2 class="title">${{ $course->discount_price }}.00 <del> ${{ $course->selling_price }}.00</del></h2>
+                        </div>
+                        <div class="courses__information-wrap">
+                            <h5 class="title">Course includes:</h5>
+                            <ul class="list-wrap">
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon01.svg" alt="img" class="injectable">
+                                    Level
+                                    <span>{{ $course->label }}</span>
+                                </li>
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon02.svg" alt="img" class="injectable">
+                                    Duration
+                                    <span>{{ $course->duration }}</span>
+                                </li>
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon03.svg" alt="img" class="injectable">
+                                    Lessons
+                                    <span>{{ $course->resources }}</span>
+                                </li>
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon04.svg" alt="img" class="injectable">
+                                    Quizzes
+                                    <span>145</span>
+                                </li>
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon05.svg" alt="img" class="injectable">
+                                    Certifications
+                                    <span>{{ $course->certificate }}</span>
+                                </li>
+                                <li>
+                                    <img src="{{asset('')}}assets/img/icons/course_icon06.svg" alt="img" class="injectable">
+                                    Graduation
+                                    <span>25K</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="courses__payment">
+                            <h5 class="title">Secure Payment:</h5>
+                            <img src="{{asset('')}}assets/img/others/payment.png" alt="img">
+                        </div>
+                        <div class="courses__details-social">
+                            <h5 class="title">Share this course:</h5>
+                            <ul class="list-wrap">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="courses__details-enroll">
+                            <div class="tg-button-wrap">
+                                <a href="/instructors" class="btn btn-two arrow-btn">
+                                    See All Instructors
+                                    <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- courses-details-area-end -->
+
+    </main>
+
+@endsection
+{{-- <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
 <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
@@ -23,22 +454,22 @@
                     <p class="section__desc pt-2 lh-30">{{ $course->course_title }}</p>
                 </div><!-- end section-heading -->
                 <div class="d-flex flex-wrap align-items-center pt-3">
-                   
+
                     @if ($course->bestseller == 1)
                     <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white">Bestseller</h6>
                     @else
-                    @endif 
+                    @endif
 
    @php
        $reviewcount = App\Models\Review::where('course_id',$course->id)->where('status',1)->latest()->get();
        $avarage = App\Models\Review::where('course_id',$course->id)->where('status',1)->avg('rating');
 
-   @endphp                 
-                    
+   @endphp
+
                     <div class="rating-wrap d-flex flex-wrap align-items-center">
                         <div class="review-stars">
                             <span class="rating-number">{{ round($avarage,1) }}</span>
-                        
+
                             @if ($avarage == 0)
                             <span class="la la-star-o"></span>
                             <span class="la la-star-o"></span>
@@ -75,8 +506,8 @@
                             <span class="la la-star"></span>
                             <span class="la la-star"></span>
                             <span class="la la-star"></span>
-                            @endif 
-                            
+                            @endif
+
                         </div>
                         <span class="rating-total pl-1">({{ count($reviewcount) }} ratings)</span>
     @php
@@ -128,10 +559,10 @@
                    <div class="course-overview-card bg-gray p-4 rounded">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">What you'll learn?</h3>
                        <ul class="generic-list-item overview-list-item">
-                        @foreach ($goals as $goal) 
+                        @foreach ($goals as $goal)
    <li><i class="la la-check mr-1 text-black"></i>  {{ $goal->goal_name }} </li>
-                        @endforeach  
-                           
+                        @endforeach
+
                        </ul>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card bg-gray p-4 rounded">
@@ -141,7 +572,7 @@
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Requirements</h3>
                        <ul class="generic-list-item generic-list-item-bullet fs-15">
                            <li> {{ $course->prerequisites }} </li>
-                           
+
                        </ul>
                    </div><!-- end course-overview-card -->
                     <div class="course-overview-card border border-gray p-4 rounded">
@@ -161,11 +592,11 @@
 
 
                        <div class="collapse" id="collapseMore">
-                          
+
                         <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
                         <p class="fs-15 pb-2"> {{ $course->prerequisites }} </p>
-                          
-                            
+
+
                        </div>
                        <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMore" role="button" aria-expanded="false" aria-controls="collapseMore">
                            <span class="collapse-btn-hide">Show more<i class="la la-angle-down ml-1 fs-14"></i></span>
@@ -175,7 +606,7 @@
 
     @php
         $lecture = App\Models\CourseLecture::where('course_id',$course->id)->get();
-    @endphp               
+    @endphp
                    <div class="course-overview-card">
                        <div class="curriculum-header d-flex align-items-center justify-content-between pb-4">
                            <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
@@ -191,13 +622,13 @@
 
                        <div class="curriculum-content">
                            <div id="accordion" class="generic-accordion">
-                               
+
         @foreach ($section as $sec)
 
         @php
             $lecture = App\Models\CourseLecture::where('section_id',$sec->id)->get();
         @endphp
-                       
+
     <div class="card">
             <div class="card-header" id="heading{{ $sec->id }}">
                 <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapse{{ $sec->id }}" aria-expanded="true" aria-controls="collapse{{ $sec->id }}">
@@ -211,7 +642,7 @@
             <div id="collapse{{ $sec->id }}" class="collapse " aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
                 <div class="card-body">
                     <ul class="generic-list-item">
-                       @foreach ($lecture as $lect) 
+                       @foreach ($lecture as $lect)
                         <li>
                             <div class="d-flex align-items-center justify-content-between">
                                 <span>
@@ -221,21 +652,21 @@
                                 <span>03:09</span>
                             </div>
                         </li>
-                        @endforeach 
+                        @endforeach
 
                     </ul>
                 </div><!-- end card-body -->
             </div><!-- end collapse -->
         </div><!-- end card -->
-     
-        @endforeach    
+
+        @endforeach
 
 
-                               
+
                            </div><!-- end generic-accordion -->
                        </div><!-- end curriculum-content -->
                    </div><!-- end course-overview-card -->
-             
+
 
     <div class="course-overview-card pt-4">
         <h3 class="fs-24 font-weight-semi-bold pb-4">About the instructor</h3>
@@ -332,7 +763,7 @@
                                         <span class="la la-star"></span>
                                         <span class="la la-star"></span>
                                         <span class="la la-star"></span>
-                                        @endif 
+                                        @endif
                                        </div>
                                        <span class="rating-total d-block">({{ count($reviewcount) }})</span>
                                        <span>Course Rating</span>
@@ -351,7 +782,7 @@
 
             $percentages = [];
 
-            for ($i=5; $i >= 1 ; $i--) { 
+            for ($i=5; $i >= 1 ; $i--) {
                 $ratingCount = $reviewcount->where('rating',$i)->first();
                 $count =  $ratingCount ? $ratingCount->count : 0;
                 $percent = $totalReviews  > 0 ? ($count / $totalReviews) * 100 : 0;
@@ -360,13 +791,13 @@
                     'percent' => $percent,
                     'count' => $count,
                ];
-            } 
+            }
         @endphp
 
 
-        @if (count($percentages) > 0) 
+        @if (count($percentages) > 0)
         @foreach ($percentages as $ratingInfo)
-            
+
         <div class="review-bars d-flex align-items-center mb-2">
             <div class="review-bars__text">{{ $ratingInfo['rating'] }} stars</div>
             <div class="review-bars__fill">
@@ -378,13 +809,13 @@
             </div><!-- end review-bars__fill -->
             <div class="review-bars__percent">{{ number_format($ratingInfo['percent'], 2) }}%</div>
         </div><!-- end review-bars -->
-        
+
         @endforeach
         @else
         <p>No Reviews Available</p>
         @endif
-      
-    
+
+
     </div><!-- end media-body -->
                            </div>
                        </div><!-- end feedback-wrap -->
@@ -392,8 +823,8 @@
                    <div class="course-overview-card pt-4">
                        <h3 class="fs-24 font-weight-semi-bold pb-4">Reviews</h3>
                        <div class="review-wrap">
-              
-                        
+
+
    @php
        $reviews = App\Models\Review::where('course_id',$course->id)->where('status',1)->latest()->limit(5)->get();
    @endphp
@@ -458,17 +889,17 @@
                 <span class="btn-text fs-14 cursor-pointer pl-1" data-toggle="modal" data-target="#reportModal">Report</span>
             </div>
         </div>
-    </div><!-- end media --> 
-        
+    </div><!-- end media -->
+
     @endforeach
 
-                     
+
                        </div><!-- end review-wrap -->
                        <div class="see-more-review-btn text-center">
                            <button type="button" class="btn theme-btn theme-btn-transparent">Load more reviews</button>
                        </div>
                    </div><!-- end course-overview-card -->
-                  
+
 
 
 
@@ -484,11 +915,11 @@
 
                @guest
 <p><b> For Add Course Review. You need to login first <a href="{{ route('login') }}"> Login Here</a> </b> </p>
-               @else 
-                  
+               @else
+
                    <div class="course-overview-card pt-4">
                        <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
-                       
+
         <form method="post" action="{{ route('store.review') }}" class="row">
             @csrf
 
@@ -507,10 +938,10 @@
                 <label for="star1"></label>
             </div><!-- end leave-rating -->
         </div>
-        
+
             <input type="hidden" name="course_id" value="{{ $course->id }}">
             <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
-            
+
             <div class="input-box col-lg-12">
                 <label class="label-text">Message</label>
                 <div class="form-group">
@@ -518,13 +949,13 @@
                 </div>
             </div><!-- end input-box -->
             <div class="btn-box col-lg-12">
-                
+
                 <button class="btn theme-btn" type="submit">Submit Review</button>
             </div><!-- end btn-box -->
         </form>
                    </div><!-- end course-overview-card -->
 
-                   @endguest   
+                   @endguest
 
 
 
@@ -554,14 +985,14 @@
                                     </div>
                                 </a>
                             </div><!-- end preview-course-video -->
-                          
+
     @php
     $amount = $course->selling_price - $course->discount_price;
     $discount = ($amount/$course->selling_price) * 100;
-   @endphp            
-                          
+   @endphp
+
                             <div class="preview-course-feature-content pt-40px">
-        
+
          <p class="d-flex align-items-center pb-2">
             @if ($course->discount_price == NULL)
             <span class="fs-35 font-weight-semi-bold text-black">${{ $course->selling_price }}</span>
@@ -569,8 +1000,8 @@
             <span class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }}</span>
             <span class="before-price mx-1">${{ $course->selling_price }}</span>
             @endif
-            
-            
+
+
             <span class="price-discount">{{ round($discount) }}% off</span>
         </p>
                                 <p class="preview-price-discount-text pb-35px">
@@ -586,9 +1017,9 @@
         <div class="input-group-append">
             <input type="hidden" id="course_id" name="course_id" value="{{ $course->id }}">
             <input type="hidden" id="instrutor_id" name="instrutor_id" value="{{ $course->instructor_id }}">
-      <a type="submit" onclick="applyInsCoupon()" class="btn theme-btn">Apply Code</a>      
+      <a type="submit" onclick="applyInsCoupon()" class="btn theme-btn">Apply Code</a>
         </div>
-    </div>  
+    </div>
 
 
 </div>
@@ -620,7 +1051,7 @@
                             <div class="divider"><span></span></div>
     <ul class="generic-list-item generic-list-item-flash">
         <li class="d-flex align-items-center justify-content-between"><span><i class="la la-clock mr-2 text-color"></i>Duration</span> {{ $course->duration }} hours</li>
-        
+
         <li class="d-flex align-items-center justify-content-between"><span><i class="la la-file-text-o mr-2 text-color"></i>Resources</span> {{ $course->resources }}</li>
         <li class="d-flex align-items-center justify-content-between"><span><i class="la la-bolt mr-2 text-color"></i>Quizzes</span> 26</li>
         <li class="d-flex align-items-center justify-content-between"><span><i class="la la-eye mr-2 text-color"></i>Preview Lessons</span> 4</li>
@@ -637,9 +1068,9 @@
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item">
                                @foreach ($categories as $cat)
-                                <li><a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a></li> 
-                               @endforeach 
-                                
+                                <li><a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a></li>
+                               @endforeach
+
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -647,7 +1078,7 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Related Courses</h3>
                             <div class="divider"><span></span></div>
-                            
+
         @foreach ($relatedCourses as $related)
         <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
             <a href="course-details.html" class="media-img">
@@ -662,13 +1093,13 @@
                 @else
                 <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->discount_price }} <span class="before-price fs-14">${{ $related->selling_price }}</span></p>
                 @endif
-               
+
             </div>
         </div><!-- end media -->
-        
-            
+
+
         @endforeach
-                         
+
 
 
                             <div class="view-all-course-btn-box">
@@ -676,7 +1107,7 @@
                             </div>
                         </div>
                     </div><!-- end card -->
-                  
+
                 </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
         </div><!-- end row -->
@@ -694,7 +1125,7 @@
         <div class="related-course-wrap">
             <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="teacher-detail.html" class="text-color hover-underline">{{ $course['user']['name'] }}</a></h3>
             <div class="view-more-carousel-2 owl-action-styled">
-                
+
                 @foreach ($instructorCourses  as $inscourse)
 
                 @php
@@ -743,17 +1174,17 @@
                     @if ($inscourse->discount_price == NULL)
                     <p class="card-price text-black font-weight-bold">${{ $inscourse->selling_price }}  </p>
                     @else
-                    <p class="card-price text-black font-weight-bold">${{ $inscourse->discount_price }} <span class="before-price font-weight-medium">${{ $inscourse->selling_price }}</span></p> 
+                    <p class="card-price text-black font-weight-bold">${{ $inscourse->discount_price }} <span class="before-price font-weight-medium">${{ $inscourse->selling_price }}</span></p>
                     @endif
 
 
                             <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
                         </div>
                     </div><!-- end card-body -->
-                </div><!-- end card --> 
+                </div><!-- end card -->
                 @endforeach
 
-            
+
 
 
             </div><!-- end view-more-carousel -->
@@ -851,7 +1282,7 @@
                 <video controls crossorigin playsinline poster="{{ asset($course->course_image) }}" id="player">
                     <!-- Video files -->
                     <source src="{{ asset($course->video) }}" type="video/mp4"/>
-                      
+
                 </video>
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
@@ -904,6 +1335,4 @@
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
-
-
-@endsection
+ --}}
