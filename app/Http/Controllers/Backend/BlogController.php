@@ -196,7 +196,7 @@ public function BlogDetails($slug){
     $tags = $blog->post_tags;
     $tags_all = explode(',',$tags);
     $bcategory = BlogCategory::latest()->get();
-    $post = BlogPost::latest()->limit(3)->get();
+    $post = BlogPost::latest()->limit(4)->get();
     return view('frontend.blog.blog_details',compact('blog','tags_all','bcategory','post'));
 
 }// End Method
@@ -214,7 +214,7 @@ public function BlogCatList($id){
 public function BlogList(){
     $blog = BlogPost::with('blog')->latest()->paginate(9);
     $bcategory = BlogCategory::latest()->get();
-    $post = BlogPost::latest()->limit(3)->get();
+    $post = BlogPost::latest()->limit(4)->get();
     return view('frontend.blog.blog_list',compact('blog','bcategory','post'));
 
 
