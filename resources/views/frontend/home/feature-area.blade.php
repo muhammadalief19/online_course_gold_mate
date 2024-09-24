@@ -1,4 +1,57 @@
-<section class="feature-area pb-90px">
+<section class="features__area-four section-pb-90">
+    <div class="container">
+        <div class="features__item-wrap-two">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="features__item-three">
+                        <div class="features__icon-three">
+                            <img src="assets/img/icons/h3_features_icon01.svg" class="injectable" alt="">
+                        </div>
+                        <div class="features__content-three">
+                            <h2 class="title">Scholarship Facility</h2>
+                            <p>Eestuidar University we prepare you to launch your.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="features__item-three">
+                        <div class="features__icon-three">
+                            <img src="assets/img/icons/h3_features_icon02.svg" class="injectable" alt="">
+                        </div>
+                        <div class="features__content-three">
+                            <h2 class="title">Learn From Experts</h2>
+                            <p>Eestuidar University we prepare you to launch your.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="features__item-three">
+                        <div class="features__icon-three">
+                            <img src="assets/img/icons/h3_features_icon03.svg" class="injectable" alt="">
+                        </div>
+                        <div class="features__content-three">
+                            <h2 class="title">Graduation Courses</h2>
+                            <p>Eestuidar University we prepare you to launch your.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="features__item-three">
+                        <div class="features__icon-three">
+                            <img src="assets/img/icons/h3_features_icon04.svg" class="injectable" alt="">
+                        </div>
+                        <div class="features__content-three">
+                            <h2 class="title">Certificate Program</h2>
+                            <p>Eestuidar University we prepare you to launch your.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- <section class="feature-area pb-90px">
     <div class="container">
         <div class="row feature-content-wrap">
             <div class="col-lg-4 responsive-column-half">
@@ -77,4 +130,4 @@
             </div><!-- end col-lg-3 -->
         </div><!-- end row -->
     </div><!-- end container -->
-</section><!-- end feature-area -->
+</section><!-- end feature-area --> --}}

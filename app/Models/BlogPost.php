@@ -14,4 +14,9 @@ class BlogPost extends Model
         return $this->belongsTo(BlogCategory::class, 'blogcat_id' ,'id');
     }
 
+    // In App\Models\BlogPost.php
+    // public function category() {
+    //     return $this->belongsTo(BlogCategory::class, 'blogcat_id');
+    // }
+
 }

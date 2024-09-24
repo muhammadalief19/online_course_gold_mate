@@ -40,7 +40,7 @@ Easy Learning
 <!--======================================
         START COURSE AREA
 ======================================-->
-@include('frontend.home.courses-area-two')
+{{-- include('frontend.home.courses-area-two') --}}
 <!--======================================
         END COURSE AREA
 ======================================-->
@@ -48,7 +48,7 @@ Easy Learning
 <!-- ================================
        START FUNFACT AREA
 ================================= -->
-@include('frontend.home.funfact-area')
+{{-- include('frontend.home.funfact-area') --}}
 <!-- ================================
        START FUNFACT AREA
 ================================= -->
@@ -64,7 +64,7 @@ Easy Learning
 <!--================================
          START TESTIMONIAL AREA
 =================================-->
-@include('frontend.home.testimonial-area')
+{{-- @include('frontend.home.testimonial-area') --}}
 <!--================================
         END TESTIMONIAL AREA
 =================================-->
