@@ -185,83 +185,69 @@
                     </form>
                 </div><!-- end add-comment-wrap -->
             </div><!-- end col-lg-8 -->
-            <div class="col-lg-4">
-                <div class="sidebar">
-
-
-                    <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Blog Category</h3>
-                            <div class="divider"><span></span></div>
-                            <ul class="generic-list-item">
-                                @foreach ($bcategory as $cat)
-                                <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
-
-                                @endforeach
-
-                            </ul>
-                        </div>
-                    </div><!-- end card -->
-                    <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Recent Posts</h3>
-                            <div class="divider"><span></span></div>
-
-                           @foreach ($post as $dpost)
-                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                <a href="{{ url('blog/details/'.$dpost->post_slug) }}" class="media-img">
-                                    <img class="mr-3" src="{{ asset($dpost->post_image) }}" alt="Related course image">
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Admin </span>
-                                </div>
-                            </div><!-- end media -->
-
-                            @endforeach
-
-                            <div class="view-all-course-btn-box">
-                                <a href="blog-no-sidebar.html" class="btn theme-btn w-100">View All Posts <i class="la la-arrow-right icon ml-1"></i></a>
+            <div class="col-xl-3 col-lg-4">
+                    <aside class="blog-sidebar">
+                        <div class="blog-widget widget_search">
+                            <div class="sidebar-search-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Search here">
+                                    <button><i class="flaticon-search"></i></button>
+                                </form>
                             </div>
                         </div>
-                    </div><!-- end card -->
-                    <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Sidebar Form</h3>
-                            <div class="divider"><span></span></div>
-                            <form method="post" action="https://formspree.io/f/mwpejbeo">
-                                <div class="form-group">
-                                    <input class="form-control form--control" type="text" name="full-name" id="full-name" placeholder="Name">
-                                    <span class="la la-user input-icon"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control form--control" type="email" name="email" placeholder="Email">
-                                    <span class="la la-envelope input-icon"></span>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control form--control pl-3" name="message" id="message" rows="4" placeholder="Write message"></textarea>
-                                </div>
-                                <div class="btn-box">
-                                    <button class="btn theme-btn w-100">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
-                                </div>
-                            </form>
+                        <div class="blog-widget">
+                            <h4 class="widget-title">Categories</h4>
+                            <div class="shop-cat-list">
+                                <ul class="list-wrap">
+                                    @foreach ($bcategory as $cat)
+                                        <li><a href="{{ url('blog/cat/list/'.$cat->id) }}"><i class="flaticon-angle-right"></i>{{ $cat->category_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                    </div><!-- end card -->
+                        <div class="blog-widget">
+    <h4 class="widget-title">Recent Post</h4>
+    <div class="rc-post-list">
+        @foreach ($post as $dpost)
+            <div class="rc-post-item">
+                <div class="rc-post-thumb">
+                    <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
+                        <img class="lazy" src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
+                    </a>
+                </div>
+                <div class="rc-post-content">
+                    <span class="date"><i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}</span>
+                    <h4 class="title">
+                        <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
+                    </h4>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
-
-                    <div class="card card-item">
-                        <div class="card-body">
-                            <h3 class="card-title fs-18 pb-2">Connect & Follow</h3>
-                            <div class="divider"><span></span></div>
-                            <ul class="social-icons social-icons-styled social--icons-styled">
-                                <li><a href="#"><i class="la la-facebook"></i></a></li>
-                                <li><a href="#"><i class="la la-twitter"></i></a></li>
-                                <li><a href="#"><i class="la la-instagram"></i></a></li>
-                                <li><a href="#"><i class="la la-youtube"></i></a></li>
-                            </ul>
-                        </div>
-                    </div><!-- end card -->
-                </div><!-- end sidebar -->
+<div class="card card-item mb-4">
+    <div class="card-body">
+        <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
+        <div class="divider"><span></span></div>
+        <form method="post">
+            <div class="form-group mb-3">
+                <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
+                <span class="la la-user input-icon"></span>
+            </div>
+            <div class="form-group mb-3">
+                <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
+                <span class="la la-envelope input-icon"></span>
+            </div>
+            <div class="form-group mb-3">
+                <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
+            </div>
+            <div class="btn-box">
+                <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
+            </div>
+        </form>
+    </div>
+</div><!-- end card -->
             </div><!-- end col-lg-4 -->
         </div><!-- end row -->
     </div><!-- end container -->
@@ -269,12 +255,5 @@
 <!-- ================================
        START BLOG AREA
 ================================= -->
-
-
-
-
-
-
-
 
 @endsection
