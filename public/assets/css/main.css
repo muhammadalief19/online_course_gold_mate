@@ -16794,7 +16794,7 @@ textarea {
   line-height: 0;
 }
 .blog-widget .shop-cat-list .list-wrap li a:hover {
-  color: var(--tg-theme-primary);
+  color: var(--tg-theme-secondary);
 }
 .blog-widget .tagcloud {
   display: -webkit-box;

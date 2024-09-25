@@ -1,20 +1,26 @@
-<section class="cat-area pt-80px pb-80px bg-gray position-relative">
-    <span class="ring-shape ring-shape-1"></span>
-    <span class="ring-shape ring-shape-2"></span>
-    <span class="ring-shape ring-shape-3"></span>
-    <span class="ring-shape ring-shape-4"></span>
-    <span class="ring-shape ring-shape-5"></span>
-    <span class="ring-shape ring-shape-6"></span>
-    <span class="ring-shape ring-shape-7"></span>
+<section class="newsletter__area">
     <div class="container">
-        <div class="cta-content-wrap text-center">
-            <div class="section-heading">
-                <h5 class="ribbon ribbon-lg mb-2">Start online learning</h5>
-                <h2 class="section__title fs-45 lh-55">Enhance Your Skills with <br> Best Online Courses</h2>
-            </div><!-- end section-heading -->
-            <div class="cat-btn-box mt-28px">
-                <a href="sign-up.html" class="btn theme-btn">Get Started <i class="la la-arrow-right icon ml-1"></i></a>
-            </div><!-- end cat-btn-box -->
-        </div><!-- end cta-content-wrap -->
-    </div><!-- end container -->
-</section><!-- end cta-area -->
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+                <div class="newsletter__img-wrap">
+                    <img src="{{ asset('') }}assets/img/others/newsletter_img.png" alt="img">
+                    <img src="{{ asset('') }}assets/img/others/newsletter_shape01.png" alt="img" data-aos="fade-up" data-aos-delay="400" class="aos-init aos-animate">
+                    <img src="{{ asset('') }}assets/img/others/newsletter_shape02.png" alt="img" class="alltuchtopdown">
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="newsletter__content">
+                    <h2 class="title">Enhance <span>Your Skills</span> with <br> <span>Best Online Course</span></h2>
+                    <div class="newsletter__form">
+                        <form action="#" class="col-12">
+                            <button type="submit" class="btn" fdprocessedid="fma2s">Get Started</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="newsletter__shape">
+        <img src="assets/img/others/newsletter_shape03.png" alt="img" data-aos="fade-left" data-aos-delay="400" class="aos-init aos-animate">
+    </div>
+</section>
