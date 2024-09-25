@@ -22,14 +22,14 @@
         </div><!-- end row -->
         <div class="category-wrapper mt-30px">
             <div class="row">
-               
-        @foreach ($category as $cat) 
+
+        @foreach ($category as $cat)
         @php
-      $course = App\Models\Course::where('category_id',$cat->id)->get();     
+      $course = App\Models\Course::where('category_id',$cat->id)->get();
         @endphp
         <div class="col-lg-4 responsive-column-half">
             <div class="category-item">
-                <img  class="cat__img lazy" src="{{ asset($cat->image) }}" data-src="{{ asset($cat->image) }}" alt="Category image">
+                                                
                 <div class="category-content">
                     <div class="category-inner">
                         <h3 class="cat__title"><a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a></h3>
