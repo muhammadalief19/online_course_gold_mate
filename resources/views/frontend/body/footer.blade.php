@@ -162,27 +162,27 @@
                             <ul class="list-wrap footer__social">
                                 <li>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="assets/img/icons/facebook.svg" alt="img" class="injectable">
+                                        <img src="{{ asset('') }}assets/img/icons/facebook.svg" alt="img" class="injectable">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="assets/img/icons/twitter.svg" alt="img" class="injectable">
+                                        <img src="{{ asset('') }}assets/img/icons/twitter.svg" alt="img" class="injectable">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="assets/img/icons/whatsapp.svg" alt="img" class="injectable">
+                                        <img src="{{ asset('') }}assets/img/icons/whatsapp.svg" alt="img" class="injectable">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="assets/img/icons/instagram.svg" alt="img" class="injectable">
+                                        <img src="{{ asset('') }}assets/img/icons/instagram.svg" alt="img" class="injectable">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="assets/img/icons/youtube.svg" alt="img" class="injectable">
+                                        <img src="{{ asset('') }}assets/img/icons/youtube.svg" alt="img" class="injectable">
                                     </a>
                                 </li>
                             </ul>

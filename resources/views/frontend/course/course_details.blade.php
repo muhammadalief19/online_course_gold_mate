@@ -93,7 +93,7 @@
                                         </li>
                                     </ul>
                                     @endforeach
-                                    {{-- <p class="last-info">Morem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn.</p> --}}
+                                    <p class="last-info">Morem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="curriculum-tab-pane" role="tabpanel" aria-labelledby="curriculum-tab" tabindex="0">
@@ -363,7 +363,7 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="courses__details-sidebar">
                         <div class="courses__details-video">
-                            <img src="assets/img/courses/course_thumb02.jpg" alt="img">
+                            <img src="{{asset('') }}{{$course->course_image}}" alt="img">
                             <a href="https://www.youtube.com/watch?v=YwrHGratByU" class="popup-video"><i class="fas fa-play"></i></a>
                         </div>
                         <div class="courses__cost-wrap">
@@ -419,14 +419,23 @@
                                 <li><a href="#"><i class="fab fa-youtube"></i></a></li>
                             </ul>
                         </div>
-                        <div class="courses__details-enroll">
+                        <div class="courses__details-enroll" style="margin-bottom: 20px;">
                             <div class="tg-button-wrap">
-                                <a href="/instructors" class="btn btn-two arrow-btn">
+                                <a href="/instructors" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" class="btn btn-two arrow-btn">
                                     See All Instructors
-                                    <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable">
+                                    <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
                                 </a>
                             </div>
                         </div>
+                        <div class="courses__details-enroll" style="margin-bottom: 20px;">
+                            <div class="tg-button-wrap">
+                                <a href="/instructors" class="btn btn-two arrow-btn">
+                                    See All Instructors
+                                    <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
