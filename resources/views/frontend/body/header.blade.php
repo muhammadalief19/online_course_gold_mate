@@ -363,7 +363,7 @@
                                             </a>
                                         </li>
                                         <li class="mini-cart-icon">
-                                            <a href="cart.html" class="cart-count">
+                                            <a href="{{ route('mycart') }}" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
                                                 <span class="mini-cart-count">0</span>
                                             </a>
