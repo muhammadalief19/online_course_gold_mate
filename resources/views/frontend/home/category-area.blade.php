@@ -12,7 +12,7 @@
                             <h2 class="title">Top Category We Have</h2>
                             <p class="desc">when known printer took a galley of type scrambl edmake</p>
                         </div>
-                    </div>      
+                    </div>
                 </div>
 
             </div><!-- end col-lg-9 -->
@@ -92,4 +92,4 @@
             </div><!-- end row -->
         </div><!-- end category-wrapper -->
     </div><!-- end container -->
-</section><!-- end category-area -->
+</section><!-- end category-area -->
