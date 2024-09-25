@@ -131,7 +131,7 @@
  @endif
 </script>
 
-<script src="https://cdn.tiny.cloud/1/j1hfe3jjl8v3xen47yistseyi4s1rdkfjr2uiqsj4nmypp61/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/231fc9eqs7rdulanfwnhpak978gbs7gqcttnrl7kukftg5hx/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
 	   tinymce.init({
 		 selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
