@@ -65,7 +65,7 @@
                         @endphp
 
                         </ul>
-                        <h2 class="title">{{ $course->course_title }}</h2>
+                        <h2 class="title">{{ $course->course_name }}</h2>
                         <div class="courses__details-meta">
                             <ul class="list-wrap">
                                 <li class="author-two">
@@ -297,7 +297,9 @@
                                 <li>
                                     <img src="{{asset('')}}assets/img/icons/course_icon02.svg" alt="img" class="injectable">
                                     Duration
-                                    <span>{{ $course->duration }}</span>
+                                    <span>
+                                        {{ intdiv($course->duration, 60) . ' Minutes ' . ($course->duration % 60) . ' Second' }}
+                                    </span>
                                 </li>
                                 <li>
                                     <img src="{{asset('')}}assets/img/icons/course_icon03.svg" alt="img" class="injectable">

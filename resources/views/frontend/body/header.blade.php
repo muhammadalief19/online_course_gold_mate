@@ -281,7 +281,7 @@
                     <div class="col-lg-6">
                         <ul class="tg-header__top-info list-wrap">
                             <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
-                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}></a></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6">

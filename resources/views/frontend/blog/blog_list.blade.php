@@ -39,7 +39,7 @@
                             <div class="col-xl-4 col-md-6">
                                 <div class="blog__post-item shine__animate-item">
                                     <div class="blog__post-thumb">
-                                        <a href="{{ url('blog/details/'.$item->post_slug) }}">
+                                        <a href="{{ url('blog/details/'.$item->post_slug) }}" class="shine__animate-link">
                                             <img class="card-img-top lazy" src="{{ asset($item->post_image) }}" alt="{{ $item->post_title }}">
                                         </a>
                                         <a href="/blog" class="post-tag">{{ $item->blog->category_name }}</a>
