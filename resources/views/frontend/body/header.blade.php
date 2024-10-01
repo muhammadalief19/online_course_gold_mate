@@ -281,7 +281,7 @@
                     <div class="col-lg-6">
                         <ul class="tg-header__top-info list-wrap">
                             <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
-                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}></a></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -363,14 +363,30 @@
                                             </a>
                                         </li>
                                         <li class="mini-cart-icon">
-                                            <a href="cart.html" class="cart-count">
+                                            <a href="{{ route('mycart') }}" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
                                                 <span class="mini-cart-count">0</span>
                                             </a>
                                         </li>
+                                        @auth
                                         <li class="header-btn login-btn">
-                                            <a href="login.html">Log in</a>
+                                            <a href="{{ route('user.logout') }}">Logout</a>
                                         </li>
+                                        @else
+                                        <li class="header-btn login-btn">
+                                            <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        @endauth
+                                        {{-- @auth
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}"> Dashboard</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
+
+                                        @else
+
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
+
+                                        @endauth --}}
                                     </ul>
                                 </div>
                                 <div class="mobile-login-btn">

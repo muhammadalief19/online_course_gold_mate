@@ -7,26 +7,53 @@
 <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
-<section class="breadcrumb-area pt-80px pb-80px pattern-bg">
-    <div class="container">
-        <div class="breadcrumb-content">
-            <div class="section-heading pb-3">
-                <h2 class="section__title"> {{ $blog->post_title  }}</h2>
+<main class="main-area fix">
+    <section class="breadcrumb__area breadcrumb__bg pattern-bg" data-background="{{ asset('') }}assets/img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb__content breadcrumb-content">
+                        <!-- Judul Section -->
+                        <div class="section-heading pb-3">
+                            <h3 class="title section__title">{{ $blog->post_title }}</h3>
+                        </div>
+
+                        <!-- Breadcrumb Navigation -->
+                        <nav class="breadcrumb generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="index.html">Home</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="/blog">Blog</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span>{{ $blog->post_title }}</span>
+                        </nav>
+
+                        <!-- Metadata -->
+                        <ul class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center flex-wrap fs-14 pt-2">
+    <li class="d-flex align-items-center" style="margin-right: 20px;">By <a>User</a></li>
+    <li class="d-flex align-items-center" style="margin-right: 20px;">{{ $blog->created_at->format('M d Y') }}</li>
+    <li class="d-flex align-items-center" style="margin-right: 20px;"><a>1 Comments</a></li>
+    <li class="d-flex align-items-center">130 Shares</li>
+</ul>
+                    </div>
+                </div>
             </div>
-            <ul class="generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog-no-sidebar.html">Blog</a></li>
-                <li>{{ $blog->post_title  }}</li>
-            </ul>
-            <ul class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center flex-wrap fs-14 pt-2">
-                <li class="d-flex align-items-center">By<a href="#">Admin</a></li>
-                <li class="d-flex align-items-center"> {{ $blog->created_at->format('M d Y') }} </li>
-                <li class="d-flex align-items-center"><a href="#comments" class="page-scroll">4 Comments</a></li>
-                <li class="d-flex align-items-center">130 Shares</li>
-            </ul>
-        </div><!-- end breadcrumb-content -->
-    </div><!-- end container -->
-</section><!-- end breadcrumb-area -->
+        </div>
+        
+        <!-- Breadcrumb Shapes -->
+        <div class="breadcrumb__shape-wrap">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+        </div>
+    </section>
+</main>
+
 <!-- ================================
     END BREADCRUMB AREA
 ================================= -->
@@ -34,31 +61,19 @@
 <!-- ================================
        START BLOG AREA
 ================================= -->
-<section class="blog-area pt-100px pb-100px">
+<section class="blog-area section-py-120">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mb-5">
                 <div class="card card-item">
                     <div class="card-body">
                         <p class="card-text pb-3"> {!! $blog->long_descp !!} </p>
-
-
-
                         <div class="section-block"></div>
-                        <h3 class="fs-18 font-weight-semi-bold pt-3">Tags</h3>
+                        
                         <div class="d-flex flex-wrap justify-content-between align-items-center pt-3">
-                            <ul class="generic-list-item generic-list-item-boxed d-flex flex-wrap fs-15">
-                                @foreach ($tags_all as $tag)
-                                <li class="mr-2"><a href="#">{{ ucwords($tag) }}</a></li>
-
-                                @endforeach
-                            </ul>
+                            
                             <div class="share-wrap">
-                                <ul class="social-icons social-icons-styled">
-                                    <li class="mr-0"><a href="#" class="facebook-bg"><i class="la la-facebook"></i></a></li>
-                                    <li class="mr-0"><a href="#" class="twitter-bg"><i class="la la-twitter"></i></a></li>
-                                    <li class="mr-0"><a href="#" class="instagram-bg"><i class="la la-instagram"></i></a></li>
-                                </ul>
+                                
                                 <div class="icon-element icon-element-sm shadow-sm cursor-pointer share-toggle" title="Toggle to expand social icons"><i class="la la-share-alt"></i></div>
                             </div>
                         </div>
@@ -74,20 +89,14 @@
                             <h5>Alex Smith</h5>
                             <span class="d-block lh-18 pt-2 pb-2">www.techydevs.com</span>
                             <p class="pb-3">I'm a growth-oriented digital marketer with a passion for content marketing, social media marketing wonders, conversion rate optimization, and keyword research. I strongly support permission marketing and earned media. More than anything</p>
-                            <ul class="social-icons social-icons-styled social--icons-styled">
-                                <li><a href="#"><i class="la la-facebook"></i></a></li>
-                                <li><a href="#"><i class="la la-twitter"></i></a></li>
-                                <li><a href="#"><i class="la la-instagram"></i></a></li>
-                                <li><a href="#"><i class="la la-linkedin"></i></a></li>
-                            </ul>
+                            
                         </div>
                     </div>
                 </div><!-- end instructor-wrap -->
                 <div class="section-block"></div>
                 <div class="comments-wrap pt-5" id="comments">
                     <div class="d-flex align-items-center justify-content-between pb-4">
-                        <h3 class="fs-22 font-weight-semi-bold">Comments</h3>
-                        <span class="ribbon ribbon-lg">4</span>
+                        <h3 class="fs-22 font-weight-semi-bold">Comments 1</h3>
                     </div>
                     <div class="comment-list">
                         <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
@@ -108,42 +117,8 @@
                                 </div>
                             </div>
                         </div><!-- end media -->
-                        <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4 review-reply">
-                            <div class="media-img mr-4 rounded-full">
-                                <img class="rounded-full lazy" src="images/img-loading.png" data-src="images/small-avatar-2.jpg" alt="User image">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="pb-2">Jitesh Shaw</h5>
-                                <span class="d-block lh-18 pb-2">1 months ago</span>
-                                <p class="pb-3">This is one of the best courses I have taken in Udemy. It is very complete, and it has made continue learning about Java and SQL databases as well.</p>
-                                <div class="helpful-action d-flex align-items-center justify-content-between">
-                                    <a class="btn theme-btn theme-btn-sm theme-btn-transparent lh-30" href="#" data-toggle="modal" data-target="#replyModal"><i class="la la-reply mr-1"></i> Reply</a>
-                                    <div class="pl-2">
-                                        <span class="fs-13">Was this review helpful?</span>
-                                        <button class="btn">Yes</button>
-                                        <button class="btn">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- end media -->
-                        <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                            <div class="media-img mr-4 rounded-full">
-                                <img class="rounded-full lazy" src="images/img-loading.png" data-src="images/small-avatar-3.jpg" alt="User image">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="pb-2">Miguel Sanches</h5>
-                                <span class="d-block lh-18 pb-2">2 month ago</span>
-                                <p class="pb-3">This is one of the best courses I have taken in Udemy. It is very complete, and it has made continue learning about Java and SQL databases as well.</p>
-                                <div class="helpful-action d-flex align-items-center justify-content-between">
-                                    <a class="btn theme-btn theme-btn-sm theme-btn-transparent lh-30" href="#" data-toggle="modal" data-target="#replyModal"><i class="la la-reply mr-1"></i> Reply</a>
-                                    <div class="pl-2">
-                                        <span class="fs-13">Was this review helpful?</span>
-                                        <button class="btn">Yes</button>
-                                        <button class="btn">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- end media -->
+                        
+                        
                     </div>
                     <div class="load-more-btn-box text-center pt-3 pb-5">
                         <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-30"><i class="la la-refresh mr-1"></i> Load More Comment</button>
@@ -206,48 +181,57 @@
                             </div>
                         </div>
                         <div class="blog-widget">
-    <h4 class="widget-title">Recent Post</h4>
-    <div class="rc-post-list">
-        @foreach ($post as $dpost)
-            <div class="rc-post-item">
-                <div class="rc-post-thumb">
-                    <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
-                        <img class="lazy" src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
-                    </a>
+                            <h4 class="widget-title">Recent Post</h4>
+                            <div class="rc-post-list">
+                                @foreach ($post as $dpost)
+                                    <div class="rc-post-item">
+                                        <div class="rc-post-thumb">
+                                            <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
+                                                <img class="lazy" src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
+                                            </a>
+                                        </div>
+                                        <div class="rc-post-content">
+                                            <span class="date"><i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}</span>
+                                            <h4 class="title">
+                                                <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="blog-widget">
+                            <h4 class="widget-title">Tags</h4>
+                            <div class="tagcloud">
+                                @foreach ($tags_all as $tag)
+                                <a href="{{ route('blog.list', ['tag' => $tag]) }}">{{ ucwords($tag) }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="card card-item mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
+                                <div class="divider"><span></span></div>
+                                <form method="post">
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
+                                        <span class="la la-user input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
+                                        <span class="la la-envelope input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
+                                    </div>
+                                    <div class="btn-box">
+                                        <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- end card -->                        
+                    </aside>
                 </div>
-                <div class="rc-post-content">
-                    <span class="date"><i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}</span>
-                    <h4 class="title">
-                        <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
-                    </h4>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-
-<div class="card card-item mb-4">
-    <div class="card-body">
-        <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
-        <div class="divider"><span></span></div>
-        <form method="post">
-            <div class="form-group mb-3">
-                <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
-                <span class="la la-user input-icon"></span>
-            </div>
-            <div class="form-group mb-3">
-                <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
-                <span class="la la-envelope input-icon"></span>
-            </div>
-            <div class="form-group mb-3">
-                <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
-            </div>
-            <div class="btn-box">
-                <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
-            </div>
-        </form>
-    </div>
-</div><!-- end card -->
             </div><!-- end col-lg-4 -->
         </div><!-- end row -->
     </div><!-- end container -->

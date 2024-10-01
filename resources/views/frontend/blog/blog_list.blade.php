@@ -15,7 +15,7 @@
                                 <a href="index.html">Home</a>
                             </span>
                             <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                            <span property="itemListElement" typeof="ListItem">Blogs</span>
+                            <span property="itemListElement" typeof="ListItem">Blog</span>
                         </nav>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <div class="col-xl-4 col-md-6">
                                 <div class="blog__post-item shine__animate-item">
                                     <div class="blog__post-thumb">
-                                        <a href="{{ url('blog/details/'.$item->post_slug) }}">
+                                        <a href="{{ url('blog/details/'.$item->post_slug) }}" class="shine__animate-link">
                                             <img class="card-img-top lazy" src="{{ asset($item->post_image) }}" alt="{{ $item->post_title }}">
                                         </a>
                                         <a href="/blog" class="post-tag">{{ $item->blog->category_name }}</a>
@@ -62,26 +62,24 @@
                     <div class="text-center pt-3">
                         
                         <nav class="pagination__wrap mt-25">
-    <ul class="list-wrap">
-        @if ($blog->onFirstPage())
-            <li class="active"><a href="#">1</a></li>
-        @else
-            <li><a href="{{ $blog->url(1) }}">1</a></li>
-        @endif
+                            <ul class="list-wrap">
+                                @if ($blog->onFirstPage())
+                                    <li class="active"><a href="#">1</a></li>
+                                @else
+                                    <li><a href="{{ $blog->url(1) }}">1</a></li>
+                                @endif
 
-        @for ($i = 2; $i <= $blog->lastPage(); $i++)
-            @if ($i == $blog->currentPage())
-                <li class="active"><a href="#">{{ $i }}</a></li>
-            @else
-                <li><a href="{{ $blog->url($i) }}">{{ $i }}</a></li>
-            @endif
-        @endfor
-    </ul>
-</nav>
-
+                                @for ($i = 2; $i <= $blog->lastPage(); $i++)
+                                    @if ($i == $blog->currentPage())
+                                        <li class="active"><a href="#">{{ $i }}</a></li>
+                                    @else
+                                        <li><a href="{{ $blog->url($i) }}">{{ $i }}</a></li>
+                                    @endif
+                                @endfor
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-
                 <div class="col-xl-3 col-lg-4">
                     <aside class="blog-sidebar">
                         <div class="blog-widget widget_search">
@@ -103,53 +101,55 @@
                             </div>
                         </div>
                         <div class="blog-widget">
-    <h4 class="widget-title">Recent Post</h4>
-    <div class="rc-post-list">
-        @foreach ($post as $dpost)
-            <div class="rc-post-item">
-                <div class="rc-post-thumb">
-                    <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
-                        <img class="lazy" src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
-                    </a>
-                </div>
-                <div class="rc-post-content">
-                    <span class="date"><i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}</span>
-                    <h4 class="title">
-                        <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
-                    </h4>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-
-<div class="card card-item mb-4">
-    <div class="card-body">
-        <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
-        <div class="divider"><span></span></div>
-        <form method="post">
-            <div class="form-group mb-3">
-                <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
-                <span class="la la-user input-icon"></span>
-            </div>
-            <div class="form-group mb-3">
-                <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
-                <span class="la la-envelope input-icon"></span>
-            </div>
-            <div class="form-group mb-3">
-                <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
-            </div>
-            <div class="btn-box">
-                <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
-            </div>
-        </form>
-    </div>
-</div><!-- end card -->
-
-
-
-
-                        
+                            <h4 class="widget-title">Recent Post</h4>
+                            <div class="rc-post-list">
+                                @foreach ($post as $dpost)
+                                    <div class="rc-post-item">
+                                        <div class="rc-post-thumb">
+                                            <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
+                                                <img class="lazy" src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
+                                            </a>
+                                        </div>
+                                        <div class="rc-post-content">
+                                            <span class="date"><i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}</span>
+                                            <h4 class="title">
+                                                <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="blog-widget">
+                            <h4 class="widget-title">Tags</h4>
+                            <div class="tagcloud">
+                                @foreach ($tags_all as $tag)
+                                <a href="{{ route('blog.list', ['tag' => $tag]) }}">{{ ucwords($tag) }}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="card card-item mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
+                                <div class="divider"><span></span></div>
+                                <form method="post">
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
+                                        <span class="la la-user input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
+                                        <span class="la la-envelope input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
+                                    </div>
+                                    <div class="btn-box">
+                                        <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- end card -->                        
                     </aside>
                 </div>
             </div>

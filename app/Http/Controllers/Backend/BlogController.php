@@ -211,14 +211,41 @@ public function BlogCatList($id){
 
 }// End Method
 
-public function BlogList(){
-    $blog = BlogPost::with('blog')->latest()->paginate(9);
+public function BlogList(Request $request) {
+    $tag = $request->get('tag'); // Get the selected tag from the request
+    
+    if ($tag) {
+        // If a tag is selected, filter the blogs by the tag
+        $blog = BlogPost::where('post_tags', 'LIKE', "%$tag%")
+            ->with('blog')
+            ->latest()
+            ->paginate(9);
+    } else {
+        // Otherwise, get all blogs
+        $blog = BlogPost::with('blog')->latest()->paginate(9);
+    }
+
+    $blogs = BlogPost::get();
+
+    // Collect all tags from the blogs
+    $tags_all = [];
+    foreach ($blogs as $blogPost) {
+        if (!empty($blogPost->post_tags)) {
+            $tags = explode(',', $blogPost->post_tags);
+            $tags_all = array_merge($tags_all, $tags); // Merge all tags
+        }
+    }
+
+    // Remove duplicate tags
+    $tags_all = array_unique($tags_all);
+
     $bcategory = BlogCategory::latest()->get();
     $post = BlogPost::latest()->limit(4)->get();
-    return view('frontend.blog.blog_list',compact('blog','bcategory','post'));
+    
+    return view('frontend.blog.blog_list', compact('blog', 'bcategory', 'post', 'tags_all'));
+}
 
 
-}// End Method
 
 
 }

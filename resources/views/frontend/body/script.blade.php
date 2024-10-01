@@ -1,6 +1,6 @@
  {{-- /// Start Wishlist Add Option // --}}
  <script type="text/javascript">
- 
+
     $.ajaxSetup({
         headers:{
             'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
@@ -15,41 +15,41 @@
             url: "/add-to-wishlist/"+course_id,
 
             success:function(data){
-                
-                  // Start Message 
+
+                  // Start Message
 
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 6000 
+                  timer: 6000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
             }
         })
 
     }
-   
 
- </script>  
+
+ </script>
  {{-- /// End Wishlist Add Option // --}}
 
   {{-- /// Start Load Wishlist Data // --}}
@@ -75,28 +75,28 @@
                     <a href="/course/details/${value.course.id}/${value.course.course_name_slug}" class="d-block">
                         <img class="card-img-top" src="/${value.course.course_image}" alt="Card image cap">
                     </a>
-                  
-                </div><!-- end card-image --> 
+
+                </div><!-- end card-image -->
 
                 <div class="card-body">
                     <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">${value.course.label}</h6>
-                    <h5 class="card-title"><a href="/course/details/${value.course.id}/${value.course.course_name_slug}">${value.course.course_name}</a></h5> 
+                    <h5 class="card-title"><a href="/course/details/${value.course.id}/${value.course.course_name_slug}">${value.course.course_name}</a></h5>
 
                     <div class="d-flex justify-content-between align-items-center">
-                        
-                        ${value.course.discount_price == null 
+
+                        ${value.course.discount_price == null
                         ?`<p class="card-price text-black font-weight-bold">$${value.course.selling_price}</p>`
                         :`<p class="card-price text-black font-weight-bold">$${value.course.discount_price} <span class="before-price font-weight-medium">$${value.course.selling_price}</span></p>`
-                        } 
-                       
+                        }
+
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="la la-heart"></i></div>
                     </div>
-                </div> 
-            </div> 
-        </div> 
+                </div>
+            </div>
+        </div>
              `
                 });
-               $('#wishlist').html(rows); 
+               $('#wishlist').html(rows);
 
             }
         })
@@ -104,7 +104,7 @@
     wishlist();
 
 
-    /// WishList Remove Start  // 
+    /// WishList Remove Start  //
 
     function wishlistRemove(id){
         $.ajax({
@@ -114,40 +114,40 @@
 
             success:function(data){
              wishlist();
-                 // Start Message 
+                 // Start Message
 
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 6000 
+                  timer: 6000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
 
             }
         })
 
-    } 
+    }
 
-    /// End WishList Remove // 
+    /// End WishList Remove //
 
 
  </script>
@@ -162,7 +162,7 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            data: { 
+            data: {
                 _token: '{{ csrf_token() }}',
                 course_name: courseName,
                 course_name_slug: slug,
@@ -173,33 +173,33 @@
             success: function(data) {
                 miniCart();
 
-                 // Start Message 
+                 // Start Message
 
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
-            } 
+              // End Message
+            }
         });
    }
 
@@ -210,56 +210,56 @@
 
          {{-- /// Start Buy Now Button  // --}}
   <script type="text/javascript">
- 
+
     function buyCourse(courseId, courseName, instructorId, slug){
          $.ajax({
              type: "POST",
              dataType: 'json',
-             data: { 
+             data: {
                  _token: '{{ csrf_token() }}',
                  course_name: courseName,
                  course_name_slug: slug,
                  instructor: instructorId
              },
- 
+
              url: "/buy/data/store/"+ courseId,
 
              success: function(data) {
                  miniCart();
- 
-                  // Start Message 
- 
+
+                  // Start Message
+
              const Toast = Swal.mixin({
                    toast: true,
                    position: 'top-end',
                    showConfirmButton: false,
-                   timer: 3000 
+                   timer: 3000
              })
              if ($.isEmptyObject(data.error)) {
-                     
+
                      Toast.fire({
-                     type: 'success', 
-                     icon: 'success', 
-                     title: data.success, 
+                     type: 'success',
+                     icon: 'success',
+                     title: data.success,
                      });
 
-                     // Redirect to the checkout page 
+                     // Redirect to the checkout page
                      window.location.href = '/checkout';
- 
+
              }else{
-                
+
             Toast.fire({
-                     type: 'error', 
-                     icon: 'error', 
-                     title: data.error, 
+                     type: 'error',
+                     icon: 'error',
+                     title: data.error,
                      })
                  }
- 
-               // End Message   
-             } 
+
+               // End Message
+             }
          });
     }
- 
+
  </script>
       {{-- /// End Buy Now Button  // --}}
 
@@ -278,7 +278,7 @@
                 $('#cartQty').text(response.cartQty);
 
                 var miniCart = ""
-                  
+
                 $.each(response.carts, function(key,value){
                     miniCart += `<li class="media media-card">
                             <a href="shopping-cart.html" class="media-img">
@@ -286,12 +286,12 @@
                             </a>
                             <div class="media-body">
                                 <h5><a href="/course/details/${value.id}/${value.options.slug}"> ${value.name}</a></h5>
-                                  
+
                                  <span class="d-block fs-14">$${value.price}</span>
-                                 <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="la la-times"></i> </a> 
+                                 <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="la la-times"></i> </a>
                             </div>
-                        </li> 
-                        `  
+                        </li>
+                        `
                 });
                 $('#miniCart').html(miniCart);
 
@@ -300,7 +300,7 @@
     }
     miniCart();
 
-    // Mini Cart Remove Start 
+    // Mini Cart Remove Start
     function miniCartRemove(rowId){
         $.ajax({
             type: 'GET',
@@ -308,39 +308,39 @@
             dataType: 'json',
             success:function(data){
             miniCart();
-// Start Message 
+// Start Message
 
 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
 
             }
         })
     }
 
-    // End Mini Cart Remove 
+    // End Mini Cart Remove
 
  </script>
 {{-- /// End Mini Cart // --}}
@@ -362,32 +362,20 @@ const Toast = Swal.mixin({
                 var rows = ""
                 $.each(response.carts, function(key,value){
                     rows += `
-                    <tr>
-                    <th scope="row">
-                        <div class="media media-card">
-                            <a href="course-details.html" class="media-img mr-0">
-                                <img src="/${value.options.image}" alt="Cart image">
-                            </a>
-                        </div>
-                    </th>
-                    <td>
-                        <a href="/course/details/${value.id}/${value.options.slug}" class="text-black font-weight-semi-bold">${value.name}</a>
-                         
-                    </td>
-                    <td>
-                        <ul class="generic-list-item font-weight-semi-bold">
-                            <li class="text-black lh-18">$${value.price}</li>
-                            
-                        </ul>
-                    </td>
-                     
-                    <td>
-                        <button type="button" class="icon-element icon-element-xs shadow-sm border-0" data-toggle="tooltip" data-placement="top"  id="${value.rowId}" onclick="cartRemove(this.id)">
-                            <i class="la la-times"></i>
-                        </button>
-                    </td>
-                </tr>
+               <tr>
+                                    <td class="product__thumb">
+                                        <a href="shop-details.html"><img src="/${value.options.image}" alt=""></a>
+                                    </td>
+                                    <td class="product__name">
+                                        <a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a>
+                                    </td>
+                                    <td class="product__price">$${value.price}</td>
+                                    <td class="product__remove">
+                                        <a id="${value.rowId}"  onclick="cartRemove(this.id)" href="#">×</a>
+                                    </td>
+                                </tr>
                 `
+
                 });
 
                 $('#cartPage').html(rows);
@@ -398,7 +386,7 @@ const Toast = Swal.mixin({
     }
     cart();
 
-     // My Cart Remove Start 
+     // My Cart Remove Start
      function cartRemove(rowId){
         $.ajax({
             type: 'GET',
@@ -408,40 +396,40 @@ const Toast = Swal.mixin({
             success:function(data){
             miniCart();
             cart();
-            couponCalculation(); 
-// Start Message 
+            couponCalculation();
+// Start Message
 
 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
 
             }
         })
     }
 
-    // End My Cart Remove 
+    // End My Cart Remove
 
 </script>
 {{-- /// End MyCart // --}}
@@ -458,38 +446,38 @@ const Toast = Swal.mixin({
             url: "/coupon-apply",
 
             success:function(data){
-                couponCalculation(); 
+                couponCalculation();
 
                 if (data.validity == true) {
                     $('#couponField').hide();
                 }
 
-// Start Message 
+// Start Message
 
 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
 
             }
@@ -497,7 +485,7 @@ const Toast = Swal.mixin({
     }
 
 
-    /// Start Coupon Calculation Method 
+    /// Start Coupon Calculation Method
     function couponCalculation(){
         $.ajax({
             type: 'GET',
@@ -520,7 +508,7 @@ const Toast = Swal.mixin({
                     </li>
                 </ul>`
                     )
-                    
+
                 }else {
                     $('#couponCalField').html(
                         `<h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
@@ -546,7 +534,7 @@ const Toast = Swal.mixin({
                     <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                         <span class="text-black">Grand Total:</span>
                         <span> $${data.total_amount}</span>
-                    </li> 
+                    </li>
 
                 </ul>`
                     )
@@ -557,7 +545,7 @@ const Toast = Swal.mixin({
         })
     }
 
-   couponCalculation(); 
+   couponCalculation();
 
 </script>
 {{-- /// End Apply Coupon  // --}}
@@ -574,38 +562,38 @@ const Toast = Swal.mixin({
             url: "/inscoupon-apply",
 
             success:function(data){
-                couponCalculation(); 
+                couponCalculation();
 
                 if (data.validity == true) {
                     $('#couponField').hide();
                 }
 
-// Start Message 
+// Start Message
 
 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
 
             }
@@ -625,35 +613,35 @@ const Toast = Swal.mixin({
             url: '/coupon-remove',
 
             success:function(data){
-                couponCalculation(); 
+                couponCalculation();
                 $('#couponField').show();
 
-                // Start Message 
+                // Start Message
 
 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   showConfirmButton: false,
-                  timer: 3000 
+                  timer: 3000
             })
             if ($.isEmptyObject(data.error)) {
-                    
+
                     Toast.fire({
-                    type: 'success', 
-                    icon: 'success', 
-                    title: data.success, 
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success,
                     })
 
             }else{
-               
+
            Toast.fire({
-                    type: 'error', 
-                    icon: 'error', 
-                    title: data.error, 
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error,
                     })
                 }
 
-              // End Message   
+              // End Message
 
             }
         })
