@@ -368,9 +368,25 @@
                                                 <span class="mini-cart-count">0</span>
                                             </a>
                                         </li>
+                                        @auth
                                         <li class="header-btn login-btn">
-                                            <a href="login.html">Log in</a>
+                                            <a href="{{ route('user.logout') }}">Logout</a>
                                         </li>
+                                        @else
+                                        <li class="header-btn login-btn">
+                                            <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        @endauth
+                                        {{-- @auth
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}"> Dashboard</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
+
+                                        @else
+
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
+
+                                        @endauth --}}
                                     </ul>
                                 </div>
                                 <div class="mobile-login-btn">
