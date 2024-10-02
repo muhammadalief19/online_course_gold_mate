@@ -341,7 +341,7 @@
                             <div class="tg-button-wrap">
                                 <a href="/instructors" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"  class="btn btn-two arrow-btn">
                                     Add To Cart
-                                    <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
+                                    <img src="{{ asset('') }}assets/img/icons/cart.svg" alt="img" class="injectable">
                                 </a>
                             </div>
                         </div>
