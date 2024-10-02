@@ -215,18 +215,20 @@ public function BlogCatList($id) {
 }
 
 public function BlogList(Request $request) {
-    $tag = $request->get('tag'); 
+    $tag = $request->get('tag');
+    $search = $request->get('search'); 
+
+    $query = BlogPost::with('blog')->latest();
 
     if ($tag) {
-        
-        $blog = BlogPost::where('post_tags', 'LIKE', "%$tag%")
-            ->with('blog')
-            ->latest()
-            ->paginate(9);
-    } else {
-        
-        $blog = BlogPost::with('blog')->latest()->paginate(9);
+        $query->where('post_tags', 'LIKE', "%$tag%");
     }
+
+    if ($search) {
+        $query->where('post_title', 'LIKE', "%$search%");
+    }
+
+    $blog = $query->paginate(9);
 
     $blogs = BlogPost::all();
 
@@ -238,7 +240,6 @@ public function BlogList(Request $request) {
     return view('frontend.blog.blog_list', compact('blog', 'bcategory', 'post', 'tags_all'));
 }
 
-
 private function getAllTags($blogs) {
     $tags_all = [];
 
@@ -249,7 +250,7 @@ private function getAllTags($blogs) {
         }
     }
 
-  
     return array_unique($tags_all);
 }
+
 }
