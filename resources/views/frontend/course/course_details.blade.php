@@ -298,7 +298,7 @@
                                     <img src="{{asset('')}}assets/img/icons/course_icon02.svg" alt="img" class="injectable">
                                     Duration
                                     <span>
-                                        {{ intdiv($course->duration, 60) . ' Minutes ' . ($course->duration % 60) . ' Second' }}
+                                        {{ $course->duration }}
                                     </span>
                                 </li>
                                 <li>

@@ -33,19 +33,19 @@ class AuthenticatedSessionController extends Controller
             'message' => 'Login Successfully',
             'alert-type' => 'success'
         );
- 
+
         $url = '';
         if ($request->user()->role === 'admin') {
             $url = 'admin/dashboard';
         } elseif ($request->user()->role === 'instructor') {
             $url = 'instructor/dashboard';
         } elseif ($request->user()->role === 'user') {
-            $url = '/dashboard';
+            $url = '/';
         }
 
         return redirect()->intended($url)->with($notification);
     }
- 
+
     /**
      * Destroy an authenticated session.
      */
