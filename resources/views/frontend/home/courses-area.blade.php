@@ -48,22 +48,22 @@
                         <div class="swiper-slide swiper-slide-next" role="group" aria-label="{{ ++$no }} / {{ $sumCategories }}" data-swiper-slide-index="{{ $no++ }}" style="width: 330px; margin-right: 30px;">
                             <div class="courses__item shine__animate-item">
                                 <div class="courses__item-thumb">
-                                    <a href="course-details.html" class="shine__animate-link">
-                                        <img src="assets/img/courses/course_thumb01.jpg" alt="img">
+                                    <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <img src="{{ asset($course->course_image) }}" alt="img">
                                     </a>
                                 </div>
                                 <div class="courses__item-content">
                                     <ul class="courses__item-meta list-wrap">
                                         <li class="courses__item-tag">
-                                            <a href="course.html">Development</a>
+                                            <a href="course.html">{{ $item->category_name }}</a>
                                         </li>
                                         <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
                                     </ul>
-                                    <h5 class="title"><a href="course-details.html">Learning JavaScript With Imagination</a></h5>
-                                    <p class="author">By <a href="#">David Millar</a></p>
+                                    <h5 class="title"><a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a></h5>
+                                    <p class="author">By <a href="#">{{ $course->user->name }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
-                                            <a href="course-details.html">
+                                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
                                                 <span class="text">Enroll Now</span>
                                                 <i class="flaticon-arrow-right"></i>
                                             </a>
@@ -89,19 +89,19 @@
                         <div class="swiper-slide swiper-slide-next" role="group" aria-label="{{ ++$no }} / {{ $sumCategories }}" data-swiper-slide-index="{{ $no++ }}" style="width: 330px; margin-right: 30px;">
                             <div class="courses__item shine__animate-item">
                                 <div class="courses__item-thumb">
-                                    <a href="course-details.html" class="shine__animate-link">
-                                        <img src="assets/img/courses/course_thumb01.jpg" alt="img">
+                                    <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <img src="{{ asset($course->course_image) }}" alt="img">
                                     </a>
                                 </div>
                                 <div class="courses__item-content">
                                     <ul class="courses__item-meta list-wrap">
                                         <li class="courses__item-tag">
-                                            <a href="course.html">Development</a>
+                                            <a href="course.html">{{ $item->category_name }}</a>
                                         </li>
                                         <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
                                     </ul>
-                                    <h5 class="title"><a href="course-details.html">Learning JavaScript With Imagination</a></h5>
-                                    <p class="author">By <a href="#">David Millar</a></p>
+                                    <h5 class="title"><a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a></h5>
+                                    <p class="author">By <a href="#">{{ $course->user->name }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
                                             <a href="course-details.html">
