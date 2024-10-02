@@ -137,7 +137,7 @@
 <main class="main-area fix">
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb__area breadcrumb__bg" data-background="assets/img/bg/breadcrumb_bg.jpg">
+    <section class="breadcrumb__area breadcrumb__bg" data-background="{{ asset('') }}assets/img/bg/breadcrumb_bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -155,11 +155,11 @@
             </div>
         </div>
         <div class="breadcrumb__shape-wrap">
-            <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
-            <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
-            <img src="assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
-            <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
-            <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
         </div>
     </section>
     <!-- breadcrumb-area-end -->
@@ -212,55 +212,92 @@
                 @endif
             </div>
 
-            <!-- Sidebar Area -->
-            <div class="col-xl-3 col-lg-4">
-                <aside class="blog-sidebar">
-                    <div class="blog-widget widget_search">
-                        <div class="sidebar-search-form">
-                            <form action="#">
-                                <input type="text" placeholder="Search here">
-                                <button><i class="flaticon-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="blog-widget">
-                        <h4 class="widget-title">Categories</h4>
-                        <div class="shop-cat-list">
-                            <ul class="list-wrap">
-                                @foreach ($bcategory as $cat)
-                                    <li><a href="{{ url('blog/cat/list/'.$cat->id) }}"><i class="flaticon-angle-right"></i>{{ $cat->category_name }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="blog-widget">
-                        <h4 class="widget-title">Latest Post</h4>
-                        <div class="rc-post-item">
-                            <div class="rc-post-thumb">
-                                <a href="/blog_detail">
-                                    <img src="assets/img/blog/latest_post01.jpg" alt="img">
-                                </a>
-                            </div>
-                            <div class="rc-post-content">
-                                <span class="date"><i class="flaticon-calendar"></i> April 13, 2024</span>
-                                <h4 class="title"><a href="/blog_detail">The Right Learning Path for You</a></h4>
-                            </div>
-                        </div>
-                        <!-- Add more latest posts as needed -->
-                    </div>
-                    <div class="blog-widget">
-                        <h4 class="widget-title">Tags</h4>
-                        <div class="tagcloud">
-                            <a href="#">Education</a>
-                            <a href="#">Training</a>
-                            <a href="#">Online</a>
-                            <a href="#">Learn</a>
-                            <a href="#">Course</a>
-                            <a href="#">LMS</a>
-                        </div>
-                    </div>
-                </aside>
+           <!-- Sidebar Area -->
+<div class="col-xl-3 col-lg-4">
+    <aside class="blog-sidebar">
+        
+        <!-- Widget Search -->
+        <div class="blog-widget widget_search">
+            <div class="sidebar-search-form">
+                <form action="{{ url('blog/search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Search here">
+                    <button type="submit"><i class="flaticon-search"></i></button>
+                </form>
             </div>
+        </div>
+
+        <!-- Widget Categories -->
+        <div class="blog-widget">
+            <h4 class="widget-title">Categories</h4>
+            <div class="shop-cat-list">
+                <ul class="list-wrap">
+                    @foreach ($bcategory as $cat)
+                        <li>
+                            <a href="{{ url('blog/cat/list/'.$cat->id) }}">
+                                <i class="flaticon-angle-right"></i>{{ $cat->category_name }}
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <!-- Widget Latest Post -->
+        <div class="blog-widget">
+            <h4 class="widget-title">Latest Post</h4>
+            @foreach($post as $dpost)
+            <div class="rc-post-item">
+                <div class="rc-post-thumb">
+                    <a href="{{ url('blog/details/'.$dpost->post_slug) }}">
+                        <img src="{{ asset($dpost->post_image) }}" alt="{{ $dpost->post_title }}">
+                    </a>
+                </div>
+                <div class="rc-post-content">
+                    <span class="date">
+                        <i class="flaticon-calendar"></i> {{ $dpost->created_at->format('d F, Y') }}
+                    </span>
+                    <h4 class="title">
+                        <a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a>
+                    </h4>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <!-- Widget Tags -->
+        <div class="blog-widget">
+            <h4 class="widget-title">Tags</h4>
+            <div class="tagcloud">
+                @foreach($tags_all as $tag)
+                    <a href="{{ url('blog?tag=' . $tag) }}">{{ $tag }}</a>
+                @endforeach
+            </div>
+        </div>
+        <div class="card card-item mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
+                                <div class="divider"><span></span></div>
+                                <form method="post">
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
+                                        <span class="la la-user input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
+                                        <span class="la la-envelope input-icon"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
+                                    </div>
+                                    <div class="btn-box">
+                                        <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    </aside>
+</div>
+
         </div>
     </div>
 </section>
