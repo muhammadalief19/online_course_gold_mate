@@ -37,7 +37,7 @@
     </div>
     <!-- breadcrumb-area-end --> --}}
 
-    <!-- courses-details-area -->
+    <!-- courses-details-area
     <section class="courses__details-area section-py-120">
         <div class="container">
             <div class="row">
@@ -140,7 +140,7 @@
                                                                     <a href="#" class="course-item-link">
                                                                         <span class="item-name">{{ $lect->lecture_title }}</span>
                                                                         <div class="course-item-meta">
-                                                                            <span class="item-meta duration">03:09</span> <!-- Ini contoh durasi, bisa diganti dengan $lect->duration jika tersedia -->
+                                                                            <span class="item-meta duration">03:09</span>
                                                                         </div>
                                                                     </a>
                                                                 </li>
@@ -363,8 +363,8 @@
 
     </main>
 
-@endsection
-{{-- <!-- ================================
+@endsection -->
+<!-- ================================
     START BREADCRUMB AREA
 ================================= -->
 <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
@@ -1256,4 +1256,4 @@
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
- --}}
+ 

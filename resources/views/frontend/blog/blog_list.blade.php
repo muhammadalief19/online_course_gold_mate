@@ -48,7 +48,7 @@
                                         <div class="blog__post-meta">
                                             <ul class="list-wrap">
                                                 <li><i class="flaticon-calendar"></i>{{ $item->created_at->format('d F, Y') }}</li>
-                                                <li><i class="flaticon-user-1"></i>by <a href="/blog_detail">Admin</a></li>
+                                                <li><i class="flaticon-user-1"></i>by <a href="{{ url('blog/details/'.$item->post_slug) }}">Admin</a></li>
                                             </ul>
                                         </div>
                                         <h4 class="title">

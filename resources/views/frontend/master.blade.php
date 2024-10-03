@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -123,8 +123,8 @@
 
 @include('frontend.body.script')
 
-</body>
-</html> --}}
+<!-- </body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,9 +135,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/instructor/gold_icon.jpg">
-    <!-- Place favicon.ico in the root directory -->
 
-    <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('') }}assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/animate.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/animate.min.css">
@@ -155,21 +153,18 @@
     <link rel="stylesheet" href="{{ asset('') }}assets/css/main.css">
 </head>
 <body>
-        <!--Preloader-->
         <div id="preloader">
             <div id="loader" class="loader">
                 <div class="loader-container">
                 </div>
             </div>
         </div>
-        <!--Preloader-end -->
 
         @include('frontend.body.header')
 
         @yield('home')
 
         @include('frontend.body.footer')
-<!-- JS here -->
 <script src="{{ asset('') }}assets/js/vendor/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('') }}assets/js/bootstrap.min.js"></script>
 <script src="{{ asset('') }}assets/js/imagesloaded.pkgd.min.js"></script>
@@ -226,4 +221,4 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @include('frontend.body.script')
 </body>
-</html>
+</html> -->
