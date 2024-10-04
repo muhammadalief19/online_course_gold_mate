@@ -37,7 +37,7 @@
     </div>
     <!-- breadcrumb-area-end --> --}}
 
-    <!-- courses-details-area
+     courses-details-area
     <section class="courses__details-area section-py-120">
         <div class="container">
             <div class="row">
@@ -347,7 +347,7 @@
                         </div>
                         <div class="courses__details-enroll" style="margin-bottom: 20px;">
                             <div class="tg-button-wrap">
-                                <a href="/instructors" class="btn btn-two arrow-btn">
+                                <a href="/instructors" onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" class="btn btn-two arrow-btn">
                                     Buy this course
                                     <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
                                 </a>
@@ -363,8 +363,8 @@
 
     </main>
 
-@endsection -->
-<!-- ================================
+@endsection
+{{-- <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
 <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
@@ -1255,5 +1255,5 @@
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
-</div><!-- end modal -->
- 
+</div><!-- end modal --> --}}
+

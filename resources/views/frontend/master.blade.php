@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -123,8 +123,8 @@
 
 @include('frontend.body.script')
 
-<!-- </body>
-</html>
+</body>
+</html> --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,4 +221,4 @@
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @include('frontend.body.script')
 </body>
-</html> -->
+</html>
