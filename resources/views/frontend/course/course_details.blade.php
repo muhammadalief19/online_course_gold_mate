@@ -37,7 +37,7 @@
     </div>
     <!-- breadcrumb-area-end --> --}}
 
-    <!-- courses-details-area -->
+    <!-- courses-details-area
     <section class="courses__details-area section-py-120">
         <div class="container">
             <div class="row">
@@ -140,7 +140,7 @@
                                                                     <a href="#" class="course-item-link">
                                                                         <span class="item-name">{{ $lect->lecture_title }}</span>
                                                                         <div class="course-item-meta">
-                                                                            <span class="item-meta duration">03:09</span> <!-- Ini contoh durasi, bisa diganti dengan $lect->duration jika tersedia -->
+                                                                            <span class="item-meta duration">03:09</span>
                                                                         </div>
                                                                     </a>
                                                                 </li>
@@ -298,7 +298,7 @@
                                     <img src="{{asset('')}}assets/img/icons/course_icon02.svg" alt="img" class="injectable">
                                     Duration
                                     <span>
-                                        {{ intdiv($course->duration, 60) . ' Minutes ' . ($course->duration % 60) . ' Second' }}
+                                        {{ $course->duration }}
                                     </span>
                                 </li>
                                 <li>
@@ -341,7 +341,7 @@
                             <div class="tg-button-wrap">
                                 <a href="/instructors" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"  class="btn btn-two arrow-btn">
                                     Add To Cart
-                                    <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
+                                    <img src="{{ asset('') }}assets/img/icons/cart.svg" alt="img" class="injectable">
                                 </a>
                             </div>
                         </div>
@@ -363,8 +363,8 @@
 
     </main>
 
-@endsection
-{{-- <!-- ================================
+@endsection -->
+<!-- ================================
     START BREADCRUMB AREA
 ================================= -->
 <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
@@ -1256,4 +1256,4 @@
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
- --}}
+ 

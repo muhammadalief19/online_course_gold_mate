@@ -287,18 +287,41 @@
                     <div class="col-lg-6">
                         <div class="tg-header__top-right">
                             <div class="tg-header__phone">
-                                <img src="{{ asset('') }}assets/img/icons/phone.svg" alt="Icon">Call us: <a href="tel:00123456789"> {{ $setting->phone }}</a>
+                                <img src="{{ asset('') }}assets/img/icons/phone.svg" alt="Icon">Call us:
+                                <a href="tel:00123456789">{{ $setting->phone }}</a>
                             </div>
-                            <ul class="tg-header__top-social list-wrap">
-                                <li>Follow Us On :</li>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                            </ul>
+                            <div class="tg-header__dashboard-btn">
+                                @auth
+                                <a href="{{ route('dashboard') }}" class="btn-dashboard">Dashboard</a>
+                                @else
+                                <a href="{{ route('login') }}" class="btn-dashboard">Login</a>
+                                @endauth
+                            </div>
+
                         </div>
                     </div>
+                    <style>
+                       .tg-header__dashboard-btn {
+    text-align: right; /* Untuk memastikan tombol berada di sebelah kanan */
+}
+
+.btn-dashboard {
+    background-color: #f5ee26; /* Sesuaikan warna sesuai desain */
+    color: #080808;
+    padding: 5px 15px; /* Mengurangi padding untuk memperkecil tombol */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 14px; /* Tambahkan ini jika ingin mengurangi ukuran teks */
+}
+
+.btn-dashboard:hover {
+    background-color: #0066ff; /* Warna saat tombol di-hover */
+}
+
+
+                    </style>
                 </div>
             </div>
         </div>

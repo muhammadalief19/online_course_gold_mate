@@ -48,7 +48,7 @@
                                         <div class="blog__post-meta">
                                             <ul class="list-wrap">
                                                 <li><i class="flaticon-calendar"></i>{{ $item->created_at->format('d F, Y') }}</li>
-                                                <li><i class="flaticon-user-1"></i>by <a href="/blog_detail">Admin</a></li>
+                                                <li><i class="flaticon-user-1"></i>by <a href="{{ url('blog/details/'.$item->post_slug) }}">Admin</a></li>
                                             </ul>
                                         </div>
                                         <h4 class="title">
@@ -82,14 +82,17 @@
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <aside class="blog-sidebar">
-                        <div class="blog-widget widget_search">
-                            <div class="sidebar-search-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Search here">
-                                    <button><i class="flaticon-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="blog-widget widget_search">
+    <div class="sidebar-search-form">
+        <form action="{{ route('blog.list') }}" method="GET"> <!-- Route yang akan memproses search -->
+            <input type="text" name="search" placeholder="Search here" value="{{ request()->get('search') }}">
+            <button type="submit"><i class="flaticon-search"></i></button>
+        </form>
+    </div>
+</div>
+
+
+
                         <div class="blog-widget">
                             <h4 class="widget-title">Categories</h4>
                             <div class="shop-cat-list">

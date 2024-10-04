@@ -201,43 +201,38 @@ public function BlogDetails($slug){
 
 }// End Method
 
-public function BlogCatList($id){
-
-    $blog = BlogPost::where('blogcat_id',$id)->get();
-    $breadcat = BlogCategory::where('id',$id)->first();
+public function BlogCatList($id) {
+    $blog = BlogPost::where('blogcat_id', $id)->get();
+    $breadcat = BlogCategory::find($id); 
     $bcategory = BlogCategory::latest()->get();
-    $post = BlogPost::latest()->limit(3)->get();
-    return view('frontend.blog.blog_cat_list',compact('blog','breadcat','bcategory','post'));
+    $post = BlogPost::latest()->limit(4)->get();
 
-}// End Method
+    
+    $blogs = BlogPost::all();
+    $tags_all = $this->getAllTags($blogs);
+
+    return view('frontend.blog.blog_cat_list', compact('blog', 'breadcat', 'bcategory', 'post', 'tags_all'));
+}
 
 public function BlogList(Request $request) {
-    $tag = $request->get('tag'); // Get the selected tag from the request
-    
+    $tag = $request->get('tag');
+    $search = $request->get('search'); 
+
+    $query = BlogPost::with('blog')->latest();
+
     if ($tag) {
-        // If a tag is selected, filter the blogs by the tag
-        $blog = BlogPost::where('post_tags', 'LIKE', "%$tag%")
-            ->with('blog')
-            ->latest()
-            ->paginate(9);
-    } else {
-        // Otherwise, get all blogs
-        $blog = BlogPost::with('blog')->latest()->paginate(9);
+        $query->where('post_tags', 'LIKE', "%$tag%");
     }
 
-    $blogs = BlogPost::get();
-
-    // Collect all tags from the blogs
-    $tags_all = [];
-    foreach ($blogs as $blogPost) {
-        if (!empty($blogPost->post_tags)) {
-            $tags = explode(',', $blogPost->post_tags);
-            $tags_all = array_merge($tags_all, $tags); // Merge all tags
-        }
+    if ($search) {
+        $query->where('post_title', 'LIKE', "%$search%");
     }
 
-    // Remove duplicate tags
-    $tags_all = array_unique($tags_all);
+    $blog = $query->paginate(9);
+
+    $blogs = BlogPost::all();
+
+    $tags_all = $this->getAllTags($blogs);
 
     $bcategory = BlogCategory::latest()->get();
     $post = BlogPost::latest()->limit(4)->get();
@@ -245,7 +240,17 @@ public function BlogList(Request $request) {
     return view('frontend.blog.blog_list', compact('blog', 'bcategory', 'post', 'tags_all'));
 }
 
+private function getAllTags($blogs) {
+    $tags_all = [];
 
+    foreach ($blogs as $blogPost) {
+        if (!empty($blogPost->post_tags)) {
+            $tags = explode(',', $blogPost->post_tags);
+            $tags_all = array_merge($tags_all, $tags);
+        }
+    }
 
+    return array_unique($tags_all);
+}
 
 }
