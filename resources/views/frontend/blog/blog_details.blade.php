@@ -21,7 +21,7 @@
                         <!-- Breadcrumb Navigation -->
                         <nav class="breadcrumb generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
                             <span property="itemListElement" typeof="ListItem">
-                                <a href="index.html">Home</a>
+                                <a href="/">Home</a>
                             </span>
                             <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
                             <span property="itemListElement" typeof="ListItem">
@@ -92,6 +92,8 @@
                             
                         </div>
                     </div>
+
+
                 </div><!-- end instructor-wrap -->
                 <div class="section-block"></div>
                 <div class="comments-wrap pt-5" id="comments">
@@ -117,7 +119,6 @@
                                 </div>
                             </div>
                         </div><!-- end media -->
-                        
                         
                     </div>
                     <div class="load-more-btn-box text-center pt-3 pb-5">
@@ -159,6 +160,8 @@
                         </div><!-- end btn-box -->
                     </form>
                 </div><!-- end add-comment-wrap -->
+
+
             </div><!-- end col-lg-8 -->
             <div class="col-xl-3 col-lg-4">
                     <aside class="blog-sidebar">
@@ -208,28 +211,7 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="card card-item mb-4">
-                            <div class="card-body">
-                                <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
-                                <div class="divider"><span></span></div>
-                                <form method="post">
-                                    <div class="form-group mb-3">
-                                        <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
-                                        <span class="la la-user input-icon"></span>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
-                                        <span class="la la-envelope input-icon"></span>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
-                                    </div>
-                                    <div class="btn-box">
-                                        <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div><!-- end card -->                        
+                                          
                     </aside>
                 </div>
             </div><!-- end col-lg-4 -->
