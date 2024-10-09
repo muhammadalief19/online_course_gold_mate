@@ -136,21 +136,26 @@
                         </table>
                         <div class="d-flex flex-wrap align-items-center justify-content-between pt-4">
                             <td colspan="6" class="cart__actions">
-                                <form action="#" class="cart__actions-form">
-                                    <input type="text" placeholder="Coupon code">
-                                    <button type="submit" class="btn">Apply coupon</button>
+                                <form action="#" class="cart__actions-form" onsubmit="event.preventDefault(); applyCoupon();">
+                                    <input type="text" id="coupon_name" placeholder="Coupon code" class="form-control form--control pl-3">
+                                    <button type="submit" class="btn theme-btn">Apply coupon</button>
                                 </form>
                             </td>
                         </div>
+
+                        <div class="col-lg-4 ml-auto">
+                            <div class="bg-gray p-4 rounded-rounded mt-40px" id="couponCalField">
+                                <!-- Rincian perhitungan kupon akan ditampilkan di sini oleh fungsi couponCalculation() -->
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-lg-4">
                         <div class="cart__collaterals-wrap">
                             <h2 class="title">Cart totals</h2>
                             <ul class="list-wrap">
-                                <li>Subtotal <span>$32.00</span></li>
-                                <li>Total <span class="amount">$32.00</span></li>
                             </ul>
-                            <a href="check-out.html" class="btn">Proceed to checkout</a>
+                            <a href="{{ route('checkout') }}" class="btn">checkout</a>
                         </div>
                     </div>
                 </div>

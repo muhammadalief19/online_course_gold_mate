@@ -37,7 +37,7 @@
     </div>
     <!-- breadcrumb-area-end --> --}}
 
-     courses-details-area
+    {{-- courses-details-area --}}
     <section class="courses__details-area section-py-120">
         <div class="container">
             <div class="row">

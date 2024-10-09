@@ -161,19 +161,19 @@
                             <p>when an unknown printer took <br> galley type and scrambled</p>
                             <ul class="list-wrap footer__social">
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-youtube">
+                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-youtube">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-whatsapp">
+                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-whatsapp">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-facebook">
+                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-facebook">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-twitter">
+                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-twitter">
                                     </a>
                                 </li>
                                 <li>
@@ -183,8 +183,8 @@
                             </ul>
                         </div>
                         <div class="app-download">
-                            <a href="#"><img src="assets/img/others/google-play.svg" alt="img"></a>
-                            <a href="#"><img src="assets/img/others/apple-store.svg" alt="img"></a>
+                            <a href="#"><img src="{{ asset('') }}assets/img/others/google-play.svg" alt="img"></a>
+                            <a href="#"><img src="{{ asset('') }}assets/img/others/apple-store.svg" alt="img"></a>
                         </div>
                     </div>
                 </div>

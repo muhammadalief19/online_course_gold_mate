@@ -430,7 +430,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="{{ $cat->id }}" id="cat_{{ $cat->id }}">
                                         <label class="form-check-label" for="cat_{{ $cat->id }}">
-                                            {{ $cat->category_name }} ({{ $cat->course_count }}) <!-- Assumes course_count is available in the $cat object -->
+                                            {{ $cat->category_name }} {{ $cat->course_count }} <!-- Assumes course_count is available in the $cat object -->
                                         </label>
                                     </div>
                                 </li>
@@ -629,8 +629,8 @@
                                         </a>
                                         @php
                                         $amount = $course->selling_price - $course->discount_price;
-                                        $discount = ($amount/$course->selling_price) * 100;
-                                    @endphp
+                                        $discount = ($amount / $course->selling_price) * 100;
+                                        @endphp
                                     </div>
                                     <div class="courses__item-content">
                                         <ul class="courses__item-meta list-wrap">
@@ -639,8 +639,12 @@
                                             </li>
                                             <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
                                         </ul>
-                                        <h5 class="title"><a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a></h5>
-                                        <p class="author">By <a href=" ">{{ $course['user']['name'] }}</a></p>
+                                        <h5 class="title">
+                                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
+                                                {{ Str::limit($course->course_name, 30) }}
+                                            </a>
+                                        </h5>
+                                        <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                         <div class="courses__item-bottom">
                                             <div class="button">
                                                 <a href="/course_detail">
@@ -664,7 +668,57 @@
                             </ul>
                         </nav>
                     </div>
+
                 </div>
+                <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
+                    <div class="row courses__list-wrap row-cols-1">
+                        @foreach ($courses as $course)
+                        <div class="col">
+                            <div class="courses__item courses__item-three shine__animate-item">
+                                <div class="courses__item-thumb">
+                                    <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <img src="{{ asset($course->course_image) }}" alt="img">
+                                    </a>
+                                </div>
+                                <div class="courses__item-content">
+                                    <ul class="courses__item-meta list-wrap">
+                                        <li class="courses__item-tag">
+                                            <a href="course.html">Development</a>
+                                        </li>
+                                        <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
+                                        <li class="price">
+                                            <del>${{ $course->selling_price }}</del>
+                                            ${{ $course->discount_price }}
+                                        </li>
+                                    </ul>
+                                    <h5 class="title">
+                                        <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a>
+                                    </h5>
+                                    <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
+                                    <p class="info">{!! Str::limit($course->description,50) !!}</p>
+                                    <div class="courses__item-bottom">
+                                        <div class="button">
+                                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
+                                                <span class="text">Enroll Now</span>
+                                                <i class="flaticon-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <nav class="pagination__wrap mt-30">
+                        <ul class="list-wrap">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="courses.html">2</a></li>
+                            <li><a href="courses.html">3</a></li>
+                            <li><a href="courses.html">4</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
         </div>
     </div>

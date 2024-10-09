@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Breadcrumb Shapes -->
         <div class="breadcrumb__shape-wrap">
             <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
@@ -69,11 +69,11 @@
                     <div class="card-body">
                         <p class="card-text pb-3"> {!! $blog->long_descp !!} </p>
                         <div class="section-block"></div>
-                        
+
                         <div class="d-flex flex-wrap justify-content-between align-items-center pt-3">
-                            
+
                             <div class="share-wrap">
-                                
+
                                 <div class="icon-element icon-element-sm shadow-sm cursor-pointer share-toggle" title="Toggle to expand social icons"><i class="la la-share-alt"></i></div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <h5>Alex Smith</h5>
                             <span class="d-block lh-18 pt-2 pb-2">www.techydevs.com</span>
                             <p class="pb-3">I'm a growth-oriented digital marketer with a passion for content marketing, social media marketing wonders, conversion rate optimization, and keyword research. I strongly support permission marketing and earned media. More than anything</p>
-                            
+
                         </div>
                     </div>
                 </div><!-- end instructor-wrap -->
@@ -117,8 +117,8 @@
                                 </div>
                             </div>
                         </div><!-- end media -->
-                        
-                        
+
+
                     </div>
                     <div class="load-more-btn-box text-center pt-3 pb-5">
                         <button class="btn theme-btn theme-btn-sm theme-btn-transparent lh-30"><i class="la la-refresh mr-1"></i> Load More Comment</button>
@@ -229,7 +229,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div><!-- end card -->                        
+                        </div><!-- end card -->
                     </aside>
                 </div>
             </div><!-- end col-lg-4 -->
