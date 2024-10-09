@@ -66,7 +66,7 @@
                                         <div class="courses__item shine__animate-item">
                                             <div class="courses__item-thumb">
                                                 <a href="course-details.html" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb01.jpg" alt="img">
+                                                    <img src="{{ asset('') }}{{ $course->course_image }}" alt="img">
                                                 </a>
                                             </div>
                                             <div class="courses__item-content">
@@ -112,7 +112,7 @@
                                         <div class="courses__item shine__animate-item">
                                             <div class="courses__item-thumb">
                                                 <a href="course-details.html" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb01.jpg" alt="img">
+                                                    <img src="{{ asset('') }}{{ $course->course_image }}" alt="img">
                                                 </a>
                                             </div>
                                             <div class="courses__item-content">

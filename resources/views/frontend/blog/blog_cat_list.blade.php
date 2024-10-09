@@ -12,7 +12,7 @@
                 <h2 class="section__title text-white">{{ $breadcat->category_name }} Category</h2>
             </div>
             <ul class="generic-list-item generic-list-item-white generic-list-item-arrow d-flex flex-wrap align-items-center">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>Blog</li>
                 <li>{{ $breadcat->category_name }}</li>
             </ul>
@@ -145,10 +145,10 @@
                         <h3 class="title">Halaman Blog</h3>
                         <nav class="breadcrumb">
                             <span property="itemListElement" typeof="ListItem">
-                                <a href="index.html">Home</a>
+                                <a href="/">Home</a>
                             </span>
                             <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                            <span property="itemListElement" typeof="ListItem">Blogs</span>
+                            <span property="itemListElement" typeof="ListItem">Blog</span>
                         </nav>
                     </div>
                 </div>
@@ -244,7 +244,7 @@
 
         <!-- Widget Latest Post -->
         <div class="blog-widget">
-            <h4 class="widget-title">Latest Post</h4>
+            <h4 class="widget-title">Recent Post</h4>
             @foreach($post as $dpost)
             <div class="rc-post-item">
                 <div class="rc-post-thumb">
@@ -273,28 +273,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="card card-item mb-4">
-                            <div class="card-body">
-                                <h3 class="card-title fs-4 pb-2">Sidebar Form</h3>
-                                <div class="divider"><span></span></div>
-                                <form method="post">
-                                    <div class="form-group mb-3">
-                                        <input class="form-control form--control" type="text" name="text" placeholder="Name" required>
-                                        <span class="la la-user input-icon"></span>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control form--control" type="email" name="email" placeholder="Email" required>
-                                        <span class="la la-envelope input-icon"></span>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <textarea class="form-control form--control" name="message" rows="4" placeholder="Write message" required></textarea>
-                                    </div>
-                                    <div class="btn-box">
-                                        <button class="btn theme-btn w-100" type="submit">Contact Author <i class="la la-arrow-right icon ml-1"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        
     </aside>
 </div>
 
