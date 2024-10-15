@@ -33,10 +33,8 @@
 
                         <!-- Metadata -->
                         <ul class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center flex-wrap fs-14 pt-2">
-                            <li class="d-flex align-items-center" style="margin-right: 20px;">By <a>User</a></li>
+                            <li class="d-flex align-items-center" style="margin-right: 20px;">By <a>Admin</a></li>
                             <li class="d-flex align-items-center" style="margin-right: 20px;">{{ $blog->created_at->format('M d Y') }}</li>
-                            <li class="d-flex align-items-center" style="margin-right: 20px;"><a>1 Comments</a></li>
-                            <li class="d-flex align-items-center">130 Shares</li>
                         </ul>
                     </div>
                 </div>
@@ -77,20 +75,7 @@
                         </div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
-                <div class="instructor-wrap py-5">
-                    <h3 class="fs-22 font-weight-semi-bold pb-4">About the author</h3>
-                    <div class="media media-card">
-                        <div class="media-img rounded-full avatar-lg mr-4">
-                            <img src="images/img-loading.png" data-src="images/small-avatar-1.jpg" alt="Avatar image" class="rounded-full lazy">
-                        </div>
-                        <div class="media-body">
-                            <h5>Alex Smith</h5>
-                            <span class="d-block lh-18 pt-2 pb-2">www.techydevs.com</span>
-                            <p class="pb-3">I'm a growth-oriented digital marketer with a passion for content marketing, social media marketing wonders, conversion rate optimization, and keyword research. I strongly support permission marketing and earned media. More than anything</p>
-
-                        </div>
-                    </div>
-                </div><!-- end instructor-wrap -->
+                
                 <div class="section-block"></div>
 
                 <!-- Disqus Comments Section -->
@@ -98,11 +83,11 @@
                     <div id="disqus_thread"></div>
                     <script>
                         var disqus_config = function () {
-                            this.page.url = "{{ url()->current() }}";  // Replace PAGE_URL with your page's canonical URL variable
-                            this.page.identifier = "{{ $blog->id }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            this.page.url = "{{ url()->current() }}";  
+                            this.page.identifier = "{{ $blog->id }}"; 
                         };
 
-                        (function() {  // DON'T EDIT BELOW THIS LINE
+                        (function() {  
                             var d = document, s = d.createElement('script');
                             s.src = 'https://http-127-0-0-1-8000-e7a5ag39aw.disqus.com/embed.js';
                             s.setAttribute('data-timestamp', +new Date());
