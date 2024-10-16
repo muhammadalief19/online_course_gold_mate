@@ -6,36 +6,6 @@
 
 <main class="main-area fix">
 
-    <!-- breadcrumb-area -->
-    {{-- <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="assets/img/bg/breadcrumb_bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb__content">
-                        <nav class="breadcrumb">
-                            <span property="itemListElement" typeof="ListItem">
-                                <a href="index.html">Home</a>
-                            </span>
-                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                            <span property="itemListElement" typeof="ListItem">
-                                <a href="index.html">Courses</a>
-                            </span>
-                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                            <span property="itemListElement" typeof="ListItem">{{ $course->course_title }}</span>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="breadcrumb__shape-wrap">
-            <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
-            <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
-            <img src="assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
-            <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
-            <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
-        </div>
-    </div>
-    <!-- breadcrumb-area-end --> --}}
 
     {{-- courses-details-area --}}
     <section class="courses__details-area section-py-120">
@@ -339,15 +309,16 @@
                         </div>
                         <div class="courses__details-enroll" style="margin-bottom: 20px;">
                             <div class="tg-button-wrap">
-                                <a href="/instructors" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"  class="btn btn-two arrow-btn">
+                                <a href="{{ route('mycart') }}" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}'); window.location.href='/cart';" class="btn btn-two arrow-btn">
                                     Add To Cart
                                     <img src="{{ asset('') }}assets/img/icons/cart.svg" alt="img" class="injectable">
                                 </a>
                             </div>
                         </div>
+
                         <div class="courses__details-enroll" style="margin-bottom: 20px;">
                             <div class="tg-button-wrap">
-                                <a href="/instructors" onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" class="btn btn-two arrow-btn">
+                                <a href="{{ route('checkout') }}" onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" class="btn btn-two arrow-btn">
                                     Buy this course
                                     <img src="{{asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable">
                                 </a>

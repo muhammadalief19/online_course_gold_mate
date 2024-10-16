@@ -635,7 +635,7 @@
                                     <div class="courses__item-content">
                                         <ul class="courses__item-meta list-wrap">
                                             <li class="courses__item-tag">
-                                                <a href="course.html">Development</a>
+                                                <a href="/">{{ $course['category']['category_name'] }}</a>
                                             </li>
                                             <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
                                         </ul>
@@ -647,13 +647,14 @@
                                         <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                         <div class="courses__item-bottom">
                                             <div class="button">
-                                                <a href="/course_detail">
+                                                <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
                                                     <span class="text">Enroll Now</span>
                                                     <i class="flaticon-arrow-right"></i>
                                                 </a>
                                             </div>
                                             <h5 class="price">$15.00</h5>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -683,7 +684,7 @@
                                 <div class="courses__item-content">
                                     <ul class="courses__item-meta list-wrap">
                                         <li class="courses__item-tag">
-                                            <a href="course.html">Development</a>
+                                            <a href="/">{{ $course['category']['category_name'] }}</a>
                                         </li>
                                         <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
                                         <li class="price">
@@ -695,7 +696,7 @@
                                         <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a>
                                     </h5>
                                     <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
-                                    <p class="info">{!! Str::limit($course->description,50) !!}</p>
+                                    <p class="info">{!! Str::limit($course->description, 50) !!}</p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
                                             <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
@@ -707,7 +708,8 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                    @endforeach
+
                     </div>
                     <nav class="pagination__wrap mt-30">
                         <ul class="list-wrap">

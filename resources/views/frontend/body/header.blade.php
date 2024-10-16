@@ -388,7 +388,7 @@
                                         <li class="mini-cart-icon">
                                             <a href="{{ route('mycart') }}" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
-                                                <span class="mini-cart-count">0</span>
+                                                <span class="mini-cart-count" id="cartSubTotal">Total$</span>
                                             </a>
                                         </li>
                                         @auth
