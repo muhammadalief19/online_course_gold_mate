@@ -219,7 +219,7 @@
             <li>
                 <a href="#">pages</a>
                 <ul class="sub-menu">
-                    <li><a href="dashboard.html">dashboard <span class="ribbon">Hot</span></a></li>
+                    <li><a href="/dashboard">dashboard <span class="ribbon">Hot</span></a></li>
                     <li><a href="about.html">about</a></li>
                     <li><a href="teachers.html">Teachers</a></li>
                     <li><a href="teacher-detail.html">Teacher detail</a></li>

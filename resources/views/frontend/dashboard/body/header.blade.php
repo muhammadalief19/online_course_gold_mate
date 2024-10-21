@@ -84,7 +84,7 @@
                     </li>
                     <li>
                         <div class="notification-body">
-                            <a href="dashboard.html" class="media media-card align-items-center">
+                            <a href="/dashboard" class="media media-card align-items-center">
                                 <div class="icon-element icon-element-sm flex-shrink-0 bg-1 mr-3 text-white">
                                     <i class="la la-bolt"></i>
                                 </div>
@@ -93,7 +93,7 @@
                                     <span class="d-block lh-18 pt-1 text-gray fs-13">1 hour ago</span>
                                 </div>
                             </a>
-                            <a href="dashboard.html" class="media media-card align-items-center">
+                            <a href="/dashboard" class="media media-card align-items-center">
                                 <div class="icon-element icon-element-sm flex-shrink-0 bg-2 mr-3 text-white">
                                     <i class="la la-lock"></i>
                                 </div>
@@ -102,7 +102,7 @@
                                     <span class="d-block lh-18 pt-1 text-gray fs-13">November 12, 2019</span>
                                 </div>
                             </a>
-                            <a href="dashboard.html" class="media media-card align-items-center">
+                            <a href="/dashboard" class="media media-card align-items-center">
                                 <div class="icon-element icon-element-sm flex-shrink-0 bg-3 mr-3 text-white">
                                     <i class="la la-user"></i>
                                 </div>
@@ -114,7 +114,7 @@
                         </div>
                     </li>
                     <li class="menu-heading-block">
-                        <a href="dashboard.html" class="btn theme-btn w-100">Show All Notifications <i class="la la-arrow-right icon ml-1"></i></a>
+                        <a href="/dashboard" class="btn theme-btn w-100">Show All Notifications <i class="la la-arrow-right icon ml-1"></i></a>
                     </li>
                 </ul>
             </li>
@@ -237,7 +237,7 @@
         </div><!-- end off-canvas-menu-close -->
         <h4 class="off-canvas-menu-heading pt-90px">Alerts</h4>
         <ul class="generic-list-item off-canvas-menu-list pt-1 pb-2 border-bottom border-bottom-gray">
-            <li><a href="dashboard.html">Notifications</a></li>
+            <li><a href="/dashboard">Notifications</a></li>
             <li><a href="dashboard-message.html">Messages</a></li>
             <li><a href="my-courses.html">Wishlist</a></li>
             <li><a href="shopping-cart.html">My cart</a></li>
