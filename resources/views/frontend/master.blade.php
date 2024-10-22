@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="{{ asset('') }}assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/animate.min.css">
-    <link rel="stylesheet" href="{{ asset('') }}assets/css/animate.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/flaticon-skillgro.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/flaticon-skillgro-new.css">
@@ -35,7 +34,9 @@
 
         @include('frontend.body.header')
 
-        @yield('home')
+        <main class="main-area fix">
+            @yield('home')
+        </main>
 
         @include('frontend.body.footer')
 <script src="{{ asset('') }}assets/js/vendor/jquery-3.6.0.min.js"></script>
