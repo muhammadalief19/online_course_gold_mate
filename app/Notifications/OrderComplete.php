@@ -10,7 +10,9 @@ use Illuminate\Notifications\Notification;
 class OrderComplete extends Notification
 {
     use Queueable;
- 
+
+    public $name;
+
     /**
      * Create a new notification instance.
      */
