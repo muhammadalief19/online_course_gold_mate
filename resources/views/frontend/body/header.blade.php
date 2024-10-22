@@ -219,7 +219,7 @@
             <li>
                 <a href="#">pages</a>
                 <ul class="sub-menu">
-                    <li><a href="dashboard.html">dashboard <span class="ribbon">Hot</span></a></li>
+                    <li><a href="/dashboard">dashboard <span class="ribbon">Hot</span></a></li>
                     <li><a href="about.html">about</a></li>
                     <li><a href="teachers.html">Teachers</a></li>
                     <li><a href="teacher-detail.html">Teacher detail</a></li>
@@ -388,7 +388,7 @@
                                         <li class="mini-cart-icon">
                                             <a href="{{ route('mycart') }}" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
-                                                <span class="mini-cart-count">0</span>
+                                                <span class="mini-cart-count" id="cartSubTotal">Total$</span>
                                             </a>
                                         </li>
                                         @auth

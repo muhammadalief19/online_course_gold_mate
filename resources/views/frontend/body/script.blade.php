@@ -486,66 +486,38 @@ const Toast = Swal.mixin({
 
 
     /// Start Coupon Calculation Method
-    function couponCalculation(){
+    function couponCalculation() {
         $.ajax({
             type: 'GET',
             url: "/coupon-calculation",
             dataType: 'json',
 
-            success:function(data){
+            success: function(data) {
                 if (data.total) {
-                    $('#couponCalField').html(
-                        `<h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
-                <div class="divider"><span></span></div>
-                <ul class="generic-list-item pb-4">
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Subtotal:$</span>
-                        <span>$${data.total} </span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Total:$</span>
-                        <span> $${data.total}</span>
-                    </li>
-                </ul>`
-                    )
-
-                }else {
-                    $('#couponCalField').html(
-                        `<h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
-                <div class="divider"><span></span></div>
-                <ul class="generic-list-item pb-4">
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Subtotal: </span>
-                        <span>$${data.subtotal} </span>
-                    </li>
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Coupon Name : </span>
-                        <span>${data.coupon_name} <button type="button" class="icon-element icon-element-xs shadow-sm border-0" data-toggle="tooltip" data-placement="top" onclick="couponRemove()" >
+                    // Jika tidak ada kupon, hanya menampilkan subtotal dan total
+                    $('.cart__collaterals-wrap .list-wrap').html(`
+                        <li>Subtotal <span>$${data.total}</span></li>
+                        <li>Total <span class="amount">$${data.total}</span></li>
+                    `);
+                } else {
+                    // Jika kupon diterapkan, menampilkan subtotal, nama kupon, diskon, dan total
+                    $('.cart__collaterals-wrap .list-wrap').html(`
+                        <li>Subtotal <span>$${data.subtotal}</span></li>
+                        <li>Coupon Name <span>${data.coupon_name} <button type="button" class="icon-element icon-element-xs shadow-sm border-0" onclick="couponRemove()">
                             <i class="la la-times"></i>
-                        </button></span>
-                    </li>
-
-
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Coupon Discount:</span>
-                        <span> $${data.discount_amount}</span>
-                    </li>
-
-                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                        <span class="text-black">Grand Total:</span>
-                        <span> $${data.total_amount}</span>
-                    </li>
-
-                </ul>`
-                    )
-
+                        </button></span></li>
+                        <li>Coupon Discount <span>-$${data.discount_amount}</span></li>
+                        <li>Total <span class="amount">$${data.total_amount}</span></li>
+                    `);
                 }
-
             }
-        })
+        });
     }
 
-   couponCalculation();
+    // Panggil fungsi couponCalculation saat halaman dimuat
+    $(document).ready(function() {
+        couponCalculation();
+    });
 
 </script>
 {{-- /// End Apply Coupon  // --}}

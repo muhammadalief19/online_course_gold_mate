@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Favicon --> 
+    <!-- Favicon -->
     <link rel="icon" sizes="16x16" href="{{ asset('frontend/images/favicon.png') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -59,7 +59,6 @@
 
 
 <style>
- 
     .StripeElement {
       box-sizing: border-box;
       height: 40px;
@@ -79,10 +78,7 @@
     }
     .StripeElement--webkit-autofill {
       background-color: #fefde5 !important;}
-    </style>
-    <!-- /////////////////////////----------End CSS ------- ///////////////////////////// -->
-
-
+</style>
 <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
@@ -116,7 +112,7 @@
                     <div class="card-body">
                         <h3 class="card-title fs-22 pb-3">Billing Details</h3>
                         <div class="divider"><span></span></div>
- 
+
 
     <div class="input-box col-lg-6">
         <label class="label-text">First Name</label>
@@ -145,9 +141,9 @@
             <input id="phone" class="form-control form--control" type="tel" name="phone" value="{{ Auth::user()->phone }}">
         </div>
     </div><!-- end input-box -->
-    
-    
-        
+
+
+
 
                     </div><!-- end card-body -->
                 </div><!-- end card -->
@@ -164,11 +160,11 @@
         @csrf
         <div class="form-row">
             <label for="card-element"> Credit or Debit Cart</label>
-        
-            <input type="hidden" name="name" value="{{ $data['name'] }}">
-            <input type="hidden" name="email" value="{{ $data['email'] }}">
-            <input type="hidden" name="phone" value="{{ $data['phone'] }}">
-            <input type="hidden" name="address" value="{{ $data['address'] }}">
+
+            <input type="hidden" name="name" value="{{ $carts['name'] }}">
+            <input type="hidden" name="email" value="{{ $carts['email'] }}">
+            <input type="hidden" name="phone" value="{{ $carts['phone'] }}">
+            <input type="hidden" name="address" value="{{ $carts['address'] }}">
 
 
             <div id="card-element">
@@ -187,7 +183,7 @@
             </div>
 
         </div>
-         
+
 
 
     </div><!-- end card-body -->
@@ -199,9 +195,9 @@
                         <h3 class="card-title fs-22 pb-3">Order Details</h3>
                         <div class="divider"><span></span></div>
                         <div class="order-details-lists">
-         
-      @foreach ($carts as $item) 
-       
+
+      @foreach ($carts as $item)
+
       <input type="hidden" name="sulg[]" value="{{ $item->options->slug }}">
       <input type="hidden" name="course_id[]" value="{{ $item->id }}">
       <input type="hidden" name="course_title[]" value="{{ $item->name }}">
@@ -219,8 +215,8 @@
             <p class="text-black font-weight-semi-bold lh-18">${{ $item->price }}  </p>
         </div>
     </div><!-- end media -->
-    @endforeach     
-                         
+    @endforeach
+
 
 
                         </div><!-- end order-details-lists -->
@@ -260,17 +256,17 @@
            @else
 
            <ul class="generic-list-item generic-list-item-flash fs-15">
-            
+
             <li class="d-flex align-items-center justify-content-between font-weight-bold">
                 <span class="text-black">Total:</span>
                 <span>${{ $cartTotal }}</span>
             </li>
             <input type="hidden" name="total" value="{{ $cartTotal}}">
         </ul>
-               
-           @endif            
-                       
-                        
+
+           @endif
+
+
 
 
 
@@ -279,7 +275,7 @@
                             <p class="fs-14 lh-22 mb-2">Aduca is required by law to collect applicable transaction taxes for purchases made in certain tax jurisdictions.</p>
                             <p class="fs-14 lh-22 mb-3">By completing your purchase you agree to these <a href="#" class="text-color hover-underline">Terms of Service.</a></p>
                             <button type="submit" class="btn theme-btn w-100">Proceed <i class="la la-arrow-right icon ml-1"></i></button>
-                            
+
                         </div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
@@ -287,7 +283,7 @@
         </div><!-- end row -->
     </div><!-- end container -->
 
- 
+
 </section>
 <!-- ================================
        END CONTACT AREA
@@ -421,13 +417,13 @@ function stripeTokenHandler(token) {
 
     case 'error':
     toastr.error(" {{ Session::get('message') }} ");
-    break; 
+    break;
  }
- @endif 
+ @endif
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
- 
+
 @include('frontend.body.script')
 
 </body>
