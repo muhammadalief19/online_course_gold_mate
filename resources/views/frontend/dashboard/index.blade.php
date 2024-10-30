@@ -79,7 +79,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="student-wishlist.html">
+                                <a href="/user/wishlist">
                                     <i class="skillgro-label"></i>
                                     Wishlist
                                 </a>
