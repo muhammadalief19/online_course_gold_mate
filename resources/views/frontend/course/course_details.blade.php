@@ -107,10 +107,11 @@
                                                         <ul class="list-wrap">
                                                             @foreach ($lectures as $lect)
                                                                 <li class="course-item">
-                                                                    <a href="#" class="course-item-link">
+                                                                    <!-- Menggunakan data-video-url untuk menyimpan link YouTube dari lecture -->
+                                                                    <a href="javascript:void(0)" class="course-item-link" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ $lect->url }}">
                                                                         <span class="item-name">{{ $lect->lecture_title }}</span>
                                                                         <div class="course-item-meta">
-                                                                            <span class="item-meta duration">03:09</span>
+                                                                            <span class="item-meta duration">{{ gmdate("i:s", $lect->duration) }}</span>
                                                                         </div>
                                                                     </a>
                                                                 </li>
@@ -126,6 +127,23 @@
                                 </div>
                             </div>
 
+                            <!-- Modal untuk video YouTube -->
+                            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="videoModalLabel">Lecture Video</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ratio ratio-16x9">
+                                                <!-- Iframe YouTube untuk menampilkan video -->
+                                                <iframe id="videoFrame" src="" title="YouTube video" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
                                 <div class="courses__instructors-wrap">
                                     <div class="courses__instructors-thumb">
@@ -333,6 +351,31 @@
     <!-- courses-details-area-end -->
 
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var videoModal = document.getElementById('videoModal');
+            var videoFrame = document.getElementById('videoFrame');
+
+            // Event listener untuk menangkap ketika modal dibuka
+            videoModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var videoUrl = button.getAttribute('data-video-url');
+
+                // Mengubah URL menjadi format embed jika belum
+                if (videoUrl.includes("watch?v=")) {
+                    videoUrl = videoUrl.replace("watch?v=", "embed/");
+                }
+
+                // Set iframe src dengan URL yang benar
+                videoFrame.src = videoUrl;
+            });
+
+            // Menghentikan video ketika modal ditutup
+            videoModal.addEventListener('hidden.bs.modal', function () {
+                videoFrame.src = '';
+            });
+        });
+    </script>
 
 @endsection
 {{-- <!-- ================================
@@ -1226,5 +1269,5 @@
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
-</div><!-- end modal --> --}}
-
+</div><!-- end modal -->
+ --}}

@@ -136,10 +136,17 @@
                         </table>
                         <div class="d-flex flex-wrap align-items-center justify-content-between pt-4">
                             <td colspan="6" class="cart__actions">
-                                <form action="#" class="cart__actions-form" onsubmit="event.preventDefault(); applyCoupon();">
+
+                                @if(Session::has('coupon'))
+
+                                @else
+                                {{ json_encode(Session::get('coupon'), JSON_PRETTY_PRINT) }}
+                                
+                                <form action="#" class="cart__actions-form" id="couponField">
                                     <input type="text" id="coupon_name" placeholder="Coupon code" class="form-control form--control pl-3">
-                                    <button type="submit" class="btn theme-btn">Apply coupon</button>
+                                    <button type="submit"onclick="applyCoupon()" class="btn theme-btn">Apply coupon</button>
                                 </form>
+                                @endif
                             </td>
                         </div>
 
