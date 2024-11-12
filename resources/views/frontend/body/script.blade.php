@@ -56,53 +56,73 @@
   {{-- /// Start Load Wishlist Data // --}}
  <script type="text/javascript">
 
-    function wishlist(){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: "/get-wishlist-course/",
+function wishlist() {
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: "/get-wishlist-course/",
+        success: function(response) {
+            $('#wishQty').text(response.wishQty);
+            var rows = "";
 
-            success:function(response){
-
-                $('#wishQty').text(response.wishQty);
-
-                var rows = ""
-                $.each(response.wishlist, function(key, value){
-
-            rows += `
-                    <div class="col-lg-4 responsive-column-half">
-            <div class="card card-item">
-                <div class="card-image">
-                    <a href="/course/details/${value.course.id}/${value.course.course_name_slug}" class="d-block">
-                        <img class="card-img-top" src="/${value.course.course_image}" alt="Card image cap">
-                    </a>
-
-                </div><!-- end card-image -->
-
-                <div class="card-body">
-                    <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">${value.course.label}</h6>
-                    <h5 class="card-title"><a href="/course/details/${value.course.id}/${value.course.course_name_slug}">${value.course.course_name}</a></h5>
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        ${value.course.discount_price == null
-                        ?`<p class="card-price text-black font-weight-bold">$${value.course.selling_price}</p>`
-                        :`<p class="card-price text-black font-weight-bold">$${value.course.discount_price} <span class="before-price font-weight-medium">$${value.course.selling_price}</span></p>`
-                        }
-
-                        <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="la la-heart"></i></div>
+            $.each(response.wishlist, function(key, value) {
+                rows += `
+                    <div class="col-xl-4 col-md-6">
+                        <div class="courses__item courses__item-two shine__animate-item">
+                            <div class="courses__item-thumb courses__item-thumb-two">
+                                <a href="/course/details/${value.course.id}/${value.course.course_name_slug}" class="shine__animate-link">
+                                    <img src="/${value.course.course_image}" alt="Course image">
+                                </a>
+                            </div>
+                            <div class="courses__item-content courses__item-content-two">
+                                <ul class="courses__item-meta list-wrap">
+                                    <li class="courses__item-tag">
+                                        <a href="course.html">${value.course.label}</a>
+                                    </li>
+                                    <li class="price">
+                                        ${value.course.discount_price == null ?
+                                            `<del>$${value.course.selling_price}</del>` :
+                                            `<del>$${value.course.selling_price}</del> $${value.course.discount_price}`}
+                                    </li>
+                                </ul>
+                                <h5 class="title">
+                                    <a href="/course/details/${value.course.id}/${value.course.course_name_slug}">
+                                        ${value.course.course_name}
+                                    </a>
+                                </h5>
+                                <div class="courses__item-content-bottom">
+                                    <div class="author-two">
+                                        <a href="instructor-details.html">
+                                            <img src="assets/img/courses/course_author002.png" alt="Author"> ${value.course.user_name}
+                                        </a>
+                                    </div>
+                                    <div class="avg-rating">
+                                        <i class="fas fa-star"></i> (4.5 Reviews)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="courses__item-bottom-two">
+                                <ul class="list-wrap">
+                                    <li><i class="flaticon-book"></i>${value.course.lectures}</li>
+                                    <li><i class="flaticon-clock"></i>${value.course.duration} hours</li>
+                                    <li><i class="flaticon-mortarboard"></i>${value.course.students}</li>
+                                </ul>
+                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id="${value.id}" onclick="wishlistRemove(this.id)">
+                                    <i class="la la-heart"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-             `
-                });
-               $('#wishlist').html(rows);
+                `;
+            });
 
-            }
-        })
-    }
-    wishlist();
+            $('#wishlist').html(rows);
+        }
+    });
+}
+
+wishlist();
+
 
 
     /// WishList Remove Start  //

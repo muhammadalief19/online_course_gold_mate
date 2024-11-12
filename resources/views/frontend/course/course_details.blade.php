@@ -127,23 +127,6 @@
                                 </div>
                             </div>
 
-                            <!-- Modal untuk video YouTube -->
-                            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="videoModalLabel">Lecture Video</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="ratio ratio-16x9">
-                                                <!-- Iframe YouTube untuk menampilkan video -->
-                                                <iframe id="videoFrame" src="" title="YouTube video" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
                                 <div class="courses__instructors-wrap">
                                     <div class="courses__instructors-thumb">
@@ -351,31 +334,6 @@
     <!-- courses-details-area-end -->
 
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var videoModal = document.getElementById('videoModal');
-            var videoFrame = document.getElementById('videoFrame');
-
-            // Event listener untuk menangkap ketika modal dibuka
-            videoModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget;
-                var videoUrl = button.getAttribute('data-video-url');
-
-                // Mengubah URL menjadi format embed jika belum
-                if (videoUrl.includes("watch?v=")) {
-                    videoUrl = videoUrl.replace("watch?v=", "embed/");
-                }
-
-                // Set iframe src dengan URL yang benar
-                videoFrame.src = videoUrl;
-            });
-
-            // Menghentikan video ketika modal ditutup
-            videoModal.addEventListener('hidden.bs.modal', function () {
-                videoFrame.src = '';
-            });
-        });
-    </script>
 
 @endsection
 {{-- <!-- ================================

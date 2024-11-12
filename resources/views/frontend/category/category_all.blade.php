@@ -651,7 +651,8 @@
                                     <i class="flaticon-arrow-right"></i>
                                 </a>
                             </div>
-                            <h5 class="price">$15.00</h5>
+                            <h5 class="price"><del>${{ $course->selling_price }}</del>
+                                ${{ $course->discount_price }}</h5>
                         </div>
                     </div>
                 </div>
