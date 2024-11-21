@@ -618,106 +618,99 @@
                     </div>
                 </div>
                 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
-        <div class="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
-            @foreach ($courses as $course)
-            <div class="col">
-                <div class="courses__item shine__animate-item">
-                    <div class="courses__item-thumb">
-                        <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
-                            <img src="{{ asset($course->course_image) }}" alt="img">
-                        </a>
-                    </div>
-                    <div class="courses__item-content">
-                        <ul class="courses__item-meta list-wrap">
-                            <li class="courses__item-tag">
-                                <a href="/">{{ $course['category']['category_name'] }}</a>
-                            </li>
-                            <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
-                        </ul>
-                        <h5 class="title">
-                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
-                                {{ Str::limit($course->course_name, 30) }}
-                            </a>
-                        </h5>
-                        <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
-                        <div class="wishlist-icon" data-course-id="{{ $course->id }}">
-                            <i class="fas fa-heart" style="cursor: pointer; color: {{ $course->in_wishlist ? 'red' : 'black' }};"></i>
-                        </div>
-                        <div class="courses__item-bottom">
-                            <div class="button">
-                                <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
-                                    <span class="text">Enroll Now</span>
-                                    <i class="flaticon-arrow-right"></i>
-                                </a>
+                    <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+                        <div class="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+                            @foreach ($courses as $course)
+                            <div class="col">
+                                <div class="courses__item shine__animate-item">
+                                    <div class="courses__item-thumb">
+                                        <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                            <img src="{{ asset($course->course_image) }}" alt="img">
+                                        </a>
+                                    </div>
+                                    <div class="courses__item-content">
+                                        <ul class="courses__item-meta list-wrap">
+                                            <li class="courses__item-tag">
+                                                <a href="/">{{ $course['category']['category_name'] }}</a>
+                                            </li>
+                                            <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
+                                        </ul>
+                                        <h5 class="title">
+                                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
+                                                {{ Str::limit($course->course_name, 30) }}
+                                            </a>
+                                        </h5>
+                                        <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
+                                        <div class="wishlist-icon" data-course-id="{{ $course->id }}">
+                                            <i class="fas fa-heart" style="cursor: pointer; color: {{ $course->in_wishlist ? 'red' : 'black' }};"></i>
+                                        </div>
+                                        <div class="courses__item-bottom">
+                                            <div class="button">
+                                                <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
+                                                    <span class="text">Enroll Now</span>
+                                                    <i class="flaticon-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                            <h5 class="price"><del>${{ $course->selling_price }}</del>
+                                                ${{ $course->discount_price }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="price"><del>${{ $course->selling_price }}</del>
-                                ${{ $course->discount_price }}</h5>
+                            @endforeach
                         </div>
+                        <nav class="pagination__wrap mt-30">
+                            <ul class="list-wrap">
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="courses.html">2</a></li>
+                                <li><a href="courses.html">3</a></li>
+                                <li><a href="courses.html">4</a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
-            </div>
-            @endforeach
-        </div>
-        <nav class="pagination__wrap mt-30">
-            <ul class="list-wrap">
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="courses.html">2</a></li>
-                <li><a href="courses.html">3</a></li>
-                <li><a href="courses.html">4</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    let wishlist = []; // Array to track wishlist course IDs
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+                $(document).ready(function() {
+                    let wishlist = []; // Array to track wishlist course IDs
 
-    $('.wishlist-icon').click(function() {
-        var courseId = $(this).data('course-id');
-        var heartIcon = $(this).find('i'); // Find the heart icon
+                    $('.wishlist-icon').click(function() {
+                        var courseId = $(this).data('course-id');
+                        var heartIcon = $(this).find('i'); // Find the heart icon
 
-        // Check if the course is already in the wishlist
-        if (wishlist.includes(courseId)) {
-            // If in wishlist, remove it
-            wishlist = wishlist.filter(id => id !== courseId);
-            heartIcon.css('color', 'black'); // Change heart color to black
-        } else {
-            // If not in wishlist, add it
-            wishlist.push(courseId);
-            heartIcon.css('color', 'red'); // Change heart color to red
-        }
+                        // Check if the course is already in the wishlist
+                        if (wishlist.includes(courseId)) {
+                            // If in wishlist, remove it
+                            wishlist = wishlist.filter(id => id !== courseId);
+                            heartIcon.css('color', 'black'); // Change heart color to black
+                        } else {
+                            // If not in wishlist, add it
+                            wishlist.push(courseId);
+                            heartIcon.css('color', 'red'); // Change heart color to red
+                        }
 
-        // Optional: Send AJAX request to server
-        $.ajax({
-            url: '/add-to-wishlist/' + courseId, // Your backend endpoint
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}' // Include CSRF token for security
-            },
-            success: function(response) {
-                if (response.success) {
-                    alert(response.success);
-                } else {
-                    alert(response.error);
-                }
-            },
-            error: function() {
-                alert('An error occurred. Please try again.');
-            }
-        });
-    });
-});
-</script>
-
-
-
-
-
-
-                </div>
+                        // Optional: Send AJAX request to server
+                        $.ajax({
+                            url: '/add-to-wishlist/' + courseId, // Your backend endpoint
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}' // Include CSRF token for security
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    alert(response.success);
+                                } else {
+                                    alert(response.error);
+                                }
+                            },
+                            error: function() {
+                                alert('An error occurred. Please try again.');
+                            }
+                        });
+                    });
+                });
+                </script>
                 <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                     <div class="row courses__list-wrap row-cols-1">
                         @foreach ($courses as $course)
