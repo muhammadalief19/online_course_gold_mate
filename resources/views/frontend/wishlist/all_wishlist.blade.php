@@ -1,23 +1,14 @@
 @extends('frontend.dashboard.user_dashboard')
 @section('userdashboard')
-
-<div class="container-fluid">
-    
-    <div class="section-block mb-5"></div>
-    <div class="dashboard-heading mb-5">
-        <h3 class="fs-22 font-weight-semi-bold">My Bookmarks</h3>
+<div class="col-lg-9">
+    <div class="dashboard__content-wrap dashboard__content-wrap-two">
+        <div class="dashboard__content-title">
+            <h4 class="title">Wishlist</h4>
+        </div>
+        <div class="row" id="wishlist">
+        </div>
     </div>
-    <div class="row" id="wishlist">
-       
-       
-       
-
-
-        
-    </div><!-- end row -->
-    
-  
-</div><!-- end container-fluid -->
+</div>
 
 
 

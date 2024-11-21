@@ -1,5 +1,5 @@
-@include('frontend.mycourse.body.header')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+{{-- @include('frontend.mycourse.body.header')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <body>
 
 <!-- start cssload-loader -->
@@ -96,9 +96,6 @@ END HEADER AREA
 
 
 
-
-
-
 <!--======================================
 START COURSE-DASHBOARD
 ======================================-->
@@ -108,33 +105,19 @@ START COURSE-DASHBOARD
 <div class="course-dashboard-column">
 
 
- 
+
     <div class="lecture-viewer-container">
         <div class="lecture-video-item">
-<iframe width="100%" height="500" id="videoContainer" src="" 
-    title="The Best Way to Learn With Videos and Online Classes I Video Notebook" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+<iframe width="100%" height="500" id="videoContainer" src=""
+    title="The Best Way to Learn With Videos and Online Classes I Video Notebook" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen></iframe>
 <div id="textLesson" class="fs-24 font-weight-semi-bold pb-2 text-center mt-4">
 <h3></h3>
-</div> 
+</div>
 
-        </div> 
+        </div>
     </div><!-- end lecture-viewer-container -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,20 +171,12 @@ START COURSE-DASHBOARD
 </div><!-- end tab-pane -->
 
 
-
-
-
-
-
-
-
-
 <div class="tab-pane fade" id="course-content" role="tabpanel" aria-labelledby="course-content-tab">
     <div class="mobile-course-menu pt-4">
         <div class="accordion generic-accordion generic--accordion" id="mobileCourseAccordionCourseExample">
-           
-            
-           
+
+
+
             <div class="card">
                 <div class="card-header" id="mobileCourseHeadingOne">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#mobileCourseCollapseOne" aria-expanded="true" aria-controls="mobileCourseCollapseOne">
@@ -291,7 +266,7 @@ START COURSE-DASHBOARD
             </div><!-- end card -->
 
 
-           
+
 
 
 
@@ -365,13 +340,13 @@ START COURSE-DASHBOARD
                     <p> {!! $course->course->description !!} </p>
 
 
-                   
-                 
+
+
                 </div><!-- end lecture-overview-stats-item -->
             </div><!-- end lecture-overview-stats-wrap -->
         </div><!-- end lecture-overview-item -->
         <div class="section-block"></div>
-       
+
     </div><!-- end lecture-overview-wrap -->
 </div><!-- end tab-pane -->
 
@@ -395,14 +370,14 @@ START COURSE-DASHBOARD
         <div class="custom-control-wrap">
             <div class="custom-control custom-radio mb-3 pl-0">
                  <input type="text" name="subject" class="form-control form--control pl-3" >
-                
+
             </div>
 
             <div class="custom-control custom-radio mb-3 pl-0">
                 <textarea class="form-control form--control pl-3" name="question" rows="4" placeholder="Write your response..."></textarea>
-                
+
             </div>
-            
+
         </div>
         <div class="btn-box text-center">
             <button type="submit" class="btn theme-btn w-100">Submit Question <i class="la la-arrow-right icon ml-1"></i></button>
@@ -414,12 +389,12 @@ START COURSE-DASHBOARD
 
 
 
-       
+
         <div class="question-overview-result-wrap">
-            
-          
-          
-          
+
+
+
+
             <div class="lecture-overview-item">
                 <div class="question-overview-result-header d-flex align-items-center justify-content-between">
                     <h3 class="fs-17 font-weight-semi-bold">{{ count($allquestion) }} questions in this course</h3>
@@ -427,19 +402,19 @@ START COURSE-DASHBOARD
                 </div>
             </div><!-- end lecture-overview-item -->
             <div class="section-block"></div>
-           
 
 
 
-           
+
+
             <div class="lecture-overview-item mt-0">
                 <div class="question-list-item">
-                   
+
     @php
         $id = Auth::user()->id;
         $question = App\Models\Question::where('user_id',$id)->where('course_id',$course->course->id)->where('parent_id',null)->orderBy('id','asc')->get();
-    @endphp               
-                   
+    @endphp
+
                     @foreach ($question as $que)
                    <div class="media media-card border-bottom border-bottom-gray py-4 px-3">
                         <div class="media-img rounded-full flex-shrink-0 avatar-sm">
@@ -455,9 +430,9 @@ START COURSE-DASHBOARD
                                         </p>
                                     </a>
                                 </div><!-- end question-meta-content -->
-                                
+
                             </div>
-                            <p class="meta-tags pt-1 fs-13"> 
+                            <p class="meta-tags pt-1 fs-13">
                                 <span>{{ Carbon\Carbon::parse($que->created_at)->diffForHumans() }}</span>
                             </p>
                         </div><!-- end media-body -->
@@ -466,7 +441,7 @@ START COURSE-DASHBOARD
 
     @php
         $replay = App\Models\Question::where('parent_id',$que->id)->get();
-    @endphp      
+    @endphp
 
                     @foreach ($replay as $rep)
                     <div class="media media-card border-bottom border-bottom-gray py-4 px-3" style="background: #e6e6e6">
@@ -483,28 +458,17 @@ START COURSE-DASHBOARD
                                         </p>
                                     </a>
                                 </div><!-- end question-meta-content -->
-                                
+
                             </div>
-                            <p class="meta-tags pt-1 fs-13"> 
+                            <p class="meta-tags pt-1 fs-13">
                                 <span>{{ Carbon\Carbon::parse($rep->created_at)->diffForHumans() }}</span>
                             </p>
                         </div><!-- end media-body -->
-                    </div><!-- end media --> 
-                        
-                    @endforeach
-                        
+                    </div><!-- end media -->
+
                     @endforeach
 
-
-
-
-
-
-
-
-
-
- 
+                    @endforeach
                 </div>
                 <div class="question-btn-box pt-35px text-center">
                     <button class="btn theme-btn theme-btn-transparent w-100" type="button">See More</button>
@@ -714,14 +678,6 @@ START COURSE-DASHBOARD
 <div class="course-dashboard-side-content">
 <div class="accordion generic-accordion generic--accordion" id="accordionCourseExample">
 
-
-
-
-
-
-
-
-
 @foreach ($section as $sec)
 
 @php
@@ -734,7 +690,7 @@ START COURSE-DASHBOARD
             <i class="la la-angle-down"></i>
             <i class="la la-angle-up"></i>
             <span class="fs-15"> {{ $sec->section_title }}</span>
-            <span class="course-duration"> 
+            <span class="course-duration">
                 <span>({{ count($lectures) }})</span>
             </span>
         </button>
@@ -742,7 +698,7 @@ START COURSE-DASHBOARD
     <div id="collapseOne{{ $sec->id }}" class="collapse " aria-labelledby="headingOne{{ $sec->id }}" data-parent="#accordionCourseExample">
         <div class="card-body p-0">
             <ul class="curriculum-sidebar-list">
-               
+
                @foreach ($lectures as $lect)
                 <li class="course-item-link active">
                     <div class="course-item-content-wrap">
@@ -752,32 +708,18 @@ START COURSE-DASHBOARD
                         </div><!-- end custom-control -->
                         <div class="course-item-content">
                             <h4 class="fs-15 lecture-title" data-video-url="{{ $lect->url }}" data-content="{!!$lect->content !!}">{{ $lect->lecture_title }}</h4>
-                          
+
                         </div><!-- end course-item-content -->
                     </div><!-- end course-item-content-wrap -->
-                </li> 
+                </li>
                @endforeach
-              
+
             </ul>
         </div><!-- end card-body -->
     </div><!-- end collapse -->
-</div><!-- end card --> 
-    
+</div><!-- end card -->
+
 @endforeach
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
 
                         </div><!-- end accordion-->
                     </div><!-- end course-dashboard-side-content -->
@@ -1026,12 +968,446 @@ START COURSE-DASHBOARD
         openFirstLecture();
     });
 </script>
-
-
-
-
-
-
 @include('frontend.mycourse.body.footer')
 </body>
-</html>
+</html> --}}
+
+
+@include('frontend.mycourse.body.header')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+@php
+    $setting = App\Models\SiteSetting::find(1);
+@endphp
+    <!-- header-area -->
+    <header>
+        <div class="tg-header__top">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="tg-header__top-info list-wrap">
+                            <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
+                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="tg-header__top-right">
+                            <div class="tg-header__phone">
+                                <img src="{{ asset('') }}assets/img/icons/phone.svg" alt="Icon">Call us:
+                                <a href="tel:00123456789">{{ $setting->phone }}</a>
+                            </div>
+                            <div class="tg-header__dashboard-btn">
+                                @auth
+                                <a href="{{ route('dashboard') }}" class="btn-dashboard">Dashboard</a>
+                                @else
+                                <a href="{{ route('login') }}" class="btn-dashboard">Login</a>
+                                @endauth
+                            </div>
+
+                        </div>
+                    </div>
+                    <style>
+                       .tg-header__dashboard-btn {
+                            text-align: right; /* Untuk memastikan tombol berada di sebelah kanan */
+                        }
+
+                        .btn-dashboard {
+                            background-color: #f5ee26; /* Sesuaikan warna sesuai desain */
+                            color: #080808;
+                            padding: 5px 15px; /* Mengurangi padding untuk memperkecil tombol */
+                            border-radius: 5px;
+                            text-decoration: none;
+                            font-weight: bold;
+                            transition: background-color 0.3s ease;
+                            font-size: 14px; /* Tambahkan ini jika ingin mengurangi ukuran teks */
+                        }
+
+                        .btn-dashboard:hover {
+                            background-color: #0066ff; /* Warna saat tombol di-hover */
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+        <div id="header-fixed-height"></div>
+        <div id="sticky-header" class="tg-header__area">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tgmenu__wrap">
+                            <nav class="tgmenu__nav">
+                                <div class="logo">
+                                    <a href="{{ url('/') }}" class="logo"><img src="{{ asset($setting->logo)}}"alt="Logo"></a>
+                                </div>
+                                <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
+                                    <ul class="navigation">
+                                        <li class=""><a href="{{ url('/') }}">Home</a></li>
+                                        <li class="menu-item-has-children"><a href="#">Courses</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="courses.html">Course grid</a></li>
+                                                <li><a href="course-details.html">Course List</a></li>
+                                            </ul>
+                                        </li>
+                                        @php
+                                    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
+                                        @endphp
+
+                                        <li class="menu-item-has-children"><a href="#">Categories</a>
+                                            <ul class="sub-menu">
+                                                @foreach ($categories as $cat)
+                                                @php
+                                                $subcategories = App\Models\SubCategory::where('category_id',$cat->id)->get();
+                                                @endphp
+                                                <li class="menu-item-has-children">
+                                                    <a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a>
+                                                    <ul class="sub-menu">
+                                                        @foreach ($subcategories as $subcat)
+                                                        <li><a href="{{ url('subcategory/'.$subcat->id.'/'.$subcat->subcategory_slug) }}">{{ $subcat->subcategory_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                        <li class=""><a href="{{ route('blog') }}">Blog</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tgmenu__search d-none d-md-block">
+                                    <form action="#" class="tgmenu__search-form">
+                                        <div class="input-grp">
+                                            <input type="text" placeholder="Search For Course . . .">
+                                            <button type="submit"><i class="flaticon-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tgmenu__action">
+                                    <ul class="list-wrap">
+                                        <li class="wishlist-icon">
+                                            <a href="cart.html" class="cart-count">
+                                                <img src="{{ asset('') }}assets/img/icons/heart.svg" class="injectable" alt="img">
+                                                <span class="wishlist-count">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="mini-cart-icon">
+                                            <a href="{{ route('mycart') }}" class="cart-count">
+                                                <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
+                                                <span class="mini-cart-count" id="cartQty">0</span>
+                                            </a>
+                                        </li>
+                                        @auth
+                                        <li class="header-btn login-btn">
+                                            <a href="{{ route('user.logout') }}">Logout</a>
+                                        </li>
+                                        @else
+                                        <li class="header-btn login-btn">
+                                            <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        @endauth
+                                        {{-- @auth
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}"> Dashboard</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
+
+                                        @else
+
+                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
+                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
+
+                                        @endauth --}}
+                                    </ul>
+                                </div>
+                                <div class="mobile-login-btn">
+                                    <a href="login.html"><img src="{{ asset('') }}assets/img/icons/user.svg" alt="" class="injectable"></a>
+                                </div>
+                                <div class="mobile-nav-toggler"><i class="tg-flaticon-menu-1"></i></div>
+                            </nav>
+                        </div>
+                        <!-- Mobile Menu  -->
+                        <div class="tgmobile__menu">
+                            <nav class="tgmobile__menu-box">
+                                <div class="close-btn"><i class="tg-flaticon-close-1"></i></div>
+                                <div class="nav-logo">
+                                    <a href="index.html"><img src="{{ asset('') }}assets/img/logo/logo.svg" alt="Logo"></a>
+                                </div>
+                                <div class="tgmobile__search">
+                                    <form action="#">
+                                        <input type="text" placeholder="Search here...">
+                                        <button><i class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <div class="tgmobile__menu-outer">
+                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                </div>
+                                <div class="social-links">
+                                    <ul class="list-wrap">
+                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="tgmobile__menu-backdrop"></div>
+                        <!-- End Mobile Menu -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-area-end -->
+
+<!-- main-area -->
+<main class="main-area fix">
+
+    <!-- lesson-area -->
+    <section class="lesson__area section-pb-120">
+        <div class="container-fluid p-0">
+            <div class="row gx-0">
+                <div class="col-xl-3 col-lg-4">
+                    <div class="lesson__content">
+                        <h2 class="title">Course Content</h2>
+                        <div class="accordion" id="accordionExample">
+                            @foreach ($sections as $section)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            {{ $section->section_title }}
+                                            <span>1/3</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <ul class="list-wrap">
+                                                @foreach ($section->lectures as $lecture)
+
+                                                <li class="course-item open-item">
+                                                    <a href="#" class="course-item-link active">
+                                                        <span class="item-name">{{ $lecture->lecture_title }}</span>
+                                                        <div class="course-item-meta">
+                                                            <span class="item-meta duration">03:03</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                @endforeach
+                                                <li class="course-item">
+                                                    <a href="#" class="course-item-link">
+                                                        <span class="item-name">Create a Simple React App</span>
+                                                        <div class="course-item-meta">
+                                                            <span class="item-meta duration">07:48</span>
+                                                            <span class="item-meta course-item-status">
+                                                                <img src="assets/img/icons/lock.svg" alt="icon">
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="course-item">
+                                                    <a href="#" class="course-item-link">
+                                                        <span class="item-name">React for the Rest of us</span>
+                                                        <div class="course-item-meta">
+                                                            <span class="item-meta duration">10:48</span>
+                                                            <span class="item-meta course-item-status">
+                                                                <img src="assets/img/icons/lock.svg" alt="icon">
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                    <div class="lesson__video-wrap">
+                        <div class="lesson__video-wrap-top">
+                            <div class="lesson__video-wrap-top-left">
+                                <a href="#"><i class="flaticon-arrow-right"></i></a>
+                                <span>The Complete Design Course: From Zero to Expert!</span>
+                            </div>
+                            <div class="lesson__video-wrap-top-right">
+                                <a href="#"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <video id="player" playsinline controls data-poster="assets/img/bg/video_bg.webp">
+                            <source src="assets/video/video.mp4" type="video/mp4" />
+                            <source src="https://html.themegenix.com/path/to/video.webm" type="video/webm" />
+                        </video>
+                        <div class="lesson__next-prev-button">
+                            <button class="prev-button" title="Create a Simple React App"><i class="flaticon-arrow-right"></i></button>
+                            <button class="next-button" title="React for the Rest of us"><i class="flaticon-arrow-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="courses__details-content lesson__details-content">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Instructors</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                                <div class="courses__overview-wrap">
+                                    <h3 class="title">Course Description</h3>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.dolor sit amet, consectetur adipiscing elited do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <h3 class="title">What you'll learn in this course?</h3>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                    <ul class="about__info-list list-wrap">
+                                        <li class="about__info-list-item">
+                                            <i class="flaticon-angle-right"></i>
+                                            <p class="content">Work with color & Gradients & Grids</p>
+                                        </li>
+                                        <li class="about__info-list-item">
+                                            <i class="flaticon-angle-right"></i>
+                                            <p class="content">All the useful shortcuts</p>
+                                        </li>
+                                        <li class="about__info-list-item">
+                                            <i class="flaticon-angle-right"></i>
+                                            <p class="content">Be able to create Flyers, Brochures, Advertisements</p>
+                                        </li>
+                                        <li class="about__info-list-item">
+                                            <i class="flaticon-angle-right"></i>
+                                            <p class="content">How to work with Images & Text</p>
+                                        </li>
+                                    </ul>
+                                    <p class="last-info">Morem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn.</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
+                                <div class="courses__instructors-wrap">
+                                    <div class="courses__instructors-thumb">
+                                        <img src="assets/img/courses/course_instructors.png" alt="img">
+                                    </div>
+                                    <div class="courses__instructors-content">
+                                        <h2 class="title">Mark Jukarberg</h2>
+                                        <span class="designation">UX Design Lead</span>
+                                        <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
+                                        <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                        <div class="instructor__social">
+                                            <ul class="list-wrap justify-content-start">
+                                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                                <div class="courses__rating-wrap">
+                                    <h2 class="title">Reviews</h2>
+                                    <div class="course-rate">
+                                        <div class="course-rate__summary">
+                                            <div class="course-rate__summary-value">4.8</div>
+                                            <div class="course-rate__summary-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="course-rate__summary-text">
+                                                12 Ratings
+                                            </div>
+                                        </div>
+                                        <div class="course-rate__details">
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    5
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:80%;" title="80%"></div>
+                                                    <span class="rating-count">2</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    4
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:50%;" title="50%"></div>
+                                                    <span class="rating-count">1</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    3
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    2
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                            <div class="course-rate__details-row">
+                                                <div class="course-rate__details-row-star">
+                                                    1
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                                <div class="course-rate__details-row-value">
+                                                    <div class="rating-gray"></div>
+                                                    <div class="rating" style="width:0%;" title="0%"></div>
+                                                    <span class="rating-count">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course-review-head">
+                                        <div class="review-author-thumb">
+                                            <img src="assets/img/courses/review-author.png" alt="img">
+                                        </div>
+                                        <div class="review-author-content">
+                                            <div class="author-name">
+                                                <h5 class="name">Jura Hujaor <span>2 Days ago</span></h5>
+                                                <div class="author-rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                </div>
+                                            </div>
+                                            <h4 class="title">The best LMS Design System</h4>
+                                            <p>Maximus ligula eleifend id nisl quis interdum. Sed malesuada tortor non turpis semper bibendum nisi porta, malesuada risus nonerviverra dolor. Vestibulum ante ipsum primis in faucibus.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- lesson-area-end -->
+
+</main>
+<!-- main-area-end -->
+
+@include('frontend.mycourse.body.footer')

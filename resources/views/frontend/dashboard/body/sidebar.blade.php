@@ -1,5 +1,5 @@
 
-        <div class="off-canvas-menu-close dashboard-menu-close icon-element icon-element-sm shadow-sm" data-toggle="tooltip" data-placement="left" title="Close menu">
+        {{-- <div class="off-canvas-menu-close dashboard-menu-close icon-element icon-element-sm shadow-sm" data-toggle="tooltip" data-placement="left" title="Close menu">
             <i class="la la-times"></i>
         </div><!-- end off-canvas-menu-close -->
         <div class="logo-box px-4">
@@ -26,4 +26,81 @@
             <li><a href="{{ route('user.logout') }}"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>  Logout</a></li>
 
 
-        </ul>
+        </ul> --}}
+
+        @php
+    $id = Auth::user()->id;
+    $profileData = App\Models\User::find($id);
+@endphp
+            <div class="col-lg-3">
+                <div class="dashboard__sidebar-wrap">
+                    <div class="dashboard__sidebar-title mb-20">
+                        <h6 class="title">Welcome, {{ $profileData->name }}</h6>
+                    </div>
+                    <nav class="dashboard__sidebar-menu">
+                        <ul class="list-wrap">
+                            <li class="active">
+                                <a href="{{ route('dashboard') }}">
+                                    <i class="fas fa-home"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.profile') }}">
+                                    <i class="skillgro-avatar"></i>
+                                    My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('my.course') }}">
+                                    <i class="skillgro-book"></i>
+                                    Enrolled Courses
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.wishlist') }}">
+                                    <i class="skillgro-label"></i>
+                                    Wishlist
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dashboard-reviews.html">
+                                    <i class="skillgro-book-2"></i>
+                                    Reviews
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dashboard-quiz.html">
+                                    <i class="skillgro-question"></i>
+                                    My Quiz Attempts
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dashboard-history.html">
+                                    <i class="skillgro-satchel"></i>
+                                    Order History
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="dashboard__sidebar-title mt-30 mb-20">
+                        <h6 class="title">User</h6>
+                    </div>
+                    <nav class="dashboard__sidebar-menu">
+                        <ul class="list-wrap">
+                            <li>
+                                <a href="{{ route('user.change.password') }}">
+                                    <i class="skillgro-settings"></i>
+                                    Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.logout') }}">
+                                    <i class="skillgro-logout"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>

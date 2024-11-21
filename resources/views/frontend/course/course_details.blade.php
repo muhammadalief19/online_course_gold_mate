@@ -107,10 +107,11 @@
                                                         <ul class="list-wrap">
                                                             @foreach ($lectures as $lect)
                                                                 <li class="course-item">
-                                                                    <a href="#" class="course-item-link">
+                                                                    <!-- Menggunakan data-video-url untuk menyimpan link YouTube dari lecture -->
+                                                                    <a href="javascript:void(0)" class="course-item-link" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ $lect->url }}">
                                                                         <span class="item-name">{{ $lect->lecture_title }}</span>
                                                                         <div class="course-item-meta">
-                                                                            <span class="item-meta duration">03:09</span>
+                                                                            <span class="item-meta duration">{{ gmdate("i:s", $lect->duration) }}</span>
                                                                         </div>
                                                                     </a>
                                                                 </li>
@@ -1226,5 +1227,5 @@
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
-</div><!-- end modal --> --}}
-
+</div><!-- end modal -->
+ --}}

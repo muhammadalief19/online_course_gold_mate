@@ -13,12 +13,15 @@ class UserController extends Controller
         return view('frontend.index');
     } // End Method
 
-    public function UserProfile(){
-
+    public function UserProfile()
+    {
         $id = Auth::user()->id;
         $profileData = User::find($id);
-        return view('frontend.dashboard.edit_profile',compact('profileData'));
-    } // End Method
+
+
+        return view('frontend.dashboard.edit_profile', compact('profileData'));
+    }
+
 
     public function UserProfileUpdate(Request $request){
         $id = Auth::user()->id;

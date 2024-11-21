@@ -305,7 +305,7 @@ class CartController extends Controller
         $carts = Cart::content();
 
         // Handle Midtrans payment
-        $order_id = Str::uuid();
+        $order_id = 'ORDER-' . time();
 
         // Tentukan nilai tukar USD ke IDR
         $usd_to_idr_rate = 15000; // Misalnya, 1 USD = 15.000 IDR
@@ -357,7 +357,7 @@ class CartController extends Controller
         ];
 
         // Authorization header menggunakan base64 encoding dari server key Midtrans
-        $auth = base64_encode(env('MIDTRANS_SERVER_KEY'));
+        $auth = base64_encode(env('MIDTRANS_SERVER_KEY') . ':');
 
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -365,8 +365,6 @@ class CartController extends Controller
         ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions', $params);
 
         $responseBody = json_decode($response->body());
-
-        // return view(dd($responseBody));
 
         // Simpan data pembayaran ke database
         $payment = new Midtrans();
@@ -417,6 +415,9 @@ class CartController extends Controller
             'email' => $sendmail->email,
         ];
         Mail::to($request->email)->send(new Orderconfirm($mailData));
+        // dd($response->json()); // atau $response->body();
+        // dd(env('MIDTRANS_SERVER_KEY'));
+
 
         // Send notification
         Notification::send($user, new OrderComplete($request->name));
@@ -424,8 +425,6 @@ class CartController extends Controller
         // Arahkan pengguna ke halaman Midtrans
         return redirect($responseBody->redirect_url);
     }
-
-
 
     public function StripeOrder(Request $request){
         if (Session::has('coupon')) {
@@ -540,13 +539,13 @@ class CartController extends Controller
     public function MarkAsRead(Request $request, $notificationId){
 
         $user = Auth::user();
-        $notification = $user->notifications()->where('id',$notificationId)->first();
+        $notification = $user()->notifications()->where('id',$notificationId)->first();
 
         if ($notification) {
             $notification->markAsRead();
 
         }
-        return response()->json(['count' => $user->unreadNotifications()->count()]);
+        return response()->json(['count' => $user()->unreadNotifications()->count()]);
 
     }// End Method
 
