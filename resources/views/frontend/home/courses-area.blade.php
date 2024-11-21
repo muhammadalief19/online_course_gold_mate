@@ -7,7 +7,7 @@
     $sumCategories = count($categories);
 @endphp
 
-<section class="courses-area section-pt-120 section-pb-90 mt-5" data-background="assets/img/bg/courses_bg.jpg"
+<section class="courses-area section-pt-120 section-pb-90 mt-5" data-background="{{ asset('') }}assets/img/bg/courses_bg.jpg"
     style="background-image: url(&quot;assets/img/bg/courses_bg.jpg&quot;);">
     <div class="container">
         <div class="section__title-wrap">
@@ -72,14 +72,12 @@
                                             <div class="courses__item-content">
                                                 <ul class="courses__item-meta list-wrap">
                                                     <li class="courses__item-tag">
-                                                        <a
-                                                            href="course.html">{{ $course->category->category_name }}</a>
+                                                        <a href="course.html">{{ $course->category->category_name }}</a>
                                                     </li>
                                                     <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)
                                                     </li>
                                                 </ul>
-                                                <h5 class="title"><a
-                                                        href="course-details.html">{{ $course->course_name }}</a></h5>
+                                                <h5 class="title"><a href="course-details.html">{{ $course->course_name }}</a></h5>
                                                 <p class="author">By <a href="#">{{ $course->user->name }}</a>
                                                 </p>
                                                 <div class="courses__item-bottom">
@@ -107,7 +105,13 @@
                         aria-labelledby="{{ $item->category_slug }}" tabindex="0">
                         <div class="swiper courses-swiper-active">
                             <div class="swiper-wrapper">
-                                @foreach ($item->course as $course)
+                                @php
+                                $catwiseCourse = App\Models\Course::where('category_id', $item->id)
+                                    ->where('status', 1)
+                                    ->orderBy('id', 'DESC')
+                                    ->get();
+                                @endphp
+                                @foreach ($catwiseCourse as $course)
                                     <div class="swiper-slide">
                                         <div class="courses__item shine__animate-item">
                                             <div class="courses__item-thumb">

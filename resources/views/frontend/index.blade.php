@@ -1,10 +1,6 @@
 @extends('frontend.master')
 @section('home')
 
-@section('title')
-Easy Learning
-@endsection
-
 <!--================================
          START HERO AREA
 =================================-->
@@ -64,12 +60,10 @@ Easy Learning
 <!--================================
          START TESTIMONIAL AREA
 =================================-->
-{{-- @include('frontend.home.testimonial-area') --}}
+{{-- include('frontend.home.testimonial-area') --}}
 <!--================================
         END TESTIMONIAL AREA
 =================================-->
-
-<div class="section-block"></div>
 
 <!--======================================
         START ABOUT AREA
@@ -78,9 +72,6 @@ Easy Learning
 <!--======================================
         END ABOUT AREA
 ======================================-->
-
-<div class="section-block"></div>
-
 <!--======================================
         START REGISTER AREA
 ======================================-->
@@ -88,8 +79,6 @@ Easy Learning
 <!--======================================
         END REGISTER AREA
 ======================================-->
-
-<div class="section-block"></div>
 
 <!-- ================================
        START CLIENT-LOGO AREA
