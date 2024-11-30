@@ -23,6 +23,7 @@ class WishListController extends Controller
            if (!$exists) {
             Wishlist::insert([
                 'user_id' => Auth::id(),
+                'in_wishlist' => true,
                 'course_id' => $course_id,
                 'created_at' => Carbon::now(),
             ]);

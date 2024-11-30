@@ -642,7 +642,8 @@
                                         </h5>
                                         <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                         <div class="wishlist-icon" data-course-id="{{ $course->id }}">
-                                            <i class="fas fa-heart" style="cursor: pointer; color: {{ $course->in_wishlist ? 'red' : 'black' }};"></i>
+                                            <!-- Check if the current course is in the wishlist -->
+                                            <i class="fas fa-heart" style="cursor: pointer; color: {{ in_array($course->id, $wishlist) ? 'red' : 'black' }};"></i>
                                         </div>
                                         <div class="courses__item-bottom">
                                             <div class="button">
