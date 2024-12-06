@@ -18,6 +18,10 @@ class Course extends Model
         return $this->belongsTo(SubCategory::class, 'subcategory_id' ,'id');
     }
 
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class, 'course_id' ,'id');
+    }
+
     public function user(){
         return $this->belongsTo(User::class, 'instructor_id' ,'id');
     }

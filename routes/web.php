@@ -58,9 +58,7 @@ Route::middleware('auth')->group(function () {
 Route::controller(WishListController::class)->group(function(){
     Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
     Route::get('/get-wishlist-course/','GetWishlistCourse');
-    Route::get('/wishlist-remove/{id}','RemoveWishlist');
-
-
+    Route::post('/wishlist-remove/{id}','RemoveWishlist')->name('remove-wishlist');
 });
 
 
@@ -393,7 +391,7 @@ Route::get('/category/{id}/{slug}', [IndexController::class, 'CategoryCourse']);
 Route::get('/subcategory/{id}/{slug}', [IndexController::class, 'SubCategoryCourse']);
 Route::get('/instructor/details/{id}', [IndexController::class, 'InstructorDetails'])->name('instructor.details');
 
-Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'AddToWishList']);
+Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'AddToWishList'])->name('add-wishlist');
 
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::post('/buy/data/store/{id}', [CartController::class, 'AddToCart']);

@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use App\Models\Course;
 use App\Models\User;
 use App\Models\Course_goal;
+use App\Models\Wishlist;
 use App\Models\CourseSection;
 use App\Models\CourseLecture;
 use Intervention\Image\Facades\Image;
@@ -45,13 +46,19 @@ class IndexController extends Controller
     public function CategoryCourse($id, $slug){
 
         $courses = Course::where('category_id',$id)->where('status','1')->get();
+        $wishlist = Wishlist::whereIn('course_id', $courses->pluck('id'))
+                        ->get()
+                        ->pluck('course_id')
+                        ->toArray(); // List of course_ids in the wishlist
+                        
         $labels = Course::select('label', DB::raw('COUNT(*) as count'))
                     ->where('status', '1')
                     ->groupBy('label')
                     ->get();
         $category = Category::where('id',$id)->first();
         $categories = Category::latest()->get();
-        return view('frontend.category.category_all',compact('courses','category','categories','labels'));
+        // return view('frontend.category.category_all',compact('courses','category','categories','labels'));
+        return view('frontend.category.category_all',compact('courses','category','categories','labels','wishlist'));
     }// End Method
 
 

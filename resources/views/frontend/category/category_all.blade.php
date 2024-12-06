@@ -641,9 +641,54 @@
                                             </a>
                                         </h5>
                                         <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
-                                        <div class="wishlist-icon" data-course-id="{{ $course->id }}">
-                                            <i class="fas fa-heart" style="cursor: pointer; color: {{ $course->in_wishlist ? 'red' : 'black' }};"></i>
-                                        </div>
+                                        <!-- Button untuk Add/Remove Wishlist -->
+                                        @if (in_array($course->id, $wishlist))
+                                        <button class="wishlist-toggle" data-course-id="{{ $course->id }}" data-action="remove">
+                                            <i class="fas fa-heart" style="cursor: pointer; color: red;"></i>
+                                        </button>
+                                        @else
+                                        <button class="wishlist-toggle" data-course-id="{{ $course->id }}" data-action="add">
+                                            <i class="fas fa-heart" style="cursor: pointer; color: black;"></i>
+                                        </button>
+                                        @endif
+                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                        <script>
+                                        $(document).on('click', '.wishlist-toggle', function () {
+                                            let button = $(this);
+                                            let courseId = button.data('course-id');
+                                            let action = button.data('action'); // "add" atau "remove"
+
+                                            let url = action === 'add'
+                                                ? `/add-to-wishlist/${courseId}` // URL untuk add
+                                                : `/wishlist-remove/${courseId}`; // URL untuk remove
+
+                                            $.ajax({
+                                                url: url,
+                                                method: 'POST',
+                                                data: {
+                                                    _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                                                },
+                                                success: function (response) {
+                                                    if (response.success) {
+                                                        // Tampilkan notifikasi
+                                                        alert(response.message);
+
+                                                        // Ubah tampilan ikon sesuai status
+                                                        if (action === 'add') {
+                                                            button.data('action', 'remove');
+                                                            button.find('i').css('color', 'red');
+                                                        } else {
+                                                            button.data('action', 'add');
+                                                            button.find('i').css('color', 'black');
+                                                        }
+                                                    }
+                                                },
+                                                error: function () {
+                                                    alert('Something went wrong. Please try again.');
+                                                }
+                                            });
+                                        });
+                                        </script>
                                         <div class="courses__item-bottom">
                                             <div class="button">
                                                 <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
@@ -669,48 +714,6 @@
                         </nav>
                     </div>
                 </div>
-
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
-                $(document).ready(function() {
-                    let wishlist = []; // Array to track wishlist course IDs
-
-                    $('.wishlist-icon').click(function() {
-                        var courseId = $(this).data('course-id');
-                        var heartIcon = $(this).find('i'); // Find the heart icon
-
-                        // Check if the course is already in the wishlist
-                        if (wishlist.includes(courseId)) {
-                            // If in wishlist, remove it
-                            wishlist = wishlist.filter(id => id !== courseId);
-                            heartIcon.css('color', 'black'); // Change heart color to black
-                        } else {
-                            // If not in wishlist, add it
-                            wishlist.push(courseId);
-                            heartIcon.css('color', 'red'); // Change heart color to red
-                        }
-
-                        // Optional: Send AJAX request to server
-                        $.ajax({
-                            url: '/add-to-wishlist/' + courseId, // Your backend endpoint
-                            method: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}' // Include CSRF token for security
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    alert(response.success);
-                                } else {
-                                    alert(response.error);
-                                }
-                            },
-                            error: function() {
-                                alert('An error occurred. Please try again.');
-                            }
-                        });
-                    });
-                });
-                </script>
                 <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                     <div class="row courses__list-wrap row-cols-1">
                         @foreach ($courses as $course)

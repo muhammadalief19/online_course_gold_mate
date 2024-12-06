@@ -7,42 +7,51 @@ use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Course;
 use App\Models\User;
-use App\Models\Wishlist; 
+use App\Models\Wishlist;
 
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class WishListController extends Controller
 {
-    public function AddToWishList(Request $request, $course_id){
-
+    public function AddToWishList($course_id)
+    {
         if (Auth::check()) {
-           $exists = Wishlist::where('user_id',Auth::id())->where('course_id',$course_id)->first();
+            // Periksa apakah wishlist sudah ada
+            $exists = Wishlist::where('user_id', Auth::id())->where('course_id', $course_id)->first();
 
-           if (!$exists) {
-            Wishlist::insert([
-                'user_id' => Auth::id(),
-                'course_id' => $course_id,
-                'created_at' => Carbon::now(),
+            if (!$exists) {
+                // Tambahkan course ke wishlist
+                Wishlist::create([
+                    'user_id' => Auth::id(),
+                    'course_id' => $course_id,
+                    'created_at' => now(),
+                ]);
+
+                // Kembalikan respon JSON berhasil
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully added to your Wishlist',
+                    'wishlist_count' => Wishlist::where('user_id', Auth::id())->count(), // Opsional: Total wishlist
+                ]);
+            }
+        } else {
+            // Kembalikan respon JSON jika user belum login
+            return response()->json([
+                'success' => false,
+                'message' => 'Please login to add items to your Wishlist',
             ]);
-            return response()->json(['success' => 'Successfully Added on your Wishlist']);
-           }else {
-            return response()->json(['error' => 'This Product Has Already on your withlist']);
-           }
-  
-        }else{
-            return response()->json(['error' => 'At First Login Your Account']);
-        } 
+        }
+    }
 
-    } // End Method 
 
 
     public function AllWishlist(){
 
         return view('frontend.wishlist.all_wishlist');
 
-    }// End Method 
+    }// End Method
 
 
     public function GetWishlistCourse(){
@@ -53,16 +62,30 @@ class WishListController extends Controller
 
         return response()->json(['wishlist' => $wishlist, 'wishQty' => $wishQty]);
 
-    }// End Method 
+    }// End Method
 
-    public function RemoveWishlist($id){
+    public function RemoveWishlist($id)
+    {
+        if (Auth::check()) {
+            // Hapus wishlist berdasarkan user dan course ID
+            $deleted = Wishlist::where('user_id', Auth::id())
+                ->where('course_id', $id)
+                ->delete();
 
-        Wishlist::where('user_id',Auth::id())->where('id',$id)->delete();
-        return response()->json(['success' => 'Successfully Course Remove']);
-
-    }// End Method 
-
-
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully removed from your Wishlist',
+                    'wishlist_count' => Wishlist::where('user_id', Auth::id())->count(), // Total wishlist setelah penghapusan
+                ]);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please login to manage your Wishlist',
+            ]);
+        }
+    }
 
 
 }
