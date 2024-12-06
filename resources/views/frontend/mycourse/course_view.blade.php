@@ -698,7 +698,6 @@ START COURSE-DASHBOARD
     <div id="collapseOne{{ $sec->id }}" class="collapse " aria-labelledby="headingOne{{ $sec->id }}" data-parent="#accordionCourseExample">
         <div class="card-body p-0">
             <ul class="curriculum-sidebar-list">
-
                @foreach ($lectures as $lect)
                 <li class="course-item-link active">
                     <div class="course-item-content-wrap">
@@ -1105,16 +1104,7 @@ START COURSE-DASHBOARD
                                             <a href="{{ route('login') }}">Login</a>
                                         </li>
                                         @endauth
-                                        {{-- @auth
-                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}"> Dashboard</a></li>
-                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
 
-                                        @else
-
-                                        <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
-                                        <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
-
-                                        @endauth --}}
                                     </ul>
                                 </div>
                                 <div class="mobile-login-btn">
@@ -1172,48 +1162,35 @@ START COURSE-DASHBOARD
                         <div class="accordion" id="accordionExample">
                             @foreach ($sections as $section)
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h2 class="accordion-header" id="heading{{ $section->id }}">
+                                        <button class="accordion-button {{ $loop->first ? '' : 'collapsed' }}" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{ $section->id }}"
+                                                aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
+                                                aria-controls="collapse{{ $section->id }}">
                                             {{ $section->section_title }}
                                             <span>1/3</span>
                                         </button>
                                     </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                    <div id="collapse{{ $section->id }}"
+                                         class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
+                                         data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <ul class="list-wrap">
                                                 @foreach ($section->lectures as $lecture)
-
-                                                <li class="course-item open-item">
-                                                    <a href="#" class="course-item-link active">
-                                                        <span class="item-name">{{ $lecture->lecture_title }}</span>
-                                                        <div class="course-item-meta">
-                                                            <span class="item-meta duration">03:03</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
+                                                    <li class="course-item {{ $loop->first ? 'open-item' : '' }}">
+                                                        <a href="#" class="course-item-link {{ $loop->first ? 'active' : '' }}">
+                                                            <span class="item-name lecture-title"
+                                                                  data-video-url="{{ $lecture->url }}"
+                                                                  data-content="{!! $lecture->content !!}">
+                                                                {{ $lecture->lecture_title }}
+                                                            </span>
+                                                            <div class="course-item-meta">
+                                                                <span class="item-meta duration">03:03</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
                                                 @endforeach
-                                                <li class="course-item">
-                                                    <a href="#" class="course-item-link">
-                                                        <span class="item-name">Create a Simple React App</span>
-                                                        <div class="course-item-meta">
-                                                            <span class="item-meta duration">07:48</span>
-                                                            <span class="item-meta course-item-status">
-                                                                <img src="assets/img/icons/lock.svg" alt="icon">
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="course-item">
-                                                    <a href="#" class="course-item-link">
-                                                        <span class="item-name">React for the Rest of us</span>
-                                                        <div class="course-item-meta">
-                                                            <span class="item-meta duration">10:48</span>
-                                                            <span class="item-meta course-item-status">
-                                                                <img src="assets/img/icons/lock.svg" alt="icon">
-                                                            </span>
-                                                        </div>
-                                                    </a>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1221,6 +1198,8 @@ START COURSE-DASHBOARD
                             @endforeach
                         </div>
                     </div>
+
+
                 </div>
                 <div class="col-xl-9 col-lg-8">
                     <div class="lesson__video-wrap">
@@ -1233,15 +1212,30 @@ START COURSE-DASHBOARD
                                 <a href="#"><i class="fas fa-times"></i></a>
                             </div>
                         </div>
-                        <video id="player" playsinline controls data-poster="assets/img/bg/video_bg.webp">
-                            <source src="assets/video/video.mp4" type="video/mp4" />
-                            <source src="https://html.themegenix.com/path/to/video.webm" type="video/webm" />
-                        </video>
+
+                        <div class="lecture-video-item">
+                            <!-- Video/iframe container -->
+                            <iframe width="100%" height="500" id="videoContainer" src=""
+                                title="The Best Way to Learn With Videos and Online Classes I Video Notebook" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+
+                            <!-- Text lesson content -->
+                            <div id="textLesson" class="fs-24 font-weight-semi-bold pb-2 text-center mt-4 d-none">
+                                <h3></h3>
+                            </div>
+                        </div>
+
                         <div class="lesson__next-prev-button">
-                            <button class="prev-button" title="Create a Simple React App"><i class="flaticon-arrow-right"></i></button>
-                            <button class="next-button" title="React for the Rest of us"><i class="flaticon-arrow-right"></i></button>
+                            <button class="prev-button" title="Create a Simple React App">
+                                <i class="flaticon-arrow-right"></i>
+                            </button>
+                            <button class="next-button" title="React for the Rest of us">
+                                <i class="flaticon-arrow-right"></i>
+                            </button>
                         </div>
                     </div>
+
                     <div class="courses__details-content lesson__details-content">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -1254,11 +1248,12 @@ START COURSE-DASHBOARD
                                 <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
                             </li>
                         </ul>
+
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
                                 <div class="courses__overview-wrap">
                                     <h3 class="title">Course Description</h3>
-                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.dolor sit amet, consectetur adipiscing elited do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p>{!! $course->course->description !!}</p>
                                     <h3 class="title">What you'll learn in this course?</h3>
                                     <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
                                     <ul class="about__info-list list-wrap">
@@ -1406,7 +1401,54 @@ START COURSE-DASHBOARD
         </div>
     </section>
     <!-- lesson-area-end -->
+    <script type="text/javascript">
+        // Function to open the first lecture when the page loads
+        // Function to open the first lecture when the page loads
+function openFirstLecture() {
+    const firstLecture = document.querySelector('.lecture-title'); // Get the first lecture element
+    if (firstLecture) {
+        firstLecture.click(); // Trigger the click event on the first lecture
+    }
+}
 
+// Function to handle lecture clicks and load content
+function viewLesson(videoUrl, vimeoUrl, textContent) {
+    const video = document.getElementById("videoContainer");
+    const text = document.getElementById("textLesson");
+
+    if (videoUrl && videoUrl.trim() !== "") {
+        video.classList.remove("d-none");
+        text.classList.add("d-none");
+        text.innerHTML = "";
+        video.setAttribute("src", videoUrl);
+    } else if (vimeoUrl && vimeoUrl.trim() !== "") {
+        video.classList.remove("d-none");
+        text.classList.add("d-none");
+        text.innerHTML = "";
+        video.setAttribute("src", vimeoUrl);
+    } else if (textContent && textContent.trim() !== "") {
+        video.classList.add("d-none");
+        text.classList.remove("d-none");
+        text.innerHTML = `<div style="font-size: 14px; text-align: left; padding: 0 40px;">${textContent}</div>`;
+    }
+}
+
+// Add a click event listener to all lecture elements
+document.querySelectorAll('.lecture-title').forEach((lectureTitle) => {
+    lectureTitle.addEventListener('click', () => {
+        const videoUrl = lectureTitle.getAttribute('data-video-url');
+        const vimeoUrl = lectureTitle.getAttribute('data-vimeo-url');
+        const textContent = lectureTitle.getAttribute('data-content');
+        viewLesson(videoUrl, vimeoUrl, textContent);
+    });
+});
+
+// Open the first lecture when the page loads
+window.addEventListener('load', () => {
+    openFirstLecture();
+});
+
+    </script>
 </main>
 <!-- main-area-end -->
 

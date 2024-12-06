@@ -600,18 +600,6 @@
             </div>
         </div><!-- end instructor-wrap -->
     </div><!-- end course-overview-card -->
-
-
-
-
-
-
-
-
-
-
-
-
                    <div class="course-overview-card pt-4">
                        <h3 class="fs-24 font-weight-semi-bold pb-40px">Student feedback</h3>
                        <div class="feedback-wrap">
