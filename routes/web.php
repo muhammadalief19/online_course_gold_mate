@@ -437,3 +437,4 @@ Route::post('/mark-notification-as-read/{notification}', [CartController::class,
 
 ///// End Route Accessable for All
 
+Route::match(['get', 'post'], '/user/question', [YourController::class, 'UserQuestion'])->name('user.question');

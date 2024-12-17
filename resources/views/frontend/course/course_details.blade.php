@@ -150,99 +150,61 @@
                             </div>
                             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
                                 <div class="courses__rating-wrap">
-                                    <h2 class="title">Reviews</h2>
-                                    <div class="course-rate">
-                                        <div class="course-rate__summary">
-                                            <div class="course-rate__summary-value">4.8</div>
-                                            <div class="course-rate__summary-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="course-rate__summary-text">
-                                                12 Ratings
-                                            </div>
-                                        </div>
-                                        <div class="course-rate__details">
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    5
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:80%;" title="80%"></div>
-                                                    <span class="rating-count">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    4
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:50%;" title="50%"></div>
-                                                    <span class="rating-count">1</span>
+                                <div class="course-overview-card pt-4">
+                                    <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
+                                    @guest
+                                        <p><b>For Add Course Review. You need to login first <a href="{{ route('login') }}">Login Here</a></b></p>
+                                    @else
+                                        <form method="post" action="{{ route('store.review') }}" class="row">
+                                            @csrf
+                                            <div class="leave-rating-wrap pb-4">
+                                                <div class="leave-rating leave--rating">
+                                                    <style>
+                                                        .leave-rating input[type="radio"] {
+                                                            display: none;
+                                                        }
+
+                                                        .leave-rating label {
+                                                            font-size: 2rem;
+                                                            cursor: pointer;
+                                                            color: #ccc;
+                                                            transition: color 0.2s ease-in-out;
+                                                        }
+
+                                                        .leave-rating label:hover,
+                                                        .leave-rating label:hover ~ label {
+                                                            color: #f5b301;
+                                                        }
+
+                                                        .leave-rating input[type="radio"]:checked ~ label {
+                                                            color: #f5b301;
+                                                        }
+                                                    </style>
+                                                    @for ($i = 5; $i >= 1; $i--)
+                                                        <input type="radio" name="rate" id="star{{ $i }}" value="{{ $i }}" />
+                                                        <label for="star{{ $i }}">&#9733;</label>
+                                                    @endfor
                                                 </div>
                                             </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    3
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
+                                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                            <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
+                                            <div class="input-box col-lg-12">
+                                                <label class="label-text">Message</label>
+                                                <div class="form-group">
+                                                    <textarea class="form-control form--control pl-3" name="comment" placeholder="Write Message" rows="5"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    2
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
-                                                </div>
+                                            <div class="btn-box col-lg-12">
+                                                <button class="btn theme-btn" type="submit">Submit Review</button>
                                             </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    1
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="course-review-head">
-                                        <div class="review-author-thumb">
-                                            <img src="assets/img/courses/review-author.png" alt="img">
-                                        </div>
-                                        <div class="review-author-content">
-                                            <div class="author-name">
-                                                <h5 class="name">Jura Hujaor <span>2 Days ago</span></h5>
-                                                <div class="author-rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <h4 class="title">The best LMS Design System</h4>
-                                            <p>Maximus ligula eleifend id nisl quis interdum. Sed malesuada tortor non turpis semper bibendum nisi porta, malesuada risus nonerviverra dolor. Vestibulum ante ipsum primis in faucibus.</p>
-                                        </div>
-                                    </div>
+                                        </form>
+                                    @endguest
                                 </div>
+                                </div>
+
+
+
+
                             </div>
                         </div>
                     </div>

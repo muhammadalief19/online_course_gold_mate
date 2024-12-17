@@ -1300,99 +1300,158 @@ START COURSE-DASHBOARD
                             </div>
                             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
                                 <div class="courses__rating-wrap">
-                                    <h2 class="title">Reviews</h2>
-                                    <div class="course-rate">
-                                        <div class="course-rate__summary">
-                                            <div class="course-rate__summary-value">4.8</div>
-                                            <div class="course-rate__summary-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <div class="course-rate__summary-text">
-                                                12 Ratings
-                                            </div>
+                                <div class="question-section">
+                                    <!-- Ask New Question Section -->
+                                    <div class="new-question-wrap d-none">
+                                        <button class="btn theme-btn theme-btn-transparent back-to-question-btn">
+                                            <i class="la la-reply mr-1"></i> Back to all questions
+                                        </button>
+                                        <div class="new-question-body pt-40px">
+                                            <h3 class="fs-20 font-weight-semi-bold">My question relates to</h3>
+                                            <form method="post" action="{{ route('user.question') }}" class="pt-4">
+                                                @csrf
+                                                <input type="hidden" name="course_id" value="{{ $course->course_id }}">
+                                                <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
+                                                <div class="form-group">
+                                                    <input type="text" name="subject" class="form-control" placeholder="Subject of your question">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="question" rows="4" placeholder="Write your question..."></textarea>
+                                                </div>
+                                                <div class="btn-box text-center">
+                                                    <button type="submit" class="btn theme-btn w-100">
+                                                        Submit Question <i class="la la-arrow-right icon ml-1"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="course-rate__details">
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    5
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:80%;" title="80%"></div>
-                                                    <span class="rating-count">2</span>
-                                                </div>
+                                    </div><!-- end new-question-wrap -->
+
+                                    <!-- Question Overview Section -->
+                                    <div class="question-overview-result-wrap">
+                                        <div class="lecture-overview-item">
+                                            <div class="question-overview-result-header d-flex align-items-center justify-content-between">
+                                                <h3 class="fs-17 font-weight-semi-bold">{{ count($allquestion) }} questions in this course</h3>
+                                                <button class="btn theme-btn theme-btn-sm theme-btn-transparent ask-new-question-btn">
+                                                    Ask a new question
+                                                </button>
                                             </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    4
-                                                    <i class="fas fa-star"></i>
+                                        </div><!-- end lecture-overview-item -->
+
+                                        <div class="section-block"></div>
+
+                                        <!-- Question List -->
+                                        <div class="question-list">
+                                            @php
+                                                $id = Auth::user()->id;
+                                                $questions = App\Models\Question::where('user_id', $id)
+                                                    ->where('course_id', $course->course_id)
+                                                    ->whereNull('parent_id')
+                                                    ->orderBy('id', 'asc')
+                                                    ->get();
+                                            @endphp
+
+                                            @foreach ($questions as $question)
+                                                <div class="question-item d-flex align-items-center py-3">
+                                                    <!-- Profile Picture -->
+                                                    <div class="profile-picture mr-3">
+                                                        <img class="rounded-circle"
+                                                             src="{{ !empty($question->user->photo) ? url('upload/user_images/'.$question->user->photo) : url('upload/no_image.jpg') }}"
+                                                             alt="User image"
+                                                             width="50"
+                                                             height="50">
+                                                    </div>
+                                                    <!-- Question Details -->
+                                                    <div class="question-content">
+                                                        <h5 class="fs-16 font-weight-bold mb-1">{{ $question->subject }}</h5>
+                                                        <p class="text-muted fs-14 mb-0">{{ $question->question }}</p>
+                                                        <span class="text-gray fs-13">{{ $question->created_at->diffForHumans() }}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:50%;" title="50%"></div>
-                                                    <span class="rating-count">1</span>
-                                                </div>
-                                            </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    3
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
-                                                </div>
-                                            </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    2
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
-                                                </div>
-                                            </div>
-                                            <div class="course-rate__details-row">
-                                                <div class="course-rate__details-row-star">
-                                                    1
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="course-rate__details-row-value">
-                                                    <div class="rating-gray"></div>
-                                                    <div class="rating" style="width:0%;" title="0%"></div>
-                                                    <span class="rating-count">0</span>
-                                                </div>
-                                            </div>
+
+                                                <!-- Replies -->
+                                                @php
+                                                    $replies = App\Models\Question::where('parent_id', $question->id)->get();
+                                                @endphp
+
+                                                @foreach ($replies as $reply)
+                                                    <div class="question-item d-flex align-items-center py-3" style="background: #f9f9f9; margin-left: 40px;">
+                                                        <!-- Profile Picture -->
+                                                        <div class="profile-picture mr-3">
+                                                            <img class="rounded-circle"
+                                                                 src="{{ !empty($reply->instructor->photo) ? url('upload/instructor_images/'.$reply->instructor->photo) : url('upload/no_image.jpg') }}"
+                                                                 alt="Instructor image"
+                                                                 width="40"
+                                                                 height="40">
+                                                        </div>
+                                                        <!-- Reply Details -->
+                                                        <div class="question-content">
+                                                            <h5 class="fs-16 font-weight-bold mb-1">{{ $reply->instructor->name }}</h5>
+                                                            <p class="text-muted fs-14 mb-0">{{ $reply->question }}</p>
+                                                            <span class="text-gray fs-13">{{ $reply->created_at->diffForHumans() }}</span>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endforeach
+                                        </div><!-- end question-list -->
+
+                                        <!-- See More Button -->
+                                        <div class="question-btn-box pt-35px text-center">
+                                            <button class="btn theme-btn theme-btn-transparent w-100" type="button">See More</button>
                                         </div>
-                                    </div>
-                                    <div class="course-review-head">
-                                        <div class="review-author-thumb">
-                                            <img src="assets/img/courses/review-author.png" alt="img">
-                                        </div>
-                                        <div class="review-author-content">
-                                            <div class="author-name">
-                                                <h5 class="name">Jura Hujaor <span>2 Days ago</span></h5>
-                                                <div class="author-rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <h4 class="title">The best LMS Design System</h4>
-                                            <p>Maximus ligula eleifend id nisl quis interdum. Sed malesuada tortor non turpis semper bibendum nisi porta, malesuada risus nonerviverra dolor. Vestibulum ante ipsum primis in faucibus.</p>
-                                        </div>
-                                    </div>
+                                    </div><!-- end question-overview-result-wrap -->
                                 </div>
+                                </div>
+
+                                <script>
+                                    document.querySelector('.ask-new-question-btn').addEventListener('click', function() {
+                                        document.querySelector('.new-question-wrap').classList.remove('d-none');
+                                        document.querySelector('.question-overview-result-wrap').classList.add('d-none');
+                                    });
+
+                                    document.querySelector('.back-to-question-btn').addEventListener('click', function() {
+                                        document.querySelector('.new-question-wrap').classList.add('d-none');
+                                        document.querySelector('.question-overview-result-wrap').classList.remove('d-none');
+                                    });
+                                </script>
+                                <style>
+                                    .question-list {
+                                        list-style: none;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
+
+                                    .question-item {
+                                        border-bottom: 1px solid #e6e6e6;
+                                        padding: 15px 0;
+                                    }
+
+                                    .profile-picture img {
+                                        width: 50px;
+                                        height: 50px;
+                                        object-fit: cover;
+                                        border-radius: 50%;
+                                    }
+
+                                    .question-content h5 {
+                                        margin: 0;
+                                        color: #333;
+                                    }
+
+                                    .question-content p {
+                                        margin: 5px 0;
+                                        color: #666;
+                                        font-size: 14px;
+                                    }
+
+                                    .question-content span {
+                                        font-size: 12px;
+                                        color: #999;
+                                    }
+
+                                </style>
+
+
                             </div>
                         </div>
                     </div>
