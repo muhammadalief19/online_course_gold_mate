@@ -340,8 +340,8 @@
                                         <li class=""><a href="{{ url('/') }}">Home</a></li>
                                         <li class="menu-item-has-children"><a href="#">Courses</a>
                                             <ul class="sub-menu">
-                                                <li><a href="courses.html">Course grid</a></li>
-                                                <li><a href="course-details.html">Course List</a></li>
+                                                <li><a href="/">Course grid</a></li>
+                                                <li><a href="/">Course List</a></li>
                                             </ul>
                                         </li>
                                         @php
@@ -372,7 +372,7 @@
                                 <div class="tgmenu__search d-none d-md-block">
                                     <form action="#" class="tgmenu__search-form">
                                         <div class="input-grp">
-                                            <input type="text" placeholder="Search For Course . . .">
+                                            <input type="text" placeholder="Search For Course . . ." name="search">
                                             <button type="submit"><i class="flaticon-search"></i></button>
                                         </div>
                                     </form>
@@ -380,7 +380,7 @@
                                 <div class="tgmenu__action">
                                     <ul class="list-wrap">
                                         <li class="wishlist-icon">
-                                            <a href="cart.html" class="cart-count">
+                                            <a href="/" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/heart.svg" class="injectable" alt="img">
                                                 <span class="wishlist-count">0</span>
                                             </a>

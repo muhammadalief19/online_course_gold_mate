@@ -428,9 +428,14 @@
                                 @foreach ($categories as $cat)
                                 <li>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $cat->id }}" id="cat_{{ $cat->id }}">
+                                        <input
+                                            class="form-check-input category-checkbox"
+                                            type="checkbox"
+                                            value="{{ $cat->id }}"
+                                            id="cat_{{ $cat->id }}"
+                                            data-url="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">
                                         <label class="form-check-label" for="cat_{{ $cat->id }}">
-                                            {{ $cat->category_name }} {{ $cat->course_count }} <!-- Assumes course_count is available in the $cat object -->
+                                            {{ $cat->category_name }} ({{ $cat->course_count }})
                                         </label>
                                     </div>
                                 </li>
@@ -440,6 +445,24 @@
                                 <a href="#">Show More +</a>
                             </div>
                         </div>
+
+                        <script>
+                            // JavaScript untuk menangani pengalihan berdasarkan checkbox
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const checkboxes = document.querySelectorAll('.category-checkbox');
+
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', function() {
+                                        if (this.checked) {
+                                            const url = this.dataset.url; // Mendapatkan URL dari atribut data-url
+                                            window.location.href = url; // Mengarahkan ke URL
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
                     </div>
                     <div class="courses-widget">
                         <h4 class="widget-title">Price</h4>
@@ -740,6 +763,20 @@
                                     </h5>
                                     <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                     <p class="info">{!! Str::limit($course->description, 50) !!}</p>
+
+                                    <!-- Button untuk Add/Remove Wishlist -->
+                                    <div class="wishlist-button">
+                                        @if (in_array($course->id, $wishlist))
+                                        <button class="wishlist-toggle" data-course-id="{{ $course->id }}" data-action="remove">
+                                            <i class="fas fa-heart" style="cursor: pointer; color: red;"></i>
+                                        </button>
+                                        @else
+                                        <button class="wishlist-toggle" data-course-id="{{ $course->id }}" data-action="add">
+                                            <i class="fas fa-heart" style="cursor: pointer; color: black;"></i>
+                                        </button>
+                                        @endif
+                                    </div>
+
                                     <div class="courses__item-bottom">
                                         <div class="button">
                                             <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
@@ -751,8 +788,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-
+                        @endforeach
                     </div>
                     <nav class="pagination__wrap mt-30">
                         <ul class="list-wrap">
@@ -763,6 +799,45 @@
                         </ul>
                     </nav>
                 </div>
+
+                <script>
+                    $(document).on('click', '.wishlist-toggle', function () {
+                        let button = $(this);
+                        let courseId = button.data('course-id');
+                        let action = button.data('action'); // "add" atau "remove"
+
+                        let url = action === 'add'
+                            ? `/add-to-wishlist/${courseId}` // URL untuk add
+                            : `/wishlist-remove/${courseId}`; // URL untuk remove
+
+                        $.ajax({
+                            url: url,
+                            method: 'POST',
+                            data: {
+                                _token: $('meta[name="csrf-token"]').attr('content') // CSRF token
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    // Tampilkan notifikasi
+                                    alert(response.message);
+
+                                    // Ubah tampilan ikon sesuai status
+                                    if (action === 'add') {
+                                        button.data('action', 'remove');
+                                        button.find('i').css('color', 'red');
+                                    } else {
+                                        button.data('action', 'add');
+                                        button.find('i').css('color', 'black');
+                                    }
+                                }
+                            },
+                            error: function () {
+                                alert('Something went wrong. Please try again.');
+                            }
+                        });
+                    });
+                </script>
+
 
             </div>
         </div>

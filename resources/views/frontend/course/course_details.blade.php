@@ -4,8 +4,6 @@
 @endsection
 @section('home')
 
-<main class="main-area fix">
-
 
     {{-- courses-details-area --}}
     <section class="courses__details-area section-py-120">
@@ -150,59 +148,164 @@
                             </div>
                             <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
                                 <div class="courses__rating-wrap">
-                                <div class="course-overview-card pt-4">
-                                    <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
-                                    @guest
-                                        <p><b>For Add Course Review. You need to login first <a href="{{ route('login') }}">Login Here</a></b></p>
-                                    @else
-                                        <form method="post" action="{{ route('store.review') }}" class="row">
-                                            @csrf
-                                            <div class="leave-rating-wrap pb-4">
-                                                <div class="leave-rating leave--rating">
-                                                    <style>
-                                                        .leave-rating input[type="radio"] {
-                                                            display: none;
+                                    <div class="course-overview-card pt-4">
+                                        <h3 class="fs-24 font-weight-semi-bold pb-40px">Student Feedback</h3>
+                                        <div class="feedback-wrap">
+                                            <div class="media media-card align-items-center">
+                                                <div class="review-rating-summary text-center">
+                                                    <span class="stats-average__count display-4 font-weight-bold text-primary">{{ round($avarage,1) }}</span>
+                                                    <div class="rating-wrap pt-1">
+                                                        <div class="review-stars d-flex justify-content-center">
+                                                            @if ($avarage == 0)
+                                                                @for ($i = 0; $i < 5; $i++)
+                                                                    <span class="la la-star-o text-muted"></span>
+                                                                @endfor
+                                                            @else
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    <span class="la {{ $i <= $avarage ? 'la-star text-warning' : 'la-star-o text-muted' }}"></span>
+                                                                @endfor
+                                                            @endif
+                                                        </div>
+                                                        <span class="rating-total d-block mt-2">({{ count($reviewcount) }}) Total Ratings</span>
+                                                        <span class="text-secondary">Overall Course Rating</span>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    @php
+                                                        $reviewcount = App\Models\Review::where('course_id', $course->id)
+                                                            ->where('status', 1)
+                                                            ->select('rating', DB::raw('count(*) as count'))
+                                                            ->groupBy('rating')
+                                                            ->orderBy('rating', 'desc')
+                                                            ->get();
+                                                        $totalReviews = $reviewcount->sum('count');
+                                                        $percentages = [];
+                                                        for ($i = 5; $i >= 1; $i--) {
+                                                            $ratingCount = $reviewcount->where('rating', $i)->first();
+                                                            $count = $ratingCount ? $ratingCount->count : 0;
+                                                            $percent = $totalReviews > 0 ? ($count / $totalReviews) * 100 : 0;
+                                                            $percentages[] = [
+                                                                'rating' => $i,
+                                                                'percent' => $percent,
+                                                                'count' => $count,
+                                                            ];
                                                         }
-
-                                                        .leave-rating label {
-                                                            font-size: 2rem;
-                                                            cursor: pointer;
-                                                            color: #ccc;
-                                                            transition: color 0.2s ease-in-out;
-                                                        }
-
-                                                        .leave-rating label:hover,
-                                                        .leave-rating label:hover ~ label {
-                                                            color: #f5b301;
-                                                        }
-
-                                                        .leave-rating input[type="radio"]:checked ~ label {
-                                                            color: #f5b301;
-                                                        }
-                                                    </style>
-                                                    @for ($i = 5; $i >= 1; $i--)
-                                                        <input type="radio" name="rate" id="star{{ $i }}" value="{{ $i }}" />
-                                                        <label for="star{{ $i }}">&#9733;</label>
-                                                    @endfor
+                                                    @endphp
+                                                    @if (count($percentages) > 0)
+                                                        @foreach ($percentages as $ratingInfo)
+                                                            <div class="review-bars d-flex align-items-center mb-2">
+                                                                <div class="review-bars__text col-2 text-right">{{ $ratingInfo['rating'] }}<span class="la la-star text-warning"></span></div>
+                                                                <div class="review-bars__fill col-8 px-2">
+                                                                    <div class="progress">
+                                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $ratingInfo['percent'] }}%;" aria-valuenow="{{ $ratingInfo['percent'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="review-bars__percent col-2 text-left">{{ number_format($ratingInfo['percent'], 2) }}%</div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <p class="text-muted">No Reviews Available</p>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="course_id" value="{{ $course->id }}">
-                                            <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
-                                            <div class="input-box col-lg-12">
-                                                <label class="label-text">Message</label>
-                                                <div class="form-group">
-                                                    <textarea class="form-control form--control pl-3" name="comment" placeholder="Write Message" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="course-overview-card pt-4">
+                                        <h3 class="fs-24 font-weight-semi-bold pb-4">Reviews</h3>
+                                        <div class="review-wrap">
+                                            @php
+                                                $reviews = App\Models\Review::where('course_id', $course->id)
+                                                    ->where('status', 1)
+                                                    ->latest()
+                                                    ->limit(5)
+                                                    ->get();
+                                            @endphp
+                                            @foreach ($reviews as $item)
+                                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4 d-flex">
+                                                <div class="media-img mr-3">
+                                                    <img class="rounded-circle" src="{{ !empty($item->user->photo) ? url('upload/user_images/' . $item->user->photo) : url('upload/no_image.jpg') }}" alt="User image" style="width: 50px; height: 50px;">
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h5 class="text-primary mb-0">{{ $item->user->name }}</h5>
+                                                        <div class="review-stars">
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                <label class="star {{ $i <= $item->rating ? 'star-filled' : 'star-empty' }}">&#9733;</label>
+                                                            @endfor
+                                                            <span class="badge badge-primary ml-2">{{ $item->rating }} / 5</span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="d-block text-secondary small mb-2">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</span>
+                                                    <p class="mb-2">{{ $item->comment }}</p>
                                                 </div>
                                             </div>
-                                            <div class="btn-box col-lg-12">
-                                                <button class="btn theme-btn" type="submit">Submit Review</button>
-                                            </div>
-                                        </form>
-                                    @endguest
-                                </div>
-                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="see-more-review-btn text-center">
+                                            <button type="button" class="btn theme-btn theme-btn-transparent">Load more reviews</button>
+                                        </div>
+                                    </div>
+                                    <div class="course-overview-card pt-4">
+                                        <h3 class="fs-24 font-weight-semi-bold pb-4">Add a Review</h3>
+                                        @guest
+                                            <p><b>To add a review, please <a href="{{ route('login') }}">log in here</a>.</b></p>
+                                        @else
+                                            <form method="post" action="{{ route('store.review') }}" class="row">
+                                                @csrf
+                                                <div class="leave-rating-wrap pb-4">
+                                                    <div class="leave-rating leave--rating">
+                                                        <style>
+                                                            .leave-rating input[type="radio"] {
+                                                                display: none;
+                                                            }
+                                                            .leave-rating label {
+                                                                font-size: 2rem;
+                                                                cursor: pointer;
+                                                                color: #ccc;
+                                                                transition: color 0.2s ease-in-out;
+                                                            }
+                                                            .leave-rating label:hover,
+                                                            .leave-rating label:hover ~ label {
+                                                                color: #f5b301;
+                                                            }
+                                                            .leave-rating input[type="radio"]:checked ~ label {
+                                                                color: #f5b301;
+                                                            }
+                                                            .star {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: default;
+    }
 
+    .star.star-filled {
+        color: #f5b301; /* Warna emas untuk bintang yang terisi */
+    }
 
+    .star.star-empty {
+        color: #ccc; /* Warna abu-abu untuk bintang kosong */
+    }`
+                                                        </style>
+                                                        @for ($i = 5; $i >= 1; $i--)
+                                                            <input type="radio" name="rate" id="star{{ $i }}" value="{{ $i }}" />
+                                                            <label for="star{{ $i }}">&#9733;</label>
+                                                        @endfor
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                                <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
+                                                <div class="input-box col-lg-12">
+                                                    <label class="label-text">Message</label>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control form--control pl-3" name="comment" placeholder="Write your review here..." rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="btn-box col-lg-12">
+                                                    <button class="btn theme-btn" type="submit">Submit Review</button>
+                                                </div>
+                                            </form>
+                                        @endguest
+                                    </div>
+                                </div>
 
 
                             </div>
@@ -211,10 +314,67 @@
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="courses__details-sidebar">
-                        <div class="courses__details-video">
-                            <img src="{{asset('') }}{{$course->course_image}}" alt="img">
-                            <a href="https://www.youtube.com/watch?v=YwrHGratByU" class="popup-video"><i class="fas fa-play"></i></a>
+                        <div class="courses__details-video position-relative">
+                            <img src="{{ asset($course->course_image) }}" alt="img" class="w-100 rounded">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#previewModal" class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </a>
                         </div>
+                        <!-- Modal -->
+                        <div class="modal fade modal-container" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom-gray">
+                                        <div class="pr-2">
+                                            <p class="pb-2 font-weight-semi-bold">Course Preview</p>
+                                            <h5 class="modal-title fs-19 font-weight-semi-bold lh-24" id="previewModalTitle">{{ $course->course_name }}</h5>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="la la-times"></span>
+                                        </button>
+                                    </div>
+                                    <!-- end modal-header -->
+                                    <div class="modal-body">
+                                        <video controls crossorigin playsinline poster="{{ asset($course->course_image) }}" id="player" class="w-100">
+                                            <source src="{{ asset($course->video) }}" type="video/mp4" />
+                                        </video>
+                                    </div>
+                                    <!-- end modal-body -->
+                                </div>
+                                <!-- end modal-content -->
+                            </div>
+                            <!-- end modal-dialog -->
+                        </div>
+                        <!-- end modal -->
+
+                        <style>
+                            .courses__details-video {
+                                position: relative;
+                            }
+
+                            .courses__details-video .play-icon {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                font-size: 2.5rem; /* Ukuran ikon */
+                                color: white; /* Warna ikon */
+                                background-color: rgba(0, 0, 0, 0.6); /* Latar belakang semi-transparan */
+                                border-radius: 50%; /* Membuat latar belakang bulat */
+                                padding: 15px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                transition: background-color 0.3s ease;
+                            }
+
+                            .courses__details-video .play-icon:hover {
+                                background-color: rgba(0, 0, 0, 0.8); /* Warna saat hover */
+                                color: #fff;
+                            }
+                        </style>
+
+
                         <div class="courses__cost-wrap">
                             <span>This Course Fee:</span>
                             <h2 class="title">${{ $course->discount_price }}.00 <del> ${{ $course->selling_price }}.00</del></h2>
@@ -295,7 +455,6 @@
     </section>
     <!-- courses-details-area-end -->
 
-    </main>
 
 @endsection
 {{-- <!-- ================================
@@ -742,20 +901,6 @@
                            <button type="button" class="btn theme-btn theme-btn-transparent">Load more reviews</button>
                        </div>
                    </div><!-- end course-overview-card -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                @guest
 <p><b> For Add Course Review. You need to login first <a href="{{ route('login') }}"> Login Here</a> </b> </p>
                @else

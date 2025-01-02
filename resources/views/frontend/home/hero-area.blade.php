@@ -16,7 +16,7 @@
                                 <br>Scholarship <b>with</b> GoldMate
                             <p data-aos="fade-right" data-aos-delay="600">GoldMate is ready to help make your dreams come true. Get the best guide for a brilliant future!</p>
                             <div class="banner__btn-wrap" data-aos="fade-right" data-aos-delay="800">
-                                <a href="/kls" class="btn arrow-btn">Register Now <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                <a href="{{ route('register') }}"class="btn arrow-btn">Register Now <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
                             </div>
                         </div>
                     </div>

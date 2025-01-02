@@ -64,19 +64,19 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="dashboard-reviews.html">
+                                <a href="#">
                                     <i class="skillgro-book-2"></i>
                                     Reviews
                                 </a>
                             </li>
                             <li>
-                                <a href="dashboard-quiz.html">
+                                <a href="#">
                                     <i class="skillgro-question"></i>
                                     My Quiz Attempts
                                 </a>
                             </li>
                             <li>
-                                <a href="dashboard-history.html">
+                                <a href="#">
                                     <i class="skillgro-satchel"></i>
                                     Order History
                                 </a>

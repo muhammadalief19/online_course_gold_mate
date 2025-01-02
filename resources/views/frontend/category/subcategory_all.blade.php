@@ -431,9 +431,14 @@
                                 @foreach ($categories as $cat)
                                 <li>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $cat->id }}" id="cat_{{ $cat->id }}">
+                                        <input
+                                            class="form-check-input category-checkbox"
+                                            type="checkbox"
+                                            value="{{ $cat->id }}"
+                                            id="cat_{{ $cat->id }}"
+                                            data-url="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">
                                         <label class="form-check-label" for="cat_{{ $cat->id }}">
-                                            {{ $cat->category_name }} ({{ $cat->course_count }}) <!-- Assumes course_count is available in the $cat object -->
+                                            {{ $cat->category_name }} ({{ $cat->course_count }})
                                         </label>
                                     </div>
                                 </li>
@@ -443,6 +448,22 @@
                                 <a href="#">Show More +</a>
                             </div>
                         </div>
+
+                        <script>
+                            // JavaScript untuk menangani pengalihan berdasarkan checkbox
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const checkboxes = document.querySelectorAll('.category-checkbox');
+
+                                checkboxes.forEach(checkbox => {
+                                    checkbox.addEventListener('change', function() {
+                                        if (this.checked) {
+                                            const url = this.dataset.url; // Mendapatkan URL dari atribut data-url
+                                            window.location.href = url; // Mengarahkan ke URL
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                     <div class="courses-widget">
                         <h4 class="widget-title">Price</h4>
