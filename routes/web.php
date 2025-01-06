@@ -57,8 +57,10 @@ Route::middleware('auth')->group(function () {
     // User Wishlist All Route
 Route::controller(WishListController::class)->group(function(){
     Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
-    Route::get('/get-wishlist-course/','GetWishlistCourse');
+    Route::get('/get-wishlist-course','GetWishlistCourse');
     Route::post('/wishlist-remove/{id}','RemoveWishlist')->name('remove-wishlist');
+    Route::get('/user/dashboard/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlist']);
+
 });
 
 

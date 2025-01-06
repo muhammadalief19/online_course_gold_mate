@@ -48,44 +48,80 @@ class WishListController extends Controller
 
 
     public function AllWishlist(){
-
+        $courses = Course::get();
+        $wishlist = Wishlist::whereIn('course_id', $courses->pluck('id'))
+        ->get()
+        ->pluck('course_id')
+        ->toArray(); // List of course_ids in the wishlist
         return view('frontend.wishlist.all_wishlist');
 
     }// End Method
 
 
-    public function GetWishlistCourse(){
+    public function GetWishlistCourse()
+{
+    // Ambil semua wishlist untuk pengguna yang sedang login
+    $wishlist = Wishlist::where('user_id', auth()->id()) // Pastikan menggunakan user_id yang sesuai
+                        ->with('course') // Ambil detail kursus
+                        ->get();
 
-        $wishlist = Wishlist::with('course')->where('user_id',Auth::id())->latest()->get();
+    // Format data untuk JSON response
+    $response = [
+        'wishQty' => $wishlist->count(),
+        'wishlist' => $wishlist->map(function ($item) {
+            return [
+                'id' => $item->course->id,
+                'course' => [
+                    'id' => $item->course->id,
+                    'course_name' => $item->course->course_name,
+                    'course_name_slug' => $item->course->course_name_slug,
+                    'course_image' => $item->course->course_image,
+                    'label' => $item->course->label,
+                    'selling_price' => $item->course->selling_price,
+                    'discount_price' => $item->course->discount_price,
+                    'lectures' => $item->course->lectures,
+                    'duration' => $item->course->duration,
+                    'students' => $item->course->students,
+                ]
+            ];
+        }),
+        'wishlistIds' => $wishlist->pluck('course_id')->toArray(), // Untuk cek status wishlist di frontend
+    ];
 
-        $wishQty = Wishlist::count();
+    return response()->json($response);
+}
 
-        return response()->json(['wishlist' => $wishlist, 'wishQty' => $wishQty]);
 
-    }// End Method
-
-    public function RemoveWishlist($id)
-    {
-        if (Auth::check()) {
-            // Hapus wishlist berdasarkan user dan course ID
-            $deleted = Wishlist::where('user_id', Auth::id())
-                ->where('course_id', $id)
-                ->delete();
-
-            if ($deleted) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Successfully removed from your Wishlist',
-                    'wishlist_count' => Wishlist::where('user_id', Auth::id())->count(), // Total wishlist setelah penghapusan
-                ]);
-            }
+public function RemoveWishlist($id)
+{
+    if (Auth::check()) {
+        // Hapus wishlist berdasarkan user dan course ID
+        $deleted = Wishlist::where('user_id', Auth::id())
+            ->where('course_id', $id)
+            ->delete();
+        
+        $count = Wishlist::where('user_id', Auth::id())->count(); // Hitung ulang wishlist
+        
+        if ($deleted) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully removed from your Wishlist',
+                'wishlist_count' => $count, // Total wishlist setelah penghapusan
+            ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Please login to manage your Wishlist',
+                'message' => 'Failed to remove item from Wishlist',
             ]);
         }
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Please login to manage your Wishlist',
+        ]);
     }
+}
+
 
 
 }

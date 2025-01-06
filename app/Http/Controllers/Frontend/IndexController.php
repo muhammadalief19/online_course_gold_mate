@@ -64,13 +64,17 @@ class IndexController extends Controller
 
     public function SubCategoryCourse($id, $slug){
         $courses = Course::where('subcategory_id',$id)->where('status','1')->get();
+        $wishlist = Wishlist::whereIn('course_id', $courses->pluck('id'))
+                        ->get()
+                        ->pluck('course_id')
+                        ->toArray(); // List of course_ids in the wishlist
         $labels = Course::select('label', DB::raw('COUNT(*) as count'))
                     ->where('status', '1')
                     ->groupBy('label')
                     ->get();
         $subcategory = SubCategory::where('id',$id)->first();
         $categories = Category::latest()->get();
-        return view('frontend.category.subcategory_all',compact('courses','subcategory','categories','labels'));
+        return view('frontend.category.subcategory_all',compact('courses','subcategory','categories','labels', 'wishlist'));
     }// End Method
 
 

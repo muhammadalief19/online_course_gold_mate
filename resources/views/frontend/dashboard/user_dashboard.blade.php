@@ -3,7 +3,8 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="author" content="TechyDevs">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>User Dashboard </title>
@@ -11,7 +12,6 @@
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <!-- Favicon -->
     <link rel="icon" sizes="16x16" href="{{ asset('frontend/images/favicon.png') }}">
 
@@ -104,7 +104,31 @@
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+<script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type','info') }}"
+    switch(type){
+       case 'info':
+       toastr.info(" {{ Session::get('message') }} ");
+       break;
+
+       case 'success':
+       toastr.success(" {{ Session::get('message') }} ");
+       break;
+
+       case 'warning':
+       toastr.warning(" {{ Session::get('message') }} ");
+       break;
+
+       case 'error':
+       toastr.error(" {{ Session::get('message') }} ");
+       break;
+    }
+    @endif
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- template js files -->
 <script src="{{ asset('frontend/js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
