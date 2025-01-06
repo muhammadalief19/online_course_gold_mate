@@ -124,9 +124,7 @@ function wishlist() {
 
             $("#wishlist").html(rows);
         },
-        error: function () {
-            alert("Failed to load wishlist.");
-        },
+        
     });
 }
 
