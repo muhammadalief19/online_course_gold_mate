@@ -35,11 +35,6 @@
             </div>
         </div>
 
-         <!-- Scroll-top -->
-    <button class="scroll__top scroll-to-target" data-target="html">
-        <i class="tg-flaticon-arrowhead-up"></i>
-    </button>
-    <!-- Scroll-top-end-->
         @include('frontend.body.header')
 
         <main class="main-area fix">

@@ -59,13 +59,15 @@
 function wishlist() {
     $.ajax({
         type: "GET",
-        dataType: 'json',
+        dataType: "json",
         url: "/get-wishlist-course/",
-        success: function(response) {
-            $('#wishQty').text(response.wishQty);
+        success: function (response) {
+            $("#wishQty").text(response.wishQty);
             var rows = "";
 
-            $.each(response.wishlist, function(key, value) {
+            $.each(response.wishlist, function (key, value) {
+                const isInWishlist = response.wishlistIds.includes(value.course.id);
+
                 rows += `
                     <div class="col-xl-4 col-md-6">
                         <div class="courses__item courses__item-two shine__animate-item">
@@ -80,9 +82,11 @@ function wishlist() {
                                         <a href="course.html">${value.course.label}</a>
                                     </li>
                                     <li class="price">
-                                        ${value.course.discount_price == null ?
-                                            `<del>$${value.course.selling_price}</del>` :
-                                            `<del>$${value.course.selling_price}</del> $${value.course.discount_price}`}
+                                        ${
+                                            value.course.discount_price == null
+                                                ? `<del>$${value.course.selling_price}</del>`
+                                                : `<del>$${value.course.selling_price}</del> $${value.course.discount_price}`
+                                        }
                                     </li>
                                 </ul>
                                 <h5 class="title">
@@ -91,15 +95,20 @@ function wishlist() {
                                     </a>
                                 </h5>
                                 <div class="courses__item-content-bottom">
-                                    <div class="author-two">
-                                        <a href="instructor-details.html">
-                                            <img src="assets/img/courses/course_author002.png" alt="Author"> ${value.course.user_name}
-                                        </a>
-                                    </div>
-                                    <div class="avg-rating">
-                                        <i class="fas fa-star"></i> (4.5 Reviews)
-                                    </div>
-                                </div>
+    <div class="author-two">
+        <!-- Button untuk Remove Wishlist -->
+        <div class="wishlist-button">
+            <button class="wishlist-remove-dashboard" data-course-id="${value.course.id}">
+    <i class="fas fa-heart" style="cursor: pointer; color: red;"></i>
+</button>
+
+        </div>
+    </div>
+    <div class="avg-rating">
+        <i class="fas fa-star"></i> (4.5 Reviews)
+    </div>
+</div>
+
                             </div>
                             <div class="courses__item-bottom-two">
                                 <ul class="list-wrap">
@@ -107,21 +116,102 @@ function wishlist() {
                                     <li><i class="flaticon-clock"></i>${value.course.duration} hours</li>
                                     <li><i class="flaticon-mortarboard"></i>${value.course.students}</li>
                                 </ul>
-                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id="${value.id}" onclick="wishlistRemove(this.id)">
-                                    <i class="la la-heart"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
                 `;
             });
 
-            $('#wishlist').html(rows);
-        }
+            $("#wishlist").html(rows);
+        },
+        
     });
 }
 
+// Menangani klik tombol remove di wishlist dashboard
+$(document).on("click", ".wishlist-remove-dashboard", function () {
+    let button = $(this);
+    let courseId = button.data("course-id"); // ID course yang akan dihapus
+
+    $.ajax({
+        type: "GET",
+        url: `/user/dashboard/wishlist-remove/${courseId}`, // Endpoint khusus dashboard
+        success: function (response) {
+            if (response.success) {
+                // Hapus elemen wishlist dari tampilan
+                button.closest(".col-xl-4").remove();
+
+                // Tampilkan notifikasi
+                Swal.fire({
+                    icon: "success",
+                    title: "Removed!",
+                    text: response.message,
+                    timer: 3000,
+                });
+
+                // Perbarui jumlah wishlist
+                $("#wishQty").text(response.wishlist_count);
+            } else {
+                // Tampilkan pesan error
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: response.message,
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Something went wrong. Please try again.",
+            });
+        },
+    });
+});
+
+
+// Handle Wishlist Button Click
+$(document).on("click", ".wishlist-toggle", function () {
+    let button = $(this);
+    let id = button.data("course-id");
+    let action = button.data("action"); // "add" or "remove"
+
+    let url = action === "add" ? `/add-to-wishlist/${courseId}` : `/wishlist-remove/${id}`;
+
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
+        },
+        success: function (response) {
+            if (response.success) {
+                // Tampilkan notifikasi
+                alert(response.message);
+
+                // Ubah tampilan ikon sesuai status
+                if (action === "add") {
+                    button.data("action", "remove");
+                    button.find("i").css("color", "red");
+                } else {
+                    button.data("action", "add");
+                    button.find("i").css("color", "black");
+                }
+
+                // Refresh wishlist quantity
+                wishlist();
+            }
+        },
+        error: function () {
+            alert("Something went wrong. Please try again.");
+        },
+    });
+});
+
+// Load Wishlist on Page Load
 wishlist();
+
 
 
 
