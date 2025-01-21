@@ -280,10 +280,17 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tg-header__top-info list-wrap">
-                            <li><img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon"> <span>jalan mars</span></li>
-                            <li><img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon"> <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
+                            <li>
+                                <img src="{{ asset('') }}assets/img/icons/map_marker.svg" alt="Icon">
+                                <span>{{ Str::limit($setting->address, 30) }}</span>
+                            </li>
+                            <li>
+                                <img src="{{ asset('') }}assets/img/icons/envelope.svg" alt="Icon">
+                                <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a>
+                            </li>
                         </ul>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="tg-header__top-right">
                             <div class="tg-header__phone">
@@ -338,12 +345,6 @@
                                 <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                     <ul class="navigation">
                                         <li class=""><a href="{{ url('/') }}">Home</a></li>
-                                        <li class="menu-item-has-children"><a href="#">Courses</a>
-                                            <ul class="sub-menu">
-                                                <li><a href="/">Course grid</a></li>
-                                                <li><a href="/">Course List</a></li>
-                                            </ul>
-                                        </li>
                                         @php
                                     $categories = App\Models\Category::orderBy('category_name','ASC')->get();
                                         @endphp
@@ -379,18 +380,75 @@
                                 </div>
                                 <div class="tgmenu__action">
                                     <ul class="list-wrap">
-                                        <li class="wishlist-icon">
-                                            <a href="/" class="cart-count">
-                                                <img src="{{ asset('') }}assets/img/icons/heart.svg" class="injectable" alt="img">
-                                                <span class="wishlist-count">0</span>
-                                            </a>
-                                        </li>
-                                        <li class="mini-cart-icon">
+                                        <li class="mini-cart-icon" onmouseover="showMiniCart()" onmouseout="hideMiniCart()">
                                             <a href="{{ route('mycart') }}" class="cart-count">
                                                 <img src="{{ asset('') }}assets/img/icons/cart.svg" class="injectable" alt="img">
                                                 <span class="mini-cart-count" id="cartQty">0</span>
                                             </a>
+                                            <div id="miniCartDropdown" class="mini-cart-dropdown" style="display: none;">
+                                                <ul id="miniCart" class="list-unstyled m-0 p-3">
+                                                    <!-- Mini cart items will be dynamically added here -->
+                                                </ul>
+                                                <div class="text-center p-2 border-top">
+                                                    <a href="{{ route('mycart') }}" class="btn btn-primary btn-sm">View Cart</a>
+                                                </div>
+                                            </div>
                                         </li>
+
+                                        <style>
+                                    .mini-cart-dropdown {
+                                            display: none;
+                                            position: absolute;
+                                            top: 100%;
+                                            right: 0;
+                                            background: #fff;
+                                            border: 1px solid #ddd;
+                                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                                            width: 300px;
+                                            z-index: 1000;
+                                            border-radius: 5px;
+                                        }
+
+                                        .mini-cart-dropdown ul {
+                                            list-style: none;
+                                            padding: 0;
+                                            margin: 0;
+                                        }
+
+                                        .mini-cart-dropdown li {
+                                            display: flex;
+                                            align-items: center;
+                                            padding: 10px;
+                                            border-bottom: 1px solid #f1f1f1;
+                                        }
+
+                                        .mini-cart-dropdown li:last-child {
+                                            border-bottom: none;
+                                        }
+
+                                        .mini-cart-dropdown .media-img {
+                                            margin-right: 10px;
+                                        }
+
+                                        .mini-cart-dropdown .media-body {
+                                            flex: 1;
+                                        }
+
+                                        .mini-cart-dropdown .remove-item {
+                                            color: #ff4d4d;
+                                            font-size: 16px;
+                                            cursor: pointer;
+                                        }
+
+                                        .mini-cart-dropdown .remove-item i {
+                                            pointer-events: none;
+                                        }
+
+                                        .mini-cart-dropdown .remove-item:hover {
+                                            color: #d9534f;
+                                        }
+                                        </style>
+
                                         @auth
                                         <li class="header-btn login-btn">
                                             <a href="{{ route('user.logout') }}">Logout</a>

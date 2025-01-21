@@ -1331,7 +1331,7 @@ START COURSE-DASHBOARD
                                     <div class="question-overview-result-wrap">
                                         <div class="lecture-overview-item">
                                             <div class="question-overview-result-header d-flex align-items-center justify-content-between">
-                                                <h3 class="fs-17 font-weight-semi-bold">{{ count($allquestion) }} questions in this course</h3>
+                                                <h3 class="fs-17 font-weight-semi-bold">questions in this course</h3>
                                                 <button class="btn theme-btn theme-btn-sm theme-btn-transparent ask-new-question-btn">
                                                     Ask a new question
                                                 </button>

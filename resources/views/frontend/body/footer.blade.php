@@ -117,10 +117,10 @@
                             <a href="index.html"><img src="{{ asset($setting->logo) }}"  alt="img"></a>
                         </div>
                         <div class="footer__content">
-                            <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
+                            <p>{{ $setting->email }}</p>
                             <ul class="list-wrap">
-                                <li>463 7th Ave, NY 10018, USA</li>
-                                <li>+123 88 9900 456</li>
+                                <li>{{ $setting->address }}</li>
+                                <li>{{ $setting->phone }}</li>
                             </ul>
                         </div>
                     </div>
@@ -130,12 +130,12 @@
                         <h4 class="footer__widget-title">Useful Links</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
-                                <li><a href="events-details.html">Our values</a></li>
-                                <li><a href="events-details.html">Our advisory board</a></li>
-                                <li><a href="events-details.html">Our partners</a></li>
-                                <li><a href="events-details.html">Become a partner</a></li>
-                                <li><a href="events-details.html">Work at Future Learn</a></li>
-                                <li><a href="events-details.html">Quizlet Plus</a></li>
+                                <li><a href="#">Our values</a></li>
+                                <li><a href="#">Our advisory board</a></li>
+                                <li><a href="#">Our partners</a></li>
+                                <li><a href="#">Become a partner</a></li>
+                                <li><a href="#">Work at Future Learn</a></li>
+                                <li><a href="#">Quizlet Plus</a></li>
                             </ul>
                         </div>
                     </div>
@@ -145,11 +145,11 @@
                         <h4 class="footer__widget-title">Our Company</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
-                                <li><a href="contact.html">Contact Us</a></li>
-                                <li><a href="instructor-details.html">Become Teacher</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="instructor-details.html">Instructor</a></li>
-                                <li><a href="events-details.html">Events</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Become Teacher</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Instructor</a></li>
+                                <li><a href="#">Events</a></li>
                             </ul>
                         </div>
                     </div>
@@ -161,23 +161,23 @@
                             <p>when an unknown printer took <br> galley type and scrambled</p>
                             <ul class="list-wrap footer__social">
                                 <li>
-                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-youtube">
+                                    <a href="{{ asset('') }}#" target="_blank" class="fab fa-youtube">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-whatsapp">
+                                    <a href="{{ asset('') }}#" target="_blank" class="fab fa-whatsapp">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-facebook">
+                                    <a href="{{ $setting->facebook }}" target="_blank" class="fab fa-facebook">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ asset('') }}https://www.facebook.com/" target="_blank" class="fab fa-twitter">
+                                    <a href="{{ $setting->twitter }}" target="_blank" class="fab fa-twitter">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-instagram">
+                                    <a href="#" target="_blank" class="fab fa-instagram">
                                     </a>
                                 </li>
                             </ul>
@@ -196,14 +196,14 @@
             <div class="row align-items-center">
                 <div class="col-md-7">
                     <div class="copy-right-text">
-                        <p>© 2010-2024 skillgro.com. All rights reserved.</p>
+                        <p>{{ $setting->copyright }}</p>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="footer__bottom-menu">
                         <ul class="list-wrap">
-                            <li><a href="contact.html">Term of Use</a></li>
-                            <li><a href="contact.html">Privacy Policy</a></li>
+                            <li><a href="#">Term of Use</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>

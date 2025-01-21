@@ -656,7 +656,19 @@
                                             <li class="courses__item-tag">
                                                 <a href="/">{{ $course['category']['category_name'] }}</a>
                                             </li>
-                                            <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
+                                            @php
+                                            $reviewcount = App\Models\Review::where('course_id',$course->id)->where('status',1)->latest()->get();
+                                            $avarage = App\Models\Review::where('course_id',$course->id)->where('status',1)->avg('rating');
+
+                                        @endphp
+                                            <li class="avg-rating">
+                                                <i class="fas fa-star"></i>
+                                                ({{ round($avarage, 1) }} Reviews)
+                                            </li>
+
+                                            @php
+                                            $enrollmentCount = App\Models\Order::where('course_id',$course->id)->count();
+                                        @endphp
                                         </ul>
                                         <h5 class="title">
                                             <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">
@@ -752,7 +764,19 @@
                                         <li class="courses__item-tag">
                                             <a href="/">{{ $course['category']['category_name'] }}</a>
                                         </li>
-                                        <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
+                                        @php
+                                        $reviewcount = App\Models\Review::where('course_id',$course->id)->where('status',1)->latest()->get();
+                                        $avarage = App\Models\Review::where('course_id',$course->id)->where('status',1)->avg('rating');
+
+                                    @endphp
+                                        <li class="avg-rating">
+                                            <i class="fas fa-star"></i>
+                                            ({{ round($avarage, 1) }} Reviews)
+                                        </li>
+
+                                        @php
+                                        $enrollmentCount = App\Models\Order::where('course_id',$course->id)->count();
+                                    @endphp
                                         <li class="price">
                                             <del>${{ $course->selling_price }}</del>
                                             ${{ $course->discount_price }}

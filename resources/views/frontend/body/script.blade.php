@@ -286,84 +286,76 @@ wishlist();
 
 
  {{-- /// Start Mini Cart  // --}}
-  <script type="text/javascript">
+ <script type="text/javascript">
+    function showMiniCart() {
+        miniCart();
+        $('#miniCartDropdown').stop(true, true).slideDown(200);
+    }
 
-    function miniCart(){
+    function hideMiniCart() {
+        $('#miniCartDropdown').stop(true, true).slideUp(200);
+    }
+
+    function miniCart() {
         $.ajax({
             type: 'GET',
             url: '/course/mini/cart',
             dataType: 'json',
-            success:function(response){
-
+            success: function(response) {
                 $('span[id="cartSubTotal"]').text(response.cartTotal);
                 $('#cartQty').text(response.cartQty);
 
-                var miniCart = ""
+                var miniCart = "";
 
-                $.each(response.carts, function(key,value){
+                $.each(response.carts, function(key, value) {
                     miniCart += `<li class="media media-card">
-                            <a href="shopping-cart.html" class="media-img">
-                                <img src="/${value.options.image}" alt="Cart image">
+                            <a href="/course/details/${value.id}/${value.options.slug}" class="media-img">
+                                <img src="/${value.options.image}" alt="Cart image" style="width: 50px; height: 50px; object-fit: cover;">
                             </a>
                             <div class="media-body">
-                                <h5><a href="/course/details/${value.id}/${value.options.slug}"> ${value.name}</a></h5>
-
-                                 <span class="d-block fs-14">$${value.price}</span>
-                                 <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="la la-times"></i> </a>
+                                <h5 class="m-0"><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
+                                <span class="d-block fs-14">$${value.price}</span>
+                                <button type="button" id="${value.rowId}" class="remove-item btn btn-sm btn-danger" onclick="miniCartRemove('${value.rowId}')">
+                                    <i class="la la-times"></i>
+                                </button>
                             </div>
-                        </li>
-                        `
+                        </li>`;
                 });
                 $('#miniCart').html(miniCart);
-
             }
-        })
+        });
     }
-    miniCart();
 
-    // Mini Cart Remove Start
-    function miniCartRemove(rowId){
+    function miniCartRemove(rowId) {
         $.ajax({
             type: 'GET',
-            url: '/minicart/course/remove/'+rowId,
+            url: '/minicart/course/remove/' + rowId,
             dataType: 'json',
-            success:function(data){
-            miniCart();
-// Start Message
-
-const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000
-            })
-            if ($.isEmptyObject(data.error)) {
-
+            success: function(data) {
+                miniCart();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                if ($.isEmptyObject(data.error)) {
                     Toast.fire({
-                    type: 'success',
-                    icon: 'success',
-                    title: data.success,
-                    })
-
-            }else{
-
-           Toast.fire({
-                    type: 'error',
-                    icon: 'error',
-                    title: data.error,
-                    })
+                        type: 'success',
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error
+                    });
                 }
-
-              // End Message
-
-
             }
-        })
+        });
     }
-
-    // End Mini Cart Remove
-
- </script>
+</script>
 {{-- /// End Mini Cart // --}}
 
 

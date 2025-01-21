@@ -9,7 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/instructor/gold_icon.jpg">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/css/tooltipster.bundle.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/animate.min.css">
     <link rel="stylesheet" href="{{ asset('') }}assets/css/fontawesome-all.min.css">
@@ -67,6 +69,9 @@
 <script src="{{ asset('') }}assets/js/wow.min.js"></script>
 <script src="{{ asset('') }}assets/js/aos.js"></script>
 <script src="{{ asset('') }}assets/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
     SVGInject(document.querySelectorAll("img.injectable"));
 </script>
@@ -75,8 +80,43 @@
 </script>
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+
+<script type="text/javscript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const tabContent = document.querySelectorAll('.tab-pane');
+    tabContent.forEach((tab) => {
+        const swiperContainer = tab.querySelector('.swiper');
+        if (swiperContainer) {
+            new Swiper(swiperContainer, {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: '.courses-button-next',
+                    prevEl: '.courses-button-prev',
+                },
+                loop: true,
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 40,
+                    },
+                },
+            });
+        }
+    });
+});
+</script>
 
 <script>
     @if(Session::has('message'))
