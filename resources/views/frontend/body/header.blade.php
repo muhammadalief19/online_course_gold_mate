@@ -396,58 +396,78 @@
                                         </li>
 
                                         <style>
-                                    .mini-cart-dropdown {
-                                            display: none;
-                                            position: absolute;
-                                            top: 100%;
-                                            right: 0;
-                                            background: #fff;
-                                            border: 1px solid #ddd;
-                                            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-                                            width: 300px;
-                                            z-index: 1000;
-                                            border-radius: 5px;
-                                        }
+                                            .mini-cart-dropdown {
+                                                display: none;
+                                                position: absolute;
+                                                top: 100%;
+                                                right: 0;
+                                                background: #fff;
+                                                border: 1px solid #ddd;
+                                                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                                                width: 300px;
+                                                z-index: 1000;
+                                                border-radius: 5px;
+                                                transition: all 0.3s ease;
+                                            }
 
-                                        .mini-cart-dropdown ul {
-                                            list-style: none;
-                                            padding: 0;
-                                            margin: 0;
-                                        }
+                                            .mini-cart-dropdown ul {
+                                                list-style: none;
+                                                padding: 0;
+                                                margin: 0;
+                                                max-height: 300px;
+                                                overflow-y: auto;
+                                            }
 
-                                        .mini-cart-dropdown li {
-                                            display: flex;
-                                            align-items: center;
-                                            padding: 10px;
-                                            border-bottom: 1px solid #f1f1f1;
-                                        }
+                                            .mini-cart-dropdown li {
+                                                display: flex;
+                                                align-items: center;
+                                                padding: 10px;
+                                                border-bottom: 1px solid #f1f1f1;
+                                                flex-wrap: wrap;
+                                            }
 
-                                        .mini-cart-dropdown li:last-child {
-                                            border-bottom: none;
-                                        }
+                                            .mini-cart-dropdown li:last-child {
+                                                border-bottom: none;
+                                            }
 
-                                        .mini-cart-dropdown .media-img {
-                                            margin-right: 10px;
-                                        }
+                                            .mini-cart-dropdown .media-img {
+                                                margin-right: 10px;
+                                            }
 
-                                        .mini-cart-dropdown .media-body {
-                                            flex: 1;
-                                        }
+                                            .mini-cart-dropdown .media-img img {
+                                                width: 50px;
+                                                height: 50px;
+                                                object-fit: cover;
+                                            }
 
-                                        .mini-cart-dropdown .remove-item {
-                                            color: #ff4d4d;
-                                            font-size: 16px;
-                                            cursor: pointer;
-                                        }
+                                            .mini-cart-dropdown .media-body {
+                                                flex: 1;
+                                                min-width: 0;
+                                            }
 
-                                        .mini-cart-dropdown .remove-item i {
-                                            pointer-events: none;
-                                        }
+                                            .mini-cart-dropdown .remove-item {
+                                                background: none;
+                                                border: none;
+                                                color: #1175f6;
+                                                font-size: 18px;
+                                                cursor: pointer;
+                                                padding: 0;
+                                                margin-left: 10px;
+                                            }
 
-                                        .mini-cart-dropdown .remove-item:hover {
-                                            color: #d9534f;
-                                        }
+                                            .mini-cart-dropdown .remove-item:hover {
+                                                color: #d9534f;
+                                            }
+
+                                            @media (max-width: 768px) {
+                                                .mini-cart-dropdown {
+                                                    width: 100%;
+                                                    left: 0;
+                                                    right: 0;
+                                                }
+                                            }
                                         </style>
+
 
                                         @auth
                                         <li class="header-btn login-btn">

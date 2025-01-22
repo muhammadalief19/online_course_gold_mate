@@ -51,8 +51,8 @@
 
                                 @if(Session::has('coupon'))
 
-                                @else
                                 {{ json_encode(Session::get('coupon'), JSON_PRETTY_PRINT) }}
+                                @else
 
                                 <form action="#" class="cart__actions-form" id="couponField">
                                     <input type="text" id="coupon_name" placeholder="Coupon code" class="form-control form--control pl-3">

@@ -124,7 +124,7 @@ function wishlist() {
 
             $("#wishlist").html(rows);
         },
-        
+
     });
 }
 
@@ -377,74 +377,89 @@ wishlist();
 
  {{-- /// Start Mini Cart  // --}}
  <script type="text/javascript">
-    function showMiniCart() {
-        miniCart();
-        $('#miniCartDropdown').stop(true, true).slideDown(200);
-    }
+ let miniCartTimeout; // Untuk menghindari glitch animasi
 
-    function hideMiniCart() {
-        $('#miniCartDropdown').stop(true, true).slideUp(200);
-    }
+function showMiniCart() {
+    clearTimeout(miniCartTimeout); // Hentikan timeout jika ada
+    $('#miniCartDropdown')
+        .stop(true, true) // Hentikan animasi sebelumnya
+        .slideDown(200); // Tampilkan dropdown
+    miniCart(); // Memuat data mini cart
+}
 
-    function miniCart() {
-        $.ajax({
-            type: 'GET',
-            url: '/course/mini/cart',
-            dataType: 'json',
-            success: function(response) {
-                $('span[id="cartSubTotal"]').text(response.cartTotal);
-                $('#cartQty').text(response.cartQty);
+function hideMiniCart() {
+    miniCartTimeout = setTimeout(() => {
+        $('#miniCartDropdown')
+            .stop(true, true) // Hentikan animasi sebelumnya
+            .slideUp(200); // Sembunyikan dropdown
+    }, 300); // Penundaan untuk memastikan user benar-benar meninggalkan area
+}
 
-                var miniCart = "";
+function miniCart() {
+    $.ajax({
+        type: 'GET',
+        url: '/course/mini/cart',
+        dataType: 'json',
+        success: function (response) {
+            $('#cartQty').text(response.cartQty);
 
-                $.each(response.carts, function(key, value) {
-                    miniCart += `<li class="media media-card">
-                            <a href="/course/details/${value.id}/${value.options.slug}" class="media-img">
-                                <img src="/${value.options.image}" alt="Cart image" style="width: 50px; height: 50px; object-fit: cover;">
-                            </a>
-                            <div class="media-body">
-                                <h5 class="m-0"><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
-                                <span class="d-block fs-14">$${value.price}</span>
-                                <button type="button" id="${value.rowId}" class="remove-item btn btn-sm btn-danger" onclick="miniCartRemove('${value.rowId}')">
-                                    <i class="la la-times"></i>
-                                </button>
-                            </div>
-                        </li>`;
+            let miniCart = '';
+            $.each(response.carts, function (key, value) {
+                miniCart += `
+                    <li class="media media-card">
+                        <a href="/course/details/${value.id}/${value.options.slug}" class="media-img">
+                            <img src="/${value.options.image}" alt="Cart image">
+                        </a>
+                        <div class="media-body">
+                            <h5 class="m-0"><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
+                            <span class="d-block fs-14">$${value.price}</span>
+                        </div>
+                        <button type="button" class="remove-item" onclick="miniCartRemove('${value.rowId}')">
+                            &times;
+                        </button>
+                    </li>`;
+            });
+            $('#miniCart').html(miniCart);
+        }
+    });
+}
+
+
+function miniCartRemove(rowId) {
+    $.ajax({
+        type: 'GET',
+        url: '/minicart/course/remove/' + rowId,
+        dataType: 'json',
+        success: function (data) {
+            miniCart();
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            if (data.success) {
+                Toast.fire({
+                    icon: 'success',
+                    title: data.success
                 });
-                $('#miniCart').html(miniCart);
-            }
-        });
-    }
-
-    function miniCartRemove(rowId) {
-        $.ajax({
-            type: 'GET',
-            url: '/minicart/course/remove/' + rowId,
-            dataType: 'json',
-            success: function(data) {
-                miniCart();
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: data.error || 'Failed to remove item'
                 });
-                if ($.isEmptyObject(data.error)) {
-                    Toast.fire({
-                        type: 'success',
-                        icon: 'success',
-                        title: data.success
-                    });
-                } else {
-                    Toast.fire({
-                        type: 'error',
-                        icon: 'error',
-                        title: data.error
-                    });
-                }
             }
-        });
-    }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to connect to server.'
+            });
+        }
+    });
+}
+
 </script>
 {{-- /// End Mini Cart // --}}
 

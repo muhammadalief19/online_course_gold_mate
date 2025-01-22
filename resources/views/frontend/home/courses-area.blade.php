@@ -71,11 +71,12 @@
                                     <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
-                                            <a href="{{ route('mycart') }}" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}'); window.location.href='/cart';">
+                                            <a href="javascript:void(0);" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}');">
                                                 <span class="text">Add to Cart</span>
                                                 <i class="flaticon-arrow-right"></i>
                                             </a>
                                         </div>
+
                                         <h5 class="price"><del>${{ $course->selling_price }}</del>
                                             ${{ $course->discount_price }}</h5>
                                     </div>
@@ -133,11 +134,12 @@
                                     <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
-                                            <a href="{{ route('mycart') }}" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}'); window.location.href='/cart';">
+                                            <a href="javascript:void(0);" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}');">
                                                 <span class="text">Add to Cart</span>
                                                 <i class="flaticon-arrow-right"></i>
                                             </a>
                                         </div>
+
                                         <h5 class="price"><del>${{ $course->selling_price }}</del>
                                             ${{ $course->discount_price }}</h5>
                                     </div>

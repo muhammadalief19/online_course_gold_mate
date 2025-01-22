@@ -5,6 +5,36 @@
 @section('home')
 
 
+    <!-- breadcrumb-area -->
+    <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="assets/img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb__content">
+                        <nav class="breadcrumb">
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="index.html">Home</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="#">{{ $course['category']['category_name'] }}</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span property="itemListElement" typeof="ListItem">{{ $course['subcategory']['subcategory_name'] }}</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb__shape-wrap">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+        </div>
+    </div>
+    <!-- breadcrumb-area-end -->
     {{-- courses-details-area --}}
     <section class="courses__details-area section-py-120">
         <div class="container">
@@ -37,7 +67,15 @@
                         <div class="courses__details-meta">
                             <ul class="list-wrap">
                                 <li class="author-two">
-                                    <img src="{{asset('')}}assets/img/courses/course_author001.png" alt="img">
+                                    <img src="{{ (!empty($course->user->photo)) ? url('upload/instructor_images/'.$course->user->photo) : url('upload/no_image.jpg') }}" alt="img" class="small-image">
+                                    <style>
+                                        .small-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+}
+
+                                    </style>
                                     By
                                     <a href="#">{{ $course['user']['name'] }}</a>
                                 </li>
