@@ -364,6 +364,7 @@
                                 <i class="fas fa-play"></i>
                             </a>
                         </div>
+
                         <!-- Modal -->
                         <div class="modal fade modal-container" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
