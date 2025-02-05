@@ -123,17 +123,11 @@
                                             <div class="courses__item-content-bottom">
                                                 <div class="author-two">
                                                     <a href="instructor-details.html">
-                                                        <img src="assets/img/courses/course_author001.png" alt="Instructor Image">{{ $item->course->user->name }}
+                                                        <img src="{{ (!empty($course->user->photo)) ? url('upload/instructor_images/'.$course->user->photo) : url('upload/no_image.jpg')}}">{{ $item->course->user->name }}
                                                     </a>
                                                 </div>
                                                 <div class="avg-rating">
                                                     <i class="fas fa-star"></i> (4.4 Reviews)
-                                                </div>
-                                            </div>
-                                            <div class="progress-item progress-item-two">
-                                                <h6 class="title">COMPLETE <span>88%</span></h6>
-                                                <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                                                    <div class="progress-bar" style="width: 88%"></div>
                                                 </div>
                                             </div>
                                         </div>

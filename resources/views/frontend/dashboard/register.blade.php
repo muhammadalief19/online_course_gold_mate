@@ -34,15 +34,15 @@
                 <div class="singUp-wrap">
                     <h2 class="title">Create Your Account</h2>
                     <p>Hey there! Ready to join the party? We just need a few details from you to get started. Let's do this!</p>
-                    
-                    <div class="account__social">
+
+                    {{-- <div class="account__social">
                         <a href="#" class="account__social-btn">
                             <img src="assets/img/icons/google.svg" alt="img"> Continue with Google
                         </a>
-                    </div>
-                    <div class="account__divider">
+                    </div> --}}
+                    {{-- <div class="account__divider">
                         <span>or</span>
-                    </div>
+                    </div> --}}
 
                     <!-- Registration Form -->
                     <form method="POST" action="{{ route('register') }}" class="account__form">

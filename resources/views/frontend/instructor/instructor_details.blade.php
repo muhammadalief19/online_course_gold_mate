@@ -1,4 +1,4 @@
-@extends('frontend.master')
+{{-- @extends('frontend.master')
 @section('home')
 
 
@@ -291,9 +291,9 @@
         </div>
         <div class="divider"><span></span></div>
         <div class="row pt-30px">
-           
-           
-            @foreach ($courses as $course) 
+
+
+            @foreach ($courses as $course)
             <div class="col-lg-4 responsive-column-half">
                 <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_1{{ $course->id }}">
                     <div class="card-image">
@@ -339,10 +339,10 @@
                             @if ($course->discount_price == NULL)
                             <p class="card-price text-black font-weight-bold">${{ $course->selling_price }}  </p>
                             @else
-                            <p class="card-price text-black font-weight-bold">${{ $course->discount_price }} <span class="before-price font-weight-medium">${{ $course->selling_price }}</span></p> 
+                            <p class="card-price text-black font-weight-bold">${{ $course->discount_price }} <span class="before-price font-weight-medium">${{ $course->selling_price }}</span></p>
                             @endif
 
-                            
+
                             <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
                         </div>
                     </div><!-- end card-body -->
@@ -350,7 +350,7 @@
             </div><!-- end col-lg-4 -->
             @endforeach
 
-          
+
         </div><!-- end row -->
         <div class="text-center pt-3">
             <nav aria-label="Page navigation example" class="pagination-box">
@@ -387,7 +387,7 @@
 
 <!-- tooltip_templates -->
 @foreach ($courseData as $item)
-     
+
 <div class="tooltip_templates">
     <div id="tooltip_content_1{{ $item->id }}">
         <div class="card card-item">
@@ -398,9 +398,9 @@
                     @if ($item->bestseller == 1)
                     <h6 class="ribbon fs-14 mr-2">Bestseller</h6>
                     @else
-                    <h6 class="ribbon fs-14 mr-2">New</h6> 
+                    <h6 class="ribbon fs-14 mr-2">New</h6>
                     @endif
-                   
+
                     <p class="text-success fs-14 font-weight-medium">Updated<span class="font-weight-bold pl-1">{{ $item->created_at->format('M d Y') }}</span></p>
                 </div>
                 <ul class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center fs-14">
@@ -410,11 +410,11 @@
                 <p class="card-text pt-1 fs-14 lh-22">{{ $item->prerequisites }}</p>
 
     @php
-       $goals = App\Models\Course_goal::where('course_id',$item->id)->orderBy('id','DESC')->get(); 
+       $goals = App\Models\Course_goal::where('course_id',$item->id)->orderBy('id','DESC')->get();
     @endphp
                 <ul class="generic-list-item fs-14 py-3">
                     @foreach ($goals as $goal)
-                    <li><i class="la la-check mr-1 text-black"></i> {{ $goal->goal_name }}</li> 
+                    <li><i class="la la-check mr-1 text-black"></i> {{ $goal->goal_name }}</li>
                     @endforeach
                 </ul>
                 <div class="d-flex justify-content-between align-items-center">
@@ -426,6 +426,275 @@
     </div>
 </div><!-- end tooltip_templates -->
 @endforeach
+
+
+@endsection --}}
+
+
+@extends('frontend.master')
+@section('home')
+
+
+        <!-- breadcrumb-area -->
+        <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-two" data-background="assets/img/bg/breadcrumb_bg.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb__content">
+                            <nav class="breadcrumb">
+                                <span property="itemListElement" typeof="ListItem">
+                                    <a href="index.html">Home</a>
+                                </span>
+                                <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                                <span property="itemListElement" typeof="ListItem">
+                                    <a href="index.html">Instructors</a>
+                                </span>
+                                <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                                <span property="itemListElement" typeof="ListItem">Robert Fox</span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb__shape-wrap">
+                <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+                <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+                <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+                <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+                <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+            </div>
+        </div>
+        <!-- breadcrumb-area-end -->
+
+               <!-- instructor-details-area -->
+               <section class="instructor__details-area section-pt-120 section-pb-90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9">
+                            <div class="instructor__details-wrap">
+                                <div class="instructor__details-info">
+                                    <div class="instructor__details-thumb">
+                                        <img src="{{ (!empty($instructor->photo)) ? url('upload/instructor_images/'.$instructor->photo) : url('upload/no_image.jpg') }}" alt="Instructor thumbnail image">
+                                    </div>
+                                    <div class="instructor__details-content">
+                                        <h2 class="title">{{ $instructor->name }}</h2>
+                                        <ul class="list-wrap">
+                                            <li><i class="far fa-envelope"></i><a href="mailto:{{ $instructor->email }}">{{ $instructor->email }}</a></li>
+                                            <li><i class="fas "></i><a href="#">Course :{{ count($courses)}}</a></li>
+                                        </ul>
+                                        <div class="instructor__details-social">
+                                            <ul class="list-wrap">
+                                                <li>
+                                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="instructor__details-biography">
+                                    <h4 class="title">Biography​</h4>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.dolor sit amet, consectetur adipiscing elited do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt utte labore et dolore magna aliquauis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                </div>
+                                <div class="instructor__details-Skill">
+                                    <h4 class="title">Skills</h4>
+                                    <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsa.</p>
+                                    <div class="instructor__progress-wrap">
+                                        <ul class="list-wrap">
+                                            <li>
+                                                <div class="progress-item">
+                                                    <h6 class="title">PHP <span>88%</span></h6>
+                                                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar" style="width: 88%"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="progress-item">
+                                                    <h6 class="title">React <span>65%</span></h6>
+                                                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar" style="width: 65%"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="progress-item">
+                                                    <h6 class="title">Java <span>55%</span></h6>
+                                                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar" style="width: 55%"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="progress-item">
+                                                    <h6 class="title">Angular <span>40%</span></h6>
+                                                    <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-bar" style="width: 40%"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="instructor__details-courses">
+                                    <div class="row align-items-center mb-30">
+                                        <div class="col-md-8">
+                                            <h2 class="main-title">My Courses</h2>
+                                            <p>when known printer took a galley of type scrambl edmake</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="instructor__details-nav">
+                                                <button class="courses-button-prev"><i class="flaticon-arrow-right"></i></button>
+                                                <button class="courses-button-next"><i class="flaticon-arrow-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper courses-swiper-active-two">
+                                        <div class="swiper-wrapper">
+                                            @foreach ($courses as $course)
+                                            <div class="swiper-slide">
+                                                <div class="courses__item shine__animate-item">
+                                                    <div class="courses__item-thumb @if ($course->bestseller == 1) bestseller @endif">
+                                                        <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                                            <div class="course-labels">
+                                                                @php
+                                                                    $amount = $course->selling_price - $course->discount_price;
+                                                                    $discount = ($amount / $course->selling_price) * 100;
+                                                                @endphp
+
+                                                                @if ($course->discount_price == NULL)
+                                                                    <span class="courses__label new-label">New</span>
+                                                                @else
+                                                                    <span class="courses__label discount-label">{{ round($discount) }}%</span>
+                                                                @endif
+
+                                                                @if ($course->bestseller == 1)
+                                                                    <span class="courses__label bestseller-label">Bestseller</span>
+                                                                @endif
+                                                            </div>
+                                                            <img src="{{ asset($course->course_image) }}" alt="{{ $course->course_name }}">
+                                                        </a>
+                                                    </div>
+
+                                                    <style>
+                                                        .courses__item-thumb {
+                                                            position: relative;
+                                                            overflow: hidden;
+                                                        }
+
+                                                        .course-labels {
+                                                            position: absolute;
+                                                            top: 10px;
+                                                            left: 10px;
+                                                            display: flex;
+                                                            gap: 5px;
+                                                        }
+
+                                                        .courses__label {
+                                                            padding: 5px 10px;
+                                                            font-size: 12px;
+                                                            font-weight: bold;
+                                                            border-radius: 3px;
+                                                            color: #fff;
+                                                        }
+
+                                                        .discount-label {
+                                                            background: red;
+                                                        }
+
+                                                        .bestseller-label {
+                                                            background: gold;
+                                                            color: black;
+                                                        }
+
+                                                        .new-label {
+                                                            background: blue;
+                                                        }
+                                                    </style>
+                                                    <div class="courses__item-content">
+                                                        <ul class="courses__item-meta list-wrap">
+                                                            <li class="courses__item-tag">
+                                                                <a href="course.html">{{ $course['category']['category_name'] }}</a>
+                                                            </li>
+                                                            @php
+                                                $reviewcount = App\Models\Review::where('course_id',$course->id)->where('status',1)->latest()->get();
+                                                $avarage = App\Models\Review::where('course_id',$course->id)->where('status',1)->avg('rating');
+
+                                            @endphp
+                                                <li class="avg-rating">
+                                                    <i class="fas fa-star"></i>
+                                                    ({{ round($avarage, 1) }} Reviews)
+                                                </li>
+
+                                                @php
+                                                $enrollmentCount = App\Models\Order::where('course_id',$course->id)->count();
+                                            @endphp
+                                                        </ul>
+                                                        <h5 class="title">
+                                                            <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a>
+                                                        </h5>
+                                                        <p class="author">By <a href="{{ route('instructor.details',$course->instructor_id) }}">{{ $course['user']['name'] }}</a></p>
+                                                        <div class="courses__item-bottom">
+                                                            <div class="button">
+                                                                <a href="javascript:void(0);" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}');">
+                                                                    <span class="text">Add to Cart</span>
+                                                                    <i class="flaticon-arrow-right"></i>
+                                                                </a>
+                                                            </div>
+
+                                                            <h5 class="price"><del>${{ $course->selling_price }}</del>
+                                                                ${{ $course->discount_price }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="instructor__sidebar">
+                                <h4 class="title">Quick Contact</h4>
+                                <p>Feel free to contact us through Twitter or Facebook if you prefer!</p>
+                                <form action="#">
+                                    <div class="form-grp">
+                                        <input type="text" placeholder="Name">
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="email" placeholder="E-mail">
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="text" placeholder="Topic">
+                                    </div>
+                                    <div class="form-grp">
+                                        <input type="number" placeholder="Phone">
+                                    </div>
+                                    <div class="form-grp">
+                                        <textarea name="message" placeholder="Type Message"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn arrow-btn">Send Message <img src="{{ asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- instructor-details-area-end -->
 
 
 @endsection

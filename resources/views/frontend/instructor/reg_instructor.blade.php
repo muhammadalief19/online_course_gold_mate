@@ -1,4 +1,4 @@
-@extends('frontend.master')
+{{-- @extends('frontend.master')
 @section('home')
 
 <!-- ================================
@@ -340,7 +340,7 @@
                 @enderror
             </div>
         </div><!-- end input-box -->
-         
+
         <div class="input-box col-lg-6">
             <label class="label-text">Email</label>
             <div class="form-group">
@@ -381,13 +381,13 @@
             <div class="form-group">
                 <input class="form-control form--control" type="password" name="password"  >
                 <span class="la la-user input-icon"></span>
-                
+
             </div>
         </div><!-- end input-box -->
-      
 
 
-    
+
+
         <div class="btn-box col-lg-12">
             <div class="custom-control custom-checkbox mb-4 fs-15">
                 <input type="checkbox" class="custom-control-input" id="agreeCheckbox" required>
@@ -413,6 +413,195 @@
 
 
 
+
+
+@endsection --}}
+
+
+@extends('frontend.master')
+@section('home')
+
+<!-- breadcrumb-area -->
+<main class="main-area fix">
+    <section class="breadcrumb__area breadcrumb__bg pattern-bg" data-background="{{ asset('') }}assets/img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb__content breadcrumb-content">
+                        <!-- Judul Section -->
+                        <div class="section-heading pb-3">
+                            <h3 class="title section__title">Become A Instructor</h3>
+                        </div>
+
+                        <!-- Breadcrumb Navigation -->
+                        <nav class="breadcrumb generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="/">Home</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+                            <span>Become A Instructor</span>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb Shapes -->
+        <div class="breadcrumb__shape-wrap">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+        </div>
+    </section>
+</main>
+<!-- breadcrumb-area-end -->
+
+<!-- features-area -->
+<section class="features__area-two section-pt-120 section-pb-90">
+    <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-8">
+                    <div class="section__title text-center mb-40">
+                        <span class="sub-title">Our Top Features</span>
+                        <h2 class="title">Achieve Your Goal With SkillGrow</h2>
+                        <p>when an unknown printer took a galley of type and scrambled make <br> specimen book has survived not only five centuries</p>
+                    </div>
+                </div>
+            </div>
+            <div class="features__item-wrap">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="features__item-two">
+                            <div class="features__content-two">
+                                <div class="content-top">
+                                    <div class="features__icon-two">
+                                        <img src="{{ asset('') }}assets/img/icons/h2_features_icon01.svg" alt="img" class="injectable">
+                                    </div>
+                                    <h2 class="title">Expert Tutors</h2>
+                                </div>
+                                <p>when an unknown printer took a galley offe type and scrambled makes.</p>
+                            </div>
+                            <div class="features__item-shape">
+                                <img src="{{ asset('') }}assets/img/others/features_item_shape.svg" alt="img" class="injectable">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="features__item-two">
+                            <div class="features__content-two">
+                                <div class="content-top">
+                                    <div class="features__icon-two">
+                                        <img src="{{ asset('') }}assets/img/icons/h2_features_icon02.svg" alt="img" class="injectable">
+                                    </div>
+                                    <h2 class="title">Effective Courses</h2>
+                                </div>
+                                <p>when an unknown printer took a galley offe type and scrambled makes.</p>
+                            </div>
+                            <div class="features__item-shape">
+                                <img src="{{ asset('') }}assets/img/others/features_item_shape.svg" alt="img" class="injectable">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="features__item-two">
+                            <div class="features__content-two">
+                                <div class="content-top">
+                                    <div class="features__icon-two">
+                                        <img src="{{ asset('') }}assets/img/icons/h2_features_icon03.svg" alt="img" class="injectable">
+                                    </div>
+                                    <h2 class="title">Earn Certificate</h2>
+                                </div>
+                                <p>when an unknown printer took a galley offe type and scrambled makes.</p>
+                            </div>
+                            <div class="features__item-shape">
+                                <img src="{{ asset('') }}assets/img/others/features_item_shape.svg" alt="img" class="injectable">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- features-area-end -->
+           <!-- singUp-area -->
+           <section class="singUp-area section-py-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-8">
+                        <div class="singUp-wrap">
+                            <h2 class="title">Create Your Account</h2>
+                            <p>Fill Up this Form to Join with Us</p>
+                            <form method="post" action="{{ route('instructor.register') }}" class="account__form">
+                                @csrf
+                                <div class="row gutter-20">
+                                    <div class="col-md-6">
+                                        <div class="form-grp">
+                                            <label for="fast-name">Name</label>
+                                            <input type="text" id="fast-name" name="name" class="@error('name') is-invalid @enderror" placeholder="Name">
+                                            @error('name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-grp">
+                                            <label for="username">Username</label>
+                                            <input type="text" id="username" name="username" class="@error('username') is-invalid @enderror" placeholder="Username">
+                                            @error('username')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gutter-20">
+                                    <div class="col-md-6">
+                                        <div class="form-grp">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror" placeholder="Email">
+                                            @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="form-grp">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" id="phone" name="phone" class="@error('phone') is-invalid @enderror" placeholder="Phone">
+                                        @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-grp">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" name="address" class="@error('address') is-invalid @enderror" placeholder="Address">
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-grp">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror" placeholder="Password">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-two arrow-btn">Apply Now<img src="{{ asset('') }}assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>
+                            </form>
+
+                            <div class="account__switch">
+                                <p>Already have an account?<a href="login.html">Login</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- singUp-area-end -->
 
 
 @endsection

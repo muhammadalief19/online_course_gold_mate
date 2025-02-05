@@ -41,11 +41,63 @@
                         @foreach ($courses as $course)
                         <div class="swiper-slide">
                             <div class="courses__item shine__animate-item">
-                                <div class="courses__item-thumb">
+                                <div class="courses__item-thumb @if ($course->bestseller == 1) bestseller @endif">
                                     <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <div class="course-labels">
+                                            @php
+                                                $amount = $course->selling_price - $course->discount_price;
+                                                $discount = ($amount / $course->selling_price) * 100;
+                                            @endphp
+
+                                            @if ($course->discount_price == NULL)
+                                                <span class="courses__label new-label">New</span>
+                                            @else
+                                                <span class="courses__label discount-label">{{ round($discount) }}%</span>
+                                            @endif
+
+                                            @if ($course->bestseller == 1)
+                                                <span class="courses__label bestseller-label">Bestseller</span>
+                                            @endif
+                                        </div>
                                         <img src="{{ asset($course->course_image) }}" alt="{{ $course->course_name }}">
                                     </a>
                                 </div>
+
+                                <style>
+                                    .courses__item-thumb {
+                                        position: relative;
+                                        overflow: hidden;
+                                    }
+
+                                    .course-labels {
+                                        position: absolute;
+                                        top: 10px;
+                                        left: 10px;
+                                        display: flex;
+                                        gap: 5px;
+                                    }
+
+                                    .courses__label {
+                                        padding: 5px 10px;
+                                        font-size: 12px;
+                                        font-weight: bold;
+                                        border-radius: 3px;
+                                        color: #fff;
+                                    }
+
+                                    .discount-label {
+                                        background: red;
+                                    }
+
+                                    .bestseller-label {
+                                        background: gold;
+                                        color: black;
+                                    }
+
+                                    .new-label {
+                                        background: blue;
+                                    }
+                                </style>
                                 <div class="courses__item-content">
                                     <ul class="courses__item-meta list-wrap">
                                         <li class="courses__item-tag">
@@ -68,7 +120,7 @@
                                     <h5 class="title">
                                         <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a>
                                     </h5>
-                                    <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
+                                    <p class="author">By <a href="{{ route('instructor.details',$course->instructor_id) }}">{{ $course['user']['name'] }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
                                             <a href="javascript:void(0);" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}');">
@@ -104,11 +156,64 @@
                         @foreach ($catwiseCourse as $course)
                         <div class="swiper-slide">
                             <div class="courses__item shine__animate-item">
-                                <div class="courses__item-thumb">
+                                <div class="courses__item-thumb @if ($course->bestseller == 1) bestseller @endif">
                                     <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <div class="course-labels">
+                                            @php
+                                                $amount = $course->selling_price - $course->discount_price;
+                                                $discount = ($amount / $course->selling_price) * 100;
+                                            @endphp
+
+                                            @if ($course->discount_price == NULL)
+                                                <span class="courses__label new-label">New</span>
+                                            @else
+                                                <span class="courses__label discount-label">{{ round($discount) }}%</span>
+                                            @endif
+
+                                            @if ($course->bestseller == 1)
+                                                <span class="courses__label bestseller-label">Bestseller</span>
+                                            @endif
+                                        </div>
                                         <img src="{{ asset($course->course_image) }}" alt="{{ $course->course_name }}">
                                     </a>
                                 </div>
+
+                                <style>
+                                    .courses__item-thumb {
+                                        position: relative;
+                                        overflow: hidden;
+                                    }
+
+                                    .course-labels {
+                                        position: absolute;
+                                        top: 10px;
+                                        left: 10px;
+                                        display: flex;
+                                        gap: 5px;
+                                    }
+
+                                    .courses__label {
+                                        padding: 5px 10px;
+                                        font-size: 12px;
+                                        font-weight: bold;
+                                        border-radius: 3px;
+                                        color: #fff;
+                                    }
+
+                                    .discount-label {
+                                        background: red;
+                                    }
+
+                                    .bestseller-label {
+                                        background: gold;
+                                        color: black;
+                                    }
+
+                                    .new-label {
+                                        background: blue;
+                                    }
+                                </style>
+
                                 <div class="courses__item-content">
                                     <ul class="courses__item-meta list-wrap">
                                         <li class="courses__item-tag">
@@ -131,7 +236,7 @@
                                     <h5 class="title">
                                         <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}">{{ $course->course_name }}</a>
                                     </h5>
-                                    <p class="author">By <a href="#">{{ $course['user']['name'] }}</a></p>
+                                    <p class="author">By <a href="{{ route('instructor.details',$course->instructor_id) }}">{{ $course['user']['name'] }}</a></p>
                                     <div class="courses__item-bottom">
                                         <div class="button">
                                             <a href="javascript:void(0);" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}');">

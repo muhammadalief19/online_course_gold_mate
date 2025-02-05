@@ -382,33 +382,43 @@
 @extends('frontend.master')
 @section('home')
 <!-- breadcrumb-area -->
-<section class="breadcrumb__area breadcrumb__bg" data-background="assets/img/bg/breadcrumb_bg.jpg">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb__content">
-                    <h3 class="title">{{ $subcategory->subcategory_name }}</h3>
-                    <nav class="breadcrumb">
-                        <span property="itemListElement" typeof="ListItem">
-                            <a href="index.html">Home</a>
-                        </span>
-                        <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                        <span property="itemListElement" typeof="ListItem"><a>{{ $subcategory->category->category_name }}</a></span>
-                        <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                        <span property="itemListElement" typeof="ListItem">{{ $subcategory->subcategory_name }}</span>
-                    </nav>
+<main class="main-area fix">
+    <section class="breadcrumb__area breadcrumb__bg pattern-bg" data-background="{{ asset('') }}assets/img/bg/breadcrumb_bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb__content breadcrumb-content">
+                        <!-- Judul Section -->
+                        <div class="section-heading pb-3">
+                            <h3 class="title section__title">{{ $subcategory->subcategory_name }}</h3>
+                        </div>
+
+                        <!-- Breadcrumb Navigation -->
+                        <nav class="breadcrumb generic-list-item generic-list-item-arrow d-flex flex-wrap align-items-center">
+                            <span property="itemListElement" typeof="ListItem">
+                                <a href="/">Home</a>
+                            </span>
+                            <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+    <span property="itemListElement" typeof="ListItem"><a>{{ $subcategory->category->category_name }}</a></span>
+    <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
+    <span property="itemListElement" typeof="ListItem">{{ $subcategory->subcategory_name }}</span>
+                        </nav>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="breadcrumb__shape-wrap">
-        <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
-        <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
-        <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
-        <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
-        <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
-    </div>
-</section>
+
+        <!-- Breadcrumb Shapes -->
+        <div class="breadcrumb__shape-wrap">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape03.svg" alt="img" data-aos="fade-up" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
+            <img src="{{ asset('') }}assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
+        </div>
+    </section>
+</main>
 <!-- breadcrumb-area-end -->
 
 <!-- all-courses -->
@@ -640,15 +650,63 @@
                             @foreach ($courses as $course)
                             <div class="col">
                                 <div class="courses__item shine__animate-item">
-                                    <div class="courses__item-thumb">
+                                    <div class="courses__item-thumb @if ($course->bestseller == 1) bestseller @endif">
                                         <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
-                                            <img src="{{ asset($course->course_image) }}" alt="img">
+                                            <div class="course-labels">
+                                                @php
+                                                    $amount = $course->selling_price - $course->discount_price;
+                                                    $discount = ($amount / $course->selling_price) * 100;
+                                                @endphp
+
+                                                @if ($course->discount_price == NULL)
+                                                    <span class="courses__label new-label">New</span>
+                                                @else
+                                                    <span class="courses__label discount-label">{{ round($discount) }}%</span>
+                                                @endif
+
+                                                @if ($course->bestseller == 1)
+                                                    <span class="courses__label bestseller-label">Bestseller</span>
+                                                @endif
+                                            </div>
+                                            <img src="{{ asset($course->course_image) }}" alt="{{ $course->course_name }}">
                                         </a>
-                                        @php
-                                        $amount = $course->selling_price - $course->discount_price;
-                                        $discount = ($amount / $course->selling_price) * 100;
-                                        @endphp
                                     </div>
+
+                                    <style>
+                                        .courses__item-thumb {
+                                            position: relative;
+                                            overflow: hidden;
+                                        }
+
+                                        .course-labels {
+                                            position: absolute;
+                                            top: 10px;
+                                            left: 10px;
+                                            display: flex;
+                                            gap: 5px;
+                                        }
+
+                                        .courses__label {
+                                            padding: 5px 10px;
+                                            font-size: 12px;
+                                            font-weight: bold;
+                                            border-radius: 3px;
+                                            color: #fff;
+                                        }
+
+                                        .discount-label {
+                                            background: red;
+                                        }
+
+                                        .bestseller-label {
+                                            background: gold;
+                                            color: black;
+                                        }
+
+                                        .new-label {
+                                            background: blue;
+                                        }
+                                    </style>
                                     <div class="courses__item-content">
                                         <ul class="courses__item-meta list-wrap">
                                             <li class="courses__item-tag">
@@ -746,7 +804,7 @@
                             </ul>
                         </nav>
                     </div>
-                    
+
 
                 </div>
                 <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
@@ -754,8 +812,24 @@
                         @foreach ($courses as $course)
                         <div class="col">
                             <div class="courses__item courses__item-three shine__animate-item">
-                                <div class="courses__item-thumb">
+                                <div class="courses__item-thumb @if ($course->bestseller == 1) bestseller @endif">
                                     <a href="{{ url('course/details/'.$course->id.'/'.$course->course_name_slug) }}" class="shine__animate-link">
+                                        <div class="course-labels">
+                                            @php
+                                                $amount = $course->selling_price - $course->discount_price;
+                                                $discount = ($amount / $course->selling_price) * 100;
+                                            @endphp
+
+                                            @if ($course->discount_price == NULL)
+                                                <span class="courses__label new-label">New</span>
+                                            @else
+                                                <span class="courses__label discount-label">{{ round($discount) }}%</span>
+                                            @endif
+
+                                            @if ($course->bestseller == 1)
+                                                <span class="courses__label bestseller-label">Bestseller</span>
+                                            @endif
+                                        </div>
                                         <img src="{{ asset($course->course_image) }}" alt="img">
                                     </a>
                                 </div>
