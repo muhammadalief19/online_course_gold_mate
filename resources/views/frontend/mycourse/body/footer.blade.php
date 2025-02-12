@@ -1,61 +1,20 @@
-<!-- template js files -->
-{{-- <script src="{{ asset('frontend/js/jquery-3.4.1.min.js') }}"></script>
-<script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('frontend/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('frontend/js/isotope.js') }}"></script>
-<script src="{{ asset('frontend/js/waypoint.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
-<script src="{{ asset('frontend/js/fancybox.js') }}"></script>
-<script src="{{ asset('frontend/js/plyr.js') }}"></script>
-<script src="{{ asset('frontend/js/datedropper.min.js') }}"></script>
-<script src="{{ asset('frontend/js/emojionearea.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery-te-1.4.0.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.MultiFile.min.js') }}"></script>
-<script src="{{ asset('frontend/js/main.js') }}"></script>
-<script>
-    var player = new Plyr('#player');
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-<script>
- @if(Session::has('message'))
- var type = "{{ Session::get('alert-type','info') }}"
- switch(type){
-    case 'info':
-    toastr.info(" {{ Session::get('message') }} ");
-    break;
-
-    case 'success':
-    toastr.success(" {{ Session::get('message') }} ");
-    break;
-
-    case 'warning':
-    toastr.warning(" {{ Session::get('message') }} ");
-    break;
-
-    case 'error':
-    toastr.error(" {{ Session::get('message') }} ");
-    break;
- }
- @endif
-</script> --}}
-<!-- footer-area -->
+@php
+    $setting = App\Models\SiteSetting::find(1);
+@endphp
 <footer class="footer__area">
     <div class="footer__top">
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6">
                     <div class="footer__widget">
-                        <div class="logo mb-35">
-                            <a href="index.html"><img src="{{ asset($setting->logo) }}" alt="img"></a>
+                        <div class="logo mb-35 ">
+                            <a href="index.html"><img src="{{ asset($setting->logo) }}"  alt="img"></a>
                         </div>
                         <div class="footer__content">
-                            <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
+                            <p>{{ $setting->email }}</p>
                             <ul class="list-wrap">
-                                <li>463 7th Ave, NY 10018, USA</li>
-                                <li>+123 88 9900 456</li>
+                                <li>{{ $setting->address }}</li>
+                                <li>{{ $setting->phone }}</li>
                             </ul>
                         </div>
                     </div>
@@ -65,12 +24,12 @@
                         <h4 class="footer__widget-title">Useful Links</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
-                                <li><a href="events-details.html">Our values</a></li>
-                                <li><a href="events-details.html">Our advisory board</a></li>
-                                <li><a href="events-details.html">Our partners</a></li>
-                                <li><a href="events-details.html">Become a partner</a></li>
-                                <li><a href="events-details.html">Work at Future Learn</a></li>
-                                <li><a href="events-details.html">Quizlet Plus</a></li>
+                                <li><a href="#">Our values</a></li>
+                                <li><a href="#">Our advisory board</a></li>
+                                <li><a href="#">Our partners</a></li>
+                                <li><a href="#">Become a partner</a></li>
+                                <li><a href="#">Work at Future Learn</a></li>
+                                <li><a href="#">Quizlet Plus</a></li>
                             </ul>
                         </div>
                     </div>
@@ -80,11 +39,11 @@
                         <h4 class="footer__widget-title">Our Company</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
-                                <li><a href="contact.html">Contact Us</a></li>
-                                <li><a href="instructor-details.html">Become Teacher</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="instructor-details.html">Instructor</a></li>
-                                <li><a href="events-details.html">Events</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="{{ route('become.instructor') }}">Become Teacher</a></li>
+                                <li><a href="{{ route('blog') }}">Blog</a></li>
+                                <li><a href="#">Instructor</a></li>
+                                <li><a href="#">Events</a></li>
                             </ul>
                         </div>
                     </div>
@@ -96,28 +55,23 @@
                             <p>when an unknown printer took <br> galley type and scrambled</p>
                             <ul class="list-wrap footer__social">
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="{{ asset('') }}assets/img/icons/facebook.svg" alt="img" class="injectable">
+                                    <a href="{{ asset('') }}#" target="_blank" class="fab fa-youtube">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="{{ asset('') }}assets/img/icons/twitter.svg" alt="img" class="injectable">
+                                    <a href="{{ asset('') }}#" target="_blank" class="fab fa-whatsapp">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="{{ asset('') }}assets/img/icons/whatsapp.svg" alt="img" class="injectable">
+                                    <a href="{{ $setting->facebook }}" target="_blank" class="fab fa-facebook">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="{{ asset('') }}assets/img/icons/instagram.svg" alt="img" class="injectable">
+                                    <a href="{{ $setting->twitter }}" target="_blank" class="fab fa-twitter">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
-                                        <img src="{{ asset('') }}assets/img/icons/youtube.svg" alt="img" class="injectable">
+                                    <a href="#" target="_blank" class="fab fa-instagram">
                                     </a>
                                 </li>
                             </ul>
@@ -136,14 +90,14 @@
             <div class="row align-items-center">
                 <div class="col-md-7">
                     <div class="copy-right-text">
-                        <p>© 2010-2024 skillgro.com. All rights reserved.</p>
+                        <p>{{ $setting->copyright }}</p>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="footer__bottom-menu">
                         <ul class="list-wrap">
-                            <li><a href="contact.html">Term of Use</a></li>
-                            <li><a href="contact.html">Privacy Policy</a></li>
+                            <li><a href="#">Term of Use</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
